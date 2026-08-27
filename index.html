@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -12,25 +10,19 @@
 
 <title>2학년 6반 야자 관리</title>
 
-
 <style>
 
 * {
     box-sizing: border-box;
 }
 
-
 html {
     -webkit-text-size-adjust: 100%;
 }
 
-
 body {
-
     margin: 0;
-
-    padding:
-        clamp(6px, 1.5vw, 24px);
+    padding: clamp(6px, 1.5vw, 24px);
 
     font-family:
         Arial,
@@ -38,31 +30,22 @@ body {
         sans-serif;
 
     background: #f3f5f7;
-
     color: #222;
-
 }
 
-
-/* ========================================
-   제목
-======================================== */
+/* ===============================
+   상단
+=============================== */
 
 h1 {
-
-    margin:
-        5px 0 5px;
-
+    margin: 5px 0;
     text-align: center;
 
     font-size:
         clamp(28px, 3.2vw, 44px);
-
 }
 
-
 #clock {
-
     text-align: center;
 
     font-weight: 800;
@@ -71,23 +54,18 @@ h1 {
         clamp(17px, 2vw, 27px);
 
     margin-bottom: 8px;
-
 }
 
-
 .current-cip {
-
     max-width: 760px;
 
     margin:
         0 auto
-        clamp(15px, 2vw, 23px);
+        clamp(12px, 2vw, 20px);
 
-    padding:
-        clamp(10px, 1.3vw, 14px);
+    padding: 12px;
 
     background: #252525;
-
     color: white;
 
     border-radius: 10px;
@@ -98,18 +76,16 @@ h1 {
 
     font-size:
         clamp(13px, 1.4vw, 18px);
-
 }
 
 
-/* ========================================
-   전체 영역
-======================================== */
+/* ===============================
+   전체
+=============================== */
 
 .container {
 
     width: 100%;
-
     max-width: 1500px;
 
     margin: 0 auto;
@@ -118,19 +94,18 @@ h1 {
 
     grid-template-columns:
         minmax(0, 1fr)
-        minmax(285px, 345px);
+        minmax(290px, 360px);
 
     gap:
         clamp(12px, 2vw, 30px);
 
     align-items: start;
-
 }
 
 
-/* ========================================
-   좌석 영역
-======================================== */
+/* ===============================
+   좌석
+=============================== */
 
 .seat-area {
 
@@ -146,37 +121,24 @@ h1 {
     box-shadow:
         0 3px 14px
         rgba(0,0,0,0.08);
-
 }
-
 
 .teacher {
 
     background: #333;
-
     color: white;
 
     border-radius: 8px;
 
-    padding:
-        clamp(9px, 1.2vw, 14px);
+    padding: 12px;
 
     text-align: center;
-
-    font-size:
-        clamp(13px, 1.5vw, 18px);
 
     font-weight: bold;
 
     margin-bottom:
         clamp(10px, 1.5vw, 20px);
-
 }
-
-
-/* ========================================
-   6 × 6 좌석
-======================================== */
 
 .seat-grid {
 
@@ -185,13 +147,11 @@ h1 {
     display: grid;
 
     grid-template-columns:
-        repeat(6, minmax(0, 1fr));
+        repeat(6, minmax(0,1fr));
 
     gap:
         clamp(3px, 0.7vw, 10px);
-
 }
-
 
 .seat {
 
@@ -209,30 +169,23 @@ h1 {
     background: #e8f1ff;
 
     border:
-        clamp(1px, 0.15vw, 2px)
-        solid #7da7e8;
+        2px solid #7da7e8;
 
-    border-radius:
-        clamp(5px, 0.7vw, 10px);
+    border-radius: 9px;
 
     display: flex;
 
     flex-direction: column;
 
-    justify-content: center;
-
     align-items: center;
+    justify-content: center;
 
     text-align: center;
 
     overflow: hidden;
 
-    transition:
-        background 0.2s,
-        border-color 0.2s;
-
+    transition: 0.2s;
 }
-
 
 .number {
 
@@ -242,14 +195,11 @@ h1 {
     font-weight: 900;
 
     line-height: 1;
-
 }
-
 
 .name {
 
-    margin-top:
-        clamp(3px, 0.5vw, 7px);
+    margin-top: 5px;
 
     font-size:
         clamp(8px, 1.15vw, 16px);
@@ -257,14 +207,11 @@ h1 {
     font-weight: bold;
 
     white-space: nowrap;
-
 }
-
 
 .status {
 
-    margin-top:
-        clamp(2px, 0.4vw, 6px);
+    margin-top: 4px;
 
     max-width: 100%;
 
@@ -276,11 +223,10 @@ h1 {
     font-weight: bold;
 
     overflow-wrap: anywhere;
-
 }
 
 
-/* 현재 CIP 불참 */
+/* 불참 */
 
 .seat.absent {
 
@@ -288,12 +234,35 @@ h1 {
 
     border-color: #e53935;
 
-    color: #9d0000;
-
+    color: #950000;
 }
 
 
-/* 비활성화 */
+/* 반복 불참 */
+
+.seat.recurring {
+
+    background: #ffe7c2;
+
+    border-color: #e28a00;
+
+    color: #8b4c00;
+}
+
+
+/* 일반 + 반복 모두 */
+
+.seat.both {
+
+    background: #f3d7ff;
+
+    border-color: #8e44ad;
+
+    color: #5d176f;
+}
+
+
+/* 비활성 */
 
 .seat.disabled {
 
@@ -302,13 +271,12 @@ h1 {
     border-color: #999;
 
     color: #777;
-
 }
 
 
-/* ========================================
-   신청 패널
-======================================== */
+/* ===============================
+   패널
+=============================== */
 
 .control-panel {
 
@@ -319,7 +287,7 @@ h1 {
     background: white;
 
     padding:
-        clamp(17px, 2vw, 23px);
+        clamp(16px, 2vw, 23px);
 
     border-radius: 15px;
 
@@ -330,20 +298,30 @@ h1 {
     position: sticky;
 
     top: 10px;
-
 }
-
 
 .control-panel h2 {
 
-    margin:
-        0 0 18px;
+    margin: 0 0 15px;
 
     font-size:
         clamp(20px, 2vw, 25px);
-
 }
 
+.section-title {
+
+    margin:
+        22px 0 10px;
+
+    padding-top: 18px;
+
+    border-top:
+        2px solid #eee;
+
+    font-size: 17px;
+
+    font-weight: 900;
+}
 
 label {
 
@@ -353,10 +331,8 @@ label {
 
     font-size: 14px;
 
-    margin-top: 3px;
-
+    margin-top: 4px;
 }
-
 
 input,
 textarea,
@@ -369,8 +345,7 @@ button {
     padding: 11px;
 
     margin-top: 7px;
-
-    margin-bottom: 16px;
+    margin-bottom: 15px;
 
     border-radius: 8px;
 
@@ -379,46 +354,81 @@ button {
     font-family: inherit;
 
     font-size: 16px;
-
 }
-
 
 textarea {
 
-    min-height: 72px;
+    min-height: 70px;
 
     resize: vertical;
-
 }
 
 
-/* ========================================
-   CIP 선택
-======================================== */
+/* ===============================
+   날짜
+=============================== */
 
-.cip-buttons {
+.date-box {
+
+    padding: 12px;
+
+    margin-bottom: 18px;
+
+    border-radius: 10px;
+
+    background: #f5f7fa;
+}
+
+.date-box input {
+    margin-bottom: 4px;
+}
+
+.date-info {
+
+    text-align: center;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #555;
+}
+
+
+/* ===============================
+   CIP 버튼
+=============================== */
+
+.cip-buttons,
+.weekday-buttons {
 
     display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0,1fr));
 
     gap: 7px;
 
     margin-top: 8px;
 
     margin-bottom: 18px;
-
 }
 
+.cip-buttons {
+    grid-template-columns:
+        repeat(3, minmax(0,1fr));
+}
 
-.cip-btn {
+.weekday-buttons {
+    grid-template-columns:
+        repeat(4, minmax(0,1fr));
+}
 
-    min-width: 0;
+.cip-btn,
+.weekday-btn {
 
     margin: 0;
 
-    padding: 9px 2px;
+    min-width: 0;
+
+    padding: 9px 3px;
 
     background: #f1f3f5;
 
@@ -429,9 +439,7 @@ textarea {
     font-weight: bold;
 
     cursor: pointer;
-
 }
-
 
 .cip-btn.selected {
 
@@ -440,26 +448,32 @@ textarea {
     border-color: #1976d2;
 
     color: white;
-
 }
 
+.weekday-btn.selected {
+
+    background: #e67e22;
+
+    border-color: #e67e22;
+
+    color: white;
+}
 
 .cip-time {
 
     display: block;
 
+    margin-top: 3px;
+
     font-size: 9px;
 
     font-weight: normal;
-
-    margin-top: 3px;
-
 }
 
 
-/* ========================================
-   신청 버튼
-======================================== */
+/* ===============================
+   버튼
+=============================== */
 
 .submit-btn {
 
@@ -472,9 +486,20 @@ textarea {
     font-weight: bold;
 
     cursor: pointer;
-
 }
 
+.recurring-submit {
+
+    background: #e67e22;
+
+    color: white;
+
+    border: 0;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
 
 .cancel-btn {
 
@@ -487,32 +512,25 @@ textarea {
     font-weight: bold;
 
     cursor: pointer;
-
 }
 
+.recurring-cancel {
 
-/* ========================================
-   메시지
-======================================== */
+    background: #795548;
 
-.message {
+    color: white;
 
-    min-height: 25px;
-
-    margin-bottom: 8px;
-
-    text-align: center;
-
-    font-size: 14px;
+    border: 0;
 
     font-weight: bold;
 
+    cursor: pointer;
 }
 
 
-/* ========================================
-   Firebase 연결 상태
-======================================== */
+/* ===============================
+   상태
+=============================== */
 
 .connection-status {
 
@@ -529,50 +547,49 @@ textarea {
     font-weight: bold;
 
     background: #eee;
-
 }
-
 
 .connection-status.online {
 
     background: #ddf5e3;
 
     color: #176b2d;
-
 }
-
 
 .connection-status.error {
 
     background: #ffe0e0;
 
     color: #9b0000;
+}
 
+.message {
+
+    min-height: 24px;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    margin-bottom: 7px;
 }
 
 
-/* ========================================
-   불참자 목록
-======================================== */
+/* ===============================
+   명단
+=============================== */
 
 .absence-list {
 
-    margin-top: 17px;
+    margin-top: 18px;
 
-    border-top: 1px solid #ddd;
+    border-top:
+        1px solid #ddd;
 
     padding-top: 13px;
-
 }
-
-
-.absence-list h3 {
-
-    margin:
-        0 0 10px;
-
-}
-
 
 .absence-item {
 
@@ -586,67 +603,50 @@ textarea {
 
     font-size: 12px;
 
-    line-height: 1.45;
+    line-height: 1.5;
+}
 
+.recurring-label {
+
+    color: #b55b00;
+
+    font-weight: bold;
 }
 
 
-/* ========================================
+/* ===============================
    태블릿
-======================================== */
+=============================== */
 
 @media(max-width: 900px) {
 
     .container {
-
-        grid-template-columns:
-            1fr;
-
+        grid-template-columns: 1fr;
     }
-
 
     .control-panel {
-
         position: static;
-
     }
-
 }
 
 
-/* ========================================
-   스마트폰
-======================================== */
+/* ===============================
+   휴대폰
+=============================== */
 
 @media(max-width: 600px) {
 
     body {
-
         padding: 5px;
-
     }
-
 
     .seat-area {
-
         padding: 6px;
-
     }
-
-
-    .teacher {
-
-        margin-bottom: 6px;
-
-    }
-
 
     .seat-grid {
-
         gap: 3px;
-
     }
-
 
     .seat {
 
@@ -657,81 +657,41 @@ textarea {
         border-radius: 5px;
 
         padding: 1px;
-
     }
-
 
     .number {
 
         font-size:
             clamp(17px, 6vw, 25px);
-
     }
-
 
     .name {
 
         font-size:
             clamp(7px, 2.4vw, 10px);
-
     }
-
 
     .status {
 
         font-size:
             clamp(6px, 2vw, 9px);
-
     }
-
 
     .control-panel {
-
-        padding: 16px;
-
+        padding: 15px;
     }
-
-}
-
-
-/* ========================================
-   아주 작은 화면
-======================================== */
-
-@media(max-width: 380px) {
-
-    .seat-grid {
-
-        gap: 2px;
-
-    }
-
-
-    .name {
-
-        font-size: 7px;
-
-    }
-
 }
 
 </style>
-
 </head>
-
 
 <body>
 
-
-<h1>
-    2학년 6반
-</h1>
-
+<h1>2학년 6반</h1>
 
 <div id="clock">
     시간 확인 중...
 </div>
-
 
 <div
     id="currentCip"
@@ -742,20 +702,18 @@ textarea {
 </div>
 
 
-
 <div class="container">
 
 
-<!-- ======================================
-     좌석표
-======================================= -->
+<!-- =====================================
+     좌석
+===================================== -->
 
 <section class="seat-area">
 
     <div class="teacher">
         칠판 / 교탁
     </div>
-
 
     <div
         id="seatGrid"
@@ -765,194 +723,350 @@ textarea {
 </section>
 
 
-
-<!-- ======================================
-     신청창
-======================================= -->
+<!-- =====================================
+     입력
+===================================== -->
 
 <aside class="control-panel">
 
 
-    <h2>
-        🌙 야자 불참 신청
-    </h2>
+<h2>
+    🌙 야자 불참 관리
+</h2>
 
+
+<div
+    id="connectionStatus"
+    class="connection-status">
+
+    Firebase 연결 중...
+
+</div>
+
+
+<!-- 날짜 -->
+
+<div class="date-box">
+
+    <label for="viewDate">
+        조회 / 신청 날짜
+    </label>
+
+    <input
+        id="viewDate"
+        type="date"
+    >
 
     <div
-        id="connectionStatus"
-        class="connection-status">
-
-        Firebase 연결 중...
-
+        id="dateInfo"
+        class="date-info">
     </div>
 
+</div>
 
 
-    <label for="studentInput">
-        번호 또는 이름
-    </label>
+<!-- 학생 -->
+
+<label for="studentInput">
+    번호 또는 이름
+</label>
+
+<input
+    id="studentInput"
+    type="text"
+    list="studentList"
+    autocomplete="off"
+    placeholder="예: 23 또는 윤하유"
+>
+
+<datalist id="studentList">
+</datalist>
 
 
-    <input
-        id="studentInput"
-        type="text"
-        list="studentList"
-        autocomplete="off"
-        placeholder="예: 23 또는 윤하유"
-    >
+<!-- ===================================================
+     날짜별 불참
+=================================================== -->
+
+<div class="section-title">
+    📅 날짜별 불참 신청
+</div>
 
 
-    <datalist id="studentList">
-    </datalist>
+<label>
+    불참할 CIP
+</label>
 
 
-
-    <label>
-        불참할 CIP 선택
-    </label>
-
-
-    <div class="cip-buttons">
-
-
-        <button
-            type="button"
-            class="cip-btn"
-            data-cip="1">
-
-            1차
-
-            <span class="cip-time">
-                16:50~17:40
-            </span>
-
-        </button>
-
-
-
-        <button
-            type="button"
-            class="cip-btn"
-            data-cip="2">
-
-            2차
-
-            <span class="cip-time">
-                18:40~20:00
-            </span>
-
-        </button>
-
-
-
-        <button
-            type="button"
-            class="cip-btn"
-            data-cip="3">
-
-            3차
-
-            <span class="cip-time">
-                20:10~21:00
-            </span>
-
-        </button>
-
-
-    </div>
-
-
-
-    <label for="reason">
-        야자 불참 사유
-    </label>
-
-
-    <textarea
-        id="reason"
-        maxlength="100"
-        placeholder="예: 학원, 병원, 가족 행사"
-    ></textarea>
-
-
-
-    <label for="password">
-        비밀번호
-    </label>
-
-
-    <input
-        id="password"
-        type="password"
-        maxlength="4"
-        inputmode="numeric"
-        placeholder="비밀번호 4자리"
-    >
-
-
+<div
+    class="cip-buttons"
+    id="singleCipButtons">
 
     <button
-        id="submitButton"
         type="button"
-        class="submit-btn">
+        class="cip-btn"
+        data-type="single"
+        data-cip="1">
 
-        야자 불참 신청
+        1차
+
+        <span class="cip-time">
+            16:50~17:40
+        </span>
 
     </button>
 
 
-
     <button
-        id="cancelButton"
         type="button"
-        class="cancel-btn">
+        class="cip-btn"
+        data-type="single"
+        data-cip="2">
 
-        전체 불참 신청 취소
+        2차
+
+        <span class="cip-time">
+            18:40~20:00
+        </span>
 
     </button>
 
 
+    <button
+        type="button"
+        class="cip-btn"
+        data-type="single"
+        data-cip="3">
 
-    <div
-        id="message"
-        class="message">
+        3차
+
+        <span class="cip-time">
+            20:10~21:00
+        </span>
+
+    </button>
+
+</div>
+
+
+<label for="singleReason">
+    불참 사유
+</label>
+
+<textarea
+    id="singleReason"
+    maxlength="100"
+    placeholder="예: 학원, 병원, 가족 행사"
+></textarea>
+
+
+<label for="password">
+    비밀번호
+</label>
+
+<input
+    id="password"
+    type="password"
+    maxlength="4"
+    inputmode="numeric"
+    placeholder="비밀번호 4자리"
+>
+
+
+<button
+    id="singleSubmit"
+    type="button"
+    class="submit-btn">
+
+    선택 날짜 불참 신청
+
+</button>
+
+
+<button
+    id="singleCancel"
+    type="button"
+    class="cancel-btn">
+
+    선택 날짜 신청 취소
+
+</button>
+
+
+<!-- ===================================================
+     반복 불참
+=================================================== -->
+
+<div class="section-title">
+    🔁 매주 반복 불참
+</div>
+
+
+<label>
+    반복 요일
+</label>
+
+
+<div class="weekday-buttons">
+
+    <button
+        type="button"
+        class="weekday-btn"
+        data-day="1">
+
+        월
+
+    </button>
+
+    <button
+        type="button"
+        class="weekday-btn"
+        data-day="2">
+
+        화
+
+    </button>
+
+    <button
+        type="button"
+        class="weekday-btn"
+        data-day="3">
+
+        수
+
+    </button>
+
+    <button
+        type="button"
+        class="weekday-btn"
+        data-day="4">
+
+        목
+
+    </button>
+
+</div>
+
+
+<label>
+    반복해서 빠질 CIP
+</label>
+
+
+<div
+    class="cip-buttons"
+    id="recurringCipButtons">
+
+    <button
+        type="button"
+        class="cip-btn"
+        data-type="recurring"
+        data-cip="1">
+
+        1차
+
+        <span class="cip-time">
+            16:50~17:40
+        </span>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="cip-btn"
+        data-type="recurring"
+        data-cip="2">
+
+        2차
+
+        <span class="cip-time">
+            18:40~20:00
+        </span>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="cip-btn"
+        data-type="recurring"
+        data-cip="3">
+
+        3차
+
+        <span class="cip-time">
+            20:10~21:00
+        </span>
+
+    </button>
+
+</div>
+
+
+<label for="recurringReason">
+    반복 불참 사유
+</label>
+
+<textarea
+    id="recurringReason"
+    maxlength="100"
+    placeholder="예: 학원"
+></textarea>
+
+
+<button
+    id="recurringSubmit"
+    type="button"
+    class="recurring-submit">
+
+    매주 반복 불참 등록
+
+</button>
+
+
+<button
+    id="recurringCancel"
+    type="button"
+    class="recurring-cancel">
+
+    반복 불참 전체 삭제
+
+</button>
+
+
+<div
+    id="message"
+    class="message">
+</div>
+
+
+<!-- 명단 -->
+
+<div class="absence-list">
+
+    <h3 id="listTitle">
+        선택 날짜 불참 현황
+    </h3>
+
+    <div id="absenceList">
+        불러오는 중...
     </div>
 
-
-
-    <div class="absence-list">
-
-        <h3>
-            오늘 전체 신청 현황
-        </h3>
-
-
-        <div id="absenceList">
-
-            불러오는 중...
-
-        </div>
-
-    </div>
+</div>
 
 
 </aside>
-
 
 </div>
 
 
 
-<!-- ========================================
-     Firebase + JavaScript
-========================================= -->
-
 <script type="module">
 
 
-/* =========================================
-   Firebase 불러오기
-========================================= */
+/* ===================================================
+   Firebase
+=================================================== */
 
 import {
     initializeApp
@@ -977,11 +1091,6 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
-
-
-/* =========================================
-   Firebase 설정
-========================================= */
 
 const firebaseConfig = {
 
@@ -1009,7 +1118,6 @@ const firebaseConfig = {
 };
 
 
-
 const app =
     initializeApp(
         firebaseConfig
@@ -1021,81 +1129,70 @@ const db =
 
 
 
-/* =========================================
+/* ===================================================
    학생
-========================================= */
+=================================================== */
 
 const students = {
 
-    1:"강주형",
-    2:"고진용",
-    3:"권율",
+1:"강주형",
+2:"고진용",
+3:"권율",
+4:"X",
 
-    4:"X",
+5:"김경태",
+6:"김용준",
+7:"김제겸",
+8:"김지효",
+9:"김하윤",
+10:"김현성",
 
-    5:"김경태",
-    6:"김용준",
-    7:"김제겸",
-    8:"김지효",
-    9:"김하윤",
-    10:"김현성",
+11:"목지안",
+12:"백시우",
+13:"서재훈",
+14:"서지후",
+15:"성무빈",
+16:"송재호",
+17:"신예준",
+18:"신준모",
+19:"양서희",
+20:"오태진",
 
-    11:"목지안",
-    12:"백시우",
-    13:"서재훈",
-    14:"서지후",
-    15:"성무빈",
-    16:"송재호",
-    17:"신예준",
-    18:"신준모",
-    19:"양서희",
-    20:"오태진",
+21:"윤수찬",
+22:"윤정연",
+23:"윤하유",
+24:"이지성",
+25:"이지혁",
+26:"이지후",
+27:"전윤우",
+28:"정준기",
+29:"정하율",
+30:"조동현",
 
-    21:"윤수찬",
-    22:"윤정연",
-    23:"윤하유",
-    24:"이지성",
-    25:"이지혁",
-    26:"이지후",
-    27:"전윤우",
-    28:"정준기",
-    29:"정하율",
-    30:"조동현",
+31:"차이한",
+32:"최담호",
+33:"최유진",
+34:"최태웅",
 
-    31:"차이한",
-    32:"최담호",
-    33:"최유진",
-    34:"최태웅",
-
-    35:"X",
-    36:"X"
+35:"X",
+36:"X"
 
 };
 
 
-
 const disabledStudents = [
-
     4,
     35,
     36
-
 ];
 
-
-
-/* =========================================
-   비밀번호
-
-   현재 모두 0000
-========================================= */
 
 const passwords = {};
 
 
 for(
-    let i = 1;
-    i <= 36;
+    let i=1;
+    i<=36;
     i++
 ){
 
@@ -1106,61 +1203,87 @@ for(
 
 
 
-/* =========================================
-   CIP 시간
-========================================= */
+/* ===================================================
+   CIP
+=================================================== */
 
 const cipTimes = {
 
-    1: {
-
+    1:{
         start:
-            16 * 60 + 50,
+            16*60+50,
 
         end:
-            17 * 60 + 40
-
+            17*60+40
     },
 
-
-    2: {
-
+    2:{
         start:
-            18 * 60 + 40,
+            18*60+40,
 
         end:
-            20 * 60
-
+            20*60
     },
 
-
-    3: {
-
+    3:{
         start:
-            20 * 60 + 10,
+            20*60+10,
 
         end:
-            21 * 60
-
+            21*60
     }
 
 };
 
 
+const weekdayNames = {
 
-let selectedCips = [];
+    0:"일",
+    1:"월",
+    2:"화",
+    3:"수",
+    4:"목",
+    5:"금",
+    6:"토"
 
-let absenceData = {};
+};
+
+
+
+let singleCips = [];
+
+let recurringCips = [];
+
+let recurringDays = [];
+
+
+/*
+선택한 날짜의 일회성 불참
+*/
+
+let singleAbsenceData = {};
+
+
+/*
+전체 반복 불참 설정
+*/
+
+let recurringData = {};
+
 
 let currentCip = null;
 
-let currentDateKey = "";
+let selectedDate = "";
+
+let unsubscribeSingle = null;
+
+let unsubscribeRecurring = null;
 
 
 
-/* =========================================
+/* ===================================================
    한국시간
-========================================= */
+=================================================== */
 
 function getKoreaTimeParts(){
 
@@ -1175,26 +1298,15 @@ function getKoreaTimeParts(){
                 timeZone:
                     "Asia/Seoul",
 
-                year:
-                    "numeric",
+                year:"numeric",
+                month:"2-digit",
+                day:"2-digit",
 
-                month:
-                    "2-digit",
+                hour:"2-digit",
+                minute:"2-digit",
+                second:"2-digit",
 
-                day:
-                    "2-digit",
-
-                hour:
-                    "2-digit",
-
-                minute:
-                    "2-digit",
-
-                second:
-                    "2-digit",
-
-                hourCycle:
-                    "h23"
+                hourCycle:"h23"
 
             }
 
@@ -1211,24 +1323,23 @@ function getKoreaTimeParts(){
     const result = {};
 
 
-    for(
-        const part
-        of parts
-    ){
+    parts.forEach(
+        part => {
 
-        if(
-            part.type !==
-            "literal"
-        ){
+            if(
+                part.type !==
+                "literal"
+            ){
 
-            result[
-                part.type
-            ] =
-                part.value;
+                result[
+                    part.type
+                ] =
+                    part.value;
+
+            }
 
         }
-
-    }
+    );
 
 
     return result;
@@ -1237,13 +1348,7 @@ function getKoreaTimeParts(){
 
 
 
-/* =========================================
-   날짜 키
-
-   예: 2026-08-27
-========================================= */
-
-function getKoreaDateKey(){
+function getTodayKey(){
 
 
     const t =
@@ -1264,9 +1369,42 @@ function getKoreaDateKey(){
 
 
 
-/* =========================================
-   현재 CIP 계산
-========================================= */
+/* ===================================================
+   날짜 → 요일
+=================================================== */
+
+function getWeekdayFromDate(
+    dateString
+){
+
+
+    const parts =
+        dateString
+            .split("-")
+            .map(Number);
+
+
+    const date =
+        new Date(
+
+            Date.UTC(
+                parts[0],
+                parts[1]-1,
+                parts[2]
+            )
+
+        );
+
+
+    return date.getUTCDay();
+
+}
+
+
+
+/* ===================================================
+   CIP 시간
+=================================================== */
 
 function calculateCurrentCip(){
 
@@ -1277,8 +1415,7 @@ function calculateCurrentCip(){
 
     const total =
 
-        Number(t.hour)
-        * 60
+        Number(t.hour)*60
         +
         Number(t.minute);
 
@@ -1287,12 +1424,12 @@ function calculateCurrentCip(){
     if(
 
         total >=
-            cipTimes[1].start
+        cipTimes[1].start
 
         &&
 
         total <
-            cipTimes[1].end
+        cipTimes[1].end
 
     ){
 
@@ -1305,12 +1442,12 @@ function calculateCurrentCip(){
     if(
 
         total >=
-            cipTimes[2].start
+        cipTimes[2].start
 
         &&
 
         total <
-            cipTimes[2].end
+        cipTimes[2].end
 
     ){
 
@@ -1323,12 +1460,12 @@ function calculateCurrentCip(){
     if(
 
         total >=
-            cipTimes[3].start
+        cipTimes[3].start
 
         &&
 
         total <
-            cipTimes[3].end
+        cipTimes[3].end
 
     ){
 
@@ -1344,9 +1481,9 @@ function calculateCurrentCip(){
 
 
 
-/* =========================================
-   실시간 시계
-========================================= */
+/* ===================================================
+   시계
+=================================================== */
 
 function updateClock(){
 
@@ -1362,7 +1499,6 @@ function updateClock(){
         .textContent =
 
         `${t.year}.${t.month}.${t.day} ${t.hour}:${t.minute}:${t.second}`;
-
 
 
     const newCip =
@@ -1382,36 +1518,17 @@ function updateClock(){
     }
 
 
-    updateCurrentCipText();
-
-
-
-    /*
-       날짜가 바뀌었는지 확인
-    */
-
-    const newDate =
-        getKoreaDateKey();
-
-
-    if(
-        newDate !==
-        currentDateKey
-    ){
-
-        location.reload();
-
-    }
+    updateCipInfo();
 
 }
 
 
 
-/* =========================================
-   현재 CIP 안내
-========================================= */
+/* ===================================================
+   CIP 안내
+=================================================== */
 
-function updateCurrentCipText(){
+function updateCipInfo(){
 
 
     const box =
@@ -1420,59 +1537,73 @@ function updateCurrentCipText(){
         );
 
 
+    /*
+    다른 날짜 조회 중
+    */
+
+    if(
+        selectedDate !==
+        getTodayKey()
+    ){
+
+        const day =
+            getWeekdayFromDate(
+                selectedDate
+            );
+
+
+        box.innerHTML =
+
+            `<strong>
+            ${selectedDate}
+            (${weekdayNames[day]})
+            </strong>
+            불참 현황 조회 중`;
+
+        return;
+
+    }
+
+
     const t =
         getKoreaTimeParts();
 
 
     const total =
 
-        Number(t.hour)
-        * 60
+        Number(t.hour)*60
         +
         Number(t.minute);
 
 
-
-    if(
-        currentCip === 1
-    ){
+    if(currentCip === 1){
 
         box.innerHTML =
-
-            "현재 <strong>CIP 1차</strong> 진행 중 · 16:50 ~ 17:40";
+            "현재 <strong>CIP 1차</strong> 진행 중 · 16:50~17:40";
 
         return;
 
     }
 
 
-
-    if(
-        currentCip === 2
-    ){
+    if(currentCip === 2){
 
         box.innerHTML =
-
-            "현재 <strong>CIP 2차</strong> 진행 중 · 18:40 ~ 20:00";
+            "현재 <strong>CIP 2차</strong> 진행 중 · 18:40~20:00";
 
         return;
 
     }
 
 
-
-    if(
-        currentCip === 3
-    ){
+    if(currentCip === 3){
 
         box.innerHTML =
-
-            "현재 <strong>CIP 3차</strong> 진행 중 · 20:10 ~ 21:00";
+            "현재 <strong>CIP 3차</strong> 진행 중 · 20:10~21:00";
 
         return;
 
     }
-
 
 
     if(
@@ -1481,70 +1612,63 @@ function updateCurrentCipText(){
     ){
 
         box.innerHTML =
-
-            "현재 CIP 시간이 아닙니다 · 다음: <strong>CIP 1차 16:50</strong>";
+            "현재 CIP 전 · 다음: <strong>1차 16:50</strong>";
 
         return;
 
     }
-
 
 
     if(
 
         total >=
-            cipTimes[1].end
+        cipTimes[1].end
 
         &&
 
         total <
-            cipTimes[2].start
+        cipTimes[2].start
 
     ){
 
         box.innerHTML =
-
-            "쉬는 시간 · 다음: <strong>CIP 2차 18:40</strong>";
+            "쉬는 시간 · 다음: <strong>2차 18:40</strong>";
 
         return;
 
     }
-
 
 
     if(
 
         total >=
-            cipTimes[2].end
+        cipTimes[2].end
 
         &&
 
         total <
-            cipTimes[3].start
+        cipTimes[3].start
 
     ){
 
         box.innerHTML =
-
-            "쉬는 시간 · 다음: <strong>CIP 3차 20:10</strong>";
+            "쉬는 시간 · 다음: <strong>3차 20:10</strong>";
 
         return;
 
     }
 
 
-
-    box.innerHTML =
-
+    box.textContent =
         "오늘의 CIP 시간이 종료되었습니다.";
 
 }
 
 
 
-/* =========================================
+/* ===================================================
    좌석 생성
-========================================= */
+=================================================== */
 
 function createSeats(){
 
@@ -1560,8 +1684,8 @@ function createSeats(){
 
 
     for(
-        let i = 1;
-        i <= 36;
+        let i=1;
+        i<=36;
         i++
     ){
 
@@ -1572,12 +1696,12 @@ function createSeats(){
             );
 
 
-        seat.id =
-            "seat-" + i;
-
-
         seat.className =
             "seat";
+
+
+        seat.id =
+            "seat-" + i;
 
 
         if(
@@ -1605,17 +1729,16 @@ function createSeats(){
             </div>
 
             <div
-                id="status-${i}"
-                class="status">
+                class="status"
+                id="status-${i}">
             </div>
 
         `;
 
 
-        grid
-            .appendChild(
-                seat
-            );
+        grid.appendChild(
+            seat
+        );
 
     }
 
@@ -1623,9 +1746,9 @@ function createSeats(){
 
 
 
-/* =========================================
-   이름 자동완성
-========================================= */
+/* ===================================================
+   학생 자동완성
+=================================================== */
 
 function createStudentList(){
 
@@ -1636,13 +1759,9 @@ function createStudentList(){
         );
 
 
-    list.innerHTML =
-        "";
-
-
     for(
-        let i = 1;
-        i <= 36;
+        let i=1;
+        i<=36;
         i++
     ){
 
@@ -1657,44 +1776,39 @@ function createStudentList(){
         }
 
 
-
-        const numberOption =
+        const n =
             document.createElement(
                 "option"
             );
 
 
-        numberOption.value =
+        n.value =
             String(i);
 
 
-        numberOption.label =
+        n.label =
             students[i];
 
 
-        list.appendChild(
-            numberOption
-        );
+        list.appendChild(n);
 
 
 
-        const nameOption =
+        const name =
             document.createElement(
                 "option"
             );
 
 
-        nameOption.value =
+        name.value =
             students[i];
 
 
-        nameOption.label =
+        name.label =
             i + "번";
 
 
-        list.appendChild(
-            nameOption
-        );
+        list.appendChild(name);
 
     }
 
@@ -1702,69 +1816,9 @@ function createStudentList(){
 
 
 
-/* =========================================
-   CIP 버튼
-========================================= */
-
-function toggleCip(button){
-
-
-    const cip =
-        Number(
-            button.dataset.cip
-        );
-
-
-    if(
-        selectedCips
-            .includes(cip)
-    ){
-
-
-        selectedCips =
-            selectedCips
-                .filter(
-                    item =>
-                        item !== cip
-                );
-
-
-        button
-            .classList
-            .remove(
-                "selected"
-            );
-
-
-    }else{
-
-
-        selectedCips
-            .push(cip);
-
-
-        selectedCips
-            .sort(
-                (a,b) =>
-                    a-b
-            );
-
-
-        button
-            .classList
-            .add(
-                "selected"
-            );
-
-    }
-
-}
-
-
-
-/* =========================================
-   번호 또는 이름 검색
-========================================= */
+/* ===================================================
+   학생 찾기
+=================================================== */
 
 function findStudent(){
 
@@ -1785,7 +1839,6 @@ function findStudent(){
                 ""
             )
             .trim();
-
 
 
     if(
@@ -1815,10 +1868,9 @@ function findStudent(){
     }
 
 
-
     for(
-        let i = 1;
-        i <= 36;
+        let i=1;
+        i<=36;
         i++
     ){
 
@@ -1835,18 +1887,150 @@ function findStudent(){
     }
 
 
-
     return null;
 
 }
 
 
 
-/* =========================================
-   불참 신청
-========================================= */
+/* ===================================================
+   버튼 선택
+=================================================== */
 
-async function applyAbsence(){
+function toggleArrayValue(
+    array,
+    value
+){
+
+
+    if(
+        array.includes(value)
+    ){
+
+        return array.filter(
+            x =>
+                x !== value
+        );
+
+    }
+
+
+    return [
+        ...array,
+        value
+    ].sort(
+        (a,b)=>a-b
+    );
+
+}
+
+
+
+document
+    .querySelectorAll(
+        ".cip-btn"
+    )
+    .forEach(
+        button => {
+
+
+            button
+                .addEventListener(
+                    "click",
+                    ()=>{
+
+
+                        const cip =
+                            Number(
+                                button.dataset.cip
+                            );
+
+
+                        if(
+                            button.dataset.type ===
+                            "single"
+                        ){
+
+
+                            singleCips =
+                                toggleArrayValue(
+                                    singleCips,
+                                    cip
+                                );
+
+
+                        }else{
+
+
+                            recurringCips =
+                                toggleArrayValue(
+                                    recurringCips,
+                                    cip
+                                );
+
+                        }
+
+
+                        button
+                            .classList
+                            .toggle(
+                                "selected"
+                            );
+
+                    }
+                );
+
+        }
+    );
+
+
+
+document
+    .querySelectorAll(
+        ".weekday-btn"
+    )
+    .forEach(
+        button => {
+
+
+            button
+                .addEventListener(
+                    "click",
+                    ()=>{
+
+
+                        const day =
+                            Number(
+                                button.dataset.day
+                            );
+
+
+                        recurringDays =
+                            toggleArrayValue(
+                                recurringDays,
+                                day
+                            );
+
+
+                        button
+                            .classList
+                            .toggle(
+                                "selected"
+                            );
+
+                    }
+                );
+
+        }
+    );
+
+
+
+/* ===================================================
+   날짜별 불참 신청
+=================================================== */
+
+async function applySingleAbsence(){
 
 
     const student =
@@ -1856,7 +2040,7 @@ async function applyAbsence(){
     const reason =
         document
             .getElementById(
-                "reason"
+                "singleReason"
             )
             .value
             .trim();
@@ -1870,65 +2054,49 @@ async function applyAbsence(){
             .value;
 
 
-
-    if(
-        student === null
-    ){
+    if(student === null){
 
         showError(
             "올바른 번호 또는 이름을 입력해주세요."
         );
 
         return;
-
     }
-
 
 
     if(
         disabledStudents
-            .includes(
-                student
-            )
+            .includes(student)
     ){
 
         showError(
-            student +
-            "번은 비활성 번호입니다."
+            "비활성 번호입니다."
         );
 
         return;
-
     }
 
 
-
     if(
-        selectedCips.length === 0
+        singleCips.length === 0
     ){
 
         showError(
-            "불참할 CIP를 선택해주세요."
+            "CIP를 선택해주세요."
         );
 
         return;
-
     }
 
 
-
-    if(
-        reason === ""
-    ){
+    if(reason === ""){
 
         showError(
             "불참 사유를 입력해주세요."
         );
 
         return;
-
     }
-
 
 
     if(
@@ -1941,29 +2109,16 @@ async function applyAbsence(){
         );
 
         return;
-
     }
 
 
-
-    const date =
-        getKoreaDateKey();
-
-
-    /*
-       날짜 + 학생번호를
-       문서 ID로 사용
-
-       예:
-       2026-08-27_23
-    */
-
     const documentId =
 
-        date +
-        "_" +
+        selectedDate
+        +
+        "_"
+        +
         student;
-
 
 
     try{
@@ -1980,7 +2135,7 @@ async function applyAbsence(){
             {
 
                 date:
-                    date,
+                    selectedDate,
 
                 number:
                     student,
@@ -1989,7 +2144,7 @@ async function applyAbsence(){
                     students[student],
 
                 cips:
-                    [...selectedCips],
+                    [...singleCips],
 
                 reason:
                     reason,
@@ -2004,27 +2159,22 @@ async function applyAbsence(){
 
         showSuccess(
 
-            student +
-            "번 " +
-            students[student] +
-            " 신청 완료"
+            `${selectedDate} · ${student}번 ${students[student]} 신청 완료`
 
         );
 
 
-        clearInputs();
+        clearSingleInput();
 
 
     }catch(error){
 
 
-        console.error(
-            error
-        );
+        console.error(error);
 
 
         showError(
-            "Firebase 저장에 실패했습니다."
+            "날짜별 신청 저장 실패"
         );
 
     }
@@ -2033,11 +2183,11 @@ async function applyAbsence(){
 
 
 
-/* =========================================
-   불참 신청 취소
-========================================= */
+/* ===================================================
+   날짜별 신청 취소
+=================================================== */
 
-async function cancelAbsence(){
+async function cancelSingleAbsence(){
 
 
     const student =
@@ -2052,36 +2202,14 @@ async function cancelAbsence(){
             .value;
 
 
-
-    if(
-        student === null
-    ){
+    if(student === null){
 
         showError(
-            "번호 또는 이름을 입력해주세요."
+            "학생을 입력해주세요."
         );
 
         return;
-
     }
-
-
-
-    if(
-        disabledStudents
-            .includes(
-                student
-            )
-    ){
-
-        showError(
-            "비활성 번호입니다."
-        );
-
-        return;
-
-    }
-
 
 
     if(
@@ -2094,35 +2222,16 @@ async function cancelAbsence(){
         );
 
         return;
-
     }
-
-
-
-    if(
-        !absenceData[student]
-    ){
-
-        showError(
-            "오늘 등록된 불참 신청이 없습니다."
-        );
-
-        return;
-
-    }
-
-
-
-    const date =
-        getKoreaDateKey();
 
 
     const documentId =
 
-        date +
-        "_" +
+        selectedDate
+        +
+        "_"
+        +
         student;
-
 
 
     try{
@@ -2140,28 +2249,21 @@ async function cancelAbsence(){
 
 
         showSuccess(
-
-            student +
-            "번 " +
-            students[student] +
-            " 신청 취소 완료"
-
+            "선택 날짜 신청을 취소했습니다."
         );
 
 
-        clearInputs();
+        clearSingleInput();
 
 
     }catch(error){
 
 
-        console.error(
-            error
-        );
+        console.error(error);
 
 
         showError(
-            "신청 취소에 실패했습니다."
+            "취소 실패"
         );
 
     }
@@ -2170,23 +2272,270 @@ async function cancelAbsence(){
 
 
 
-/* =========================================
-   Firebase 실시간 동기화
-========================================= */
+/* ===================================================
+   반복 불참 등록
+=================================================== */
 
-function startRealtimeSync(){
-
-
-    currentDateKey =
-        getKoreaDateKey();
+async function applyRecurringAbsence(){
 
 
+    const student =
+        findStudent();
 
-    /*
-       오늘 날짜 데이터만 가져옴
-    */
 
-    const todayQuery =
+    const reason =
+        document
+            .getElementById(
+                "recurringReason"
+            )
+            .value
+            .trim();
+
+
+    const password =
+        document
+            .getElementById(
+                "password"
+            )
+            .value;
+
+
+    if(student === null){
+
+        showError(
+            "학생을 입력해주세요."
+        );
+
+        return;
+    }
+
+
+    if(
+        disabledStudents
+            .includes(student)
+    ){
+
+        showError(
+            "비활성 번호입니다."
+        );
+
+        return;
+    }
+
+
+    if(
+        recurringDays.length === 0
+    ){
+
+        showError(
+            "반복할 요일을 선택해주세요."
+        );
+
+        return;
+    }
+
+
+    if(
+        recurringCips.length === 0
+    ){
+
+        showError(
+            "반복해서 빠질 CIP를 선택해주세요."
+        );
+
+        return;
+    }
+
+
+    if(reason === ""){
+
+        showError(
+            "반복 불참 사유를 입력해주세요."
+        );
+
+        return;
+    }
+
+
+    if(
+        password !==
+        passwords[student]
+    ){
+
+        showError(
+            "비밀번호가 틀렸습니다."
+        );
+
+        return;
+    }
+
+
+    try{
+
+
+        await setDoc(
+
+            doc(
+                db,
+                "recurring",
+                String(student)
+            ),
+
+            {
+
+                number:
+                    student,
+
+                name:
+                    students[student],
+
+                weekdays:
+                    [...recurringDays],
+
+                cips:
+                    [...recurringCips],
+
+                reason:
+                    reason,
+
+                updatedAt:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+        const days =
+            recurringDays
+                .map(
+                    day =>
+                        weekdayNames[day]
+                )
+                .join("·");
+
+
+        showSuccess(
+
+            `${student}번 ${students[student]} 매주 ${days} 반복 등록 완료`
+
+        );
+
+
+        clearRecurringInput();
+
+
+    }catch(error){
+
+
+        console.error(error);
+
+
+        showError(
+            "반복 불참 저장 실패"
+        );
+
+    }
+
+}
+
+
+
+/* ===================================================
+   반복 불참 삭제
+=================================================== */
+
+async function cancelRecurringAbsence(){
+
+
+    const student =
+        findStudent();
+
+
+    const password =
+        document
+            .getElementById(
+                "password"
+            )
+            .value;
+
+
+    if(student === null){
+
+        showError(
+            "학생을 입력해주세요."
+        );
+
+        return;
+    }
+
+
+    if(
+        password !==
+        passwords[student]
+    ){
+
+        showError(
+            "비밀번호가 틀렸습니다."
+        );
+
+        return;
+    }
+
+
+    try{
+
+
+        await deleteDoc(
+
+            doc(
+                db,
+                "recurring",
+                String(student)
+            )
+
+        );
+
+
+        showSuccess(
+            "반복 불참 설정을 삭제했습니다."
+        );
+
+
+        clearRecurringInput();
+
+
+    }catch(error){
+
+
+        console.error(error);
+
+
+        showError(
+            "반복 설정 삭제 실패"
+        );
+
+    }
+
+}
+
+
+
+/* ===================================================
+   선택 날짜 Firestore 실시간 조회
+=================================================== */
+
+function startDateSync(){
+
+
+    if(unsubscribeSingle){
+
+        unsubscribeSingle();
+
+    }
+
+
+    const q =
         query(
 
             collection(
@@ -2197,28 +2546,24 @@ function startRealtimeSync(){
             where(
                 "date",
                 "==",
-                currentDateKey
+                selectedDate
             )
 
         );
 
 
+    unsubscribeSingle =
+        onSnapshot(
 
-    onSnapshot(
+            q,
 
-        todayQuery,
-
-
-        snapshot => {
-
-
-            absenceData =
-                {};
+            snapshot => {
 
 
-            snapshot
-                .forEach(
+                singleAbsenceData = {};
 
+
+                snapshot.forEach(
                     document => {
 
 
@@ -2226,7 +2571,7 @@ function startRealtimeSync(){
                             document.data();
 
 
-                        absenceData[
+                        singleAbsenceData[
                             data.number
                         ] = {
 
@@ -2239,65 +2584,165 @@ function startRealtimeSync(){
                         };
 
                     }
-
                 );
 
 
-            updateScreen();
+                updateScreen();
 
 
-            setConnectionStatus(
+                setConnectionStatus(
+                    "실시간 공유 연결됨",
+                    "online"
+                );
 
-                "실시간 공유 연결됨",
+            },
 
-                "online"
-
-            );
-
-        },
-
-
-        error => {
+            error => {
 
 
-            console.error(
-                error
-            );
+                console.error(error);
 
 
-            setConnectionStatus(
+                setConnectionStatus(
+                    "Firebase 연결 오류",
+                    "error"
+                );
 
-                "Firebase 연결 오류",
+            }
 
-                "error"
-
-            );
-
-
-            showError(
-
-                "Firestore 규칙 또는 연결을 확인해주세요."
-
-            );
-
-        }
-
-    );
+        );
 
 }
 
 
 
-/* =========================================
-   좌석 업데이트
-========================================= */
+/* ===================================================
+   반복 데이터 실시간 조회
+=================================================== */
+
+function startRecurringSync(){
+
+
+    if(unsubscribeRecurring){
+
+        unsubscribeRecurring();
+
+    }
+
+
+    unsubscribeRecurring =
+        onSnapshot(
+
+            collection(
+                db,
+                "recurring"
+            ),
+
+            snapshot => {
+
+
+                recurringData = {};
+
+
+                snapshot.forEach(
+                    document => {
+
+
+                        const data =
+                            document.data();
+
+
+                        recurringData[
+                            data.number
+                        ] = {
+
+                            weekdays:
+                                data.weekdays || [],
+
+                            cips:
+                                data.cips || [],
+
+                            reason:
+                                data.reason || ""
+
+                        };
+
+                    }
+                );
+
+
+                updateScreen();
+
+            }
+
+        );
+
+}
+
+
+
+/* ===================================================
+   선택 날짜에 반복 불참 적용되는지 확인
+=================================================== */
+
+function getRecurringForStudent(
+    student
+){
+
+
+    const recurring =
+        recurringData[student];
+
+
+    if(!recurring){
+
+        return null;
+    }
+
+
+    const weekday =
+        getWeekdayFromDate(
+            selectedDate
+        );
+
+
+    if(
+        !recurring.weekdays
+            .includes(
+                weekday
+            )
+    ){
+
+        return null;
+    }
+
+
+    return recurring;
+
+}
+
+
+
+/* ===================================================
+   화면
+=================================================== */
 
 function updateScreen(){
 
 
+    const weekday =
+        getWeekdayFromDate(
+            selectedDate
+        );
+
+
+    const today =
+        getTodayKey();
+
+
     for(
-        let i = 1;
-        i <= 36;
+        let i=1;
+        i<=36;
         i++
     ){
 
@@ -2314,99 +2759,177 @@ function updateScreen(){
             );
 
 
-
         if(
             disabledStudents
                 .includes(i)
         ){
 
-
             status.textContent =
                 "비활성";
 
-
             continue;
-
         }
 
 
-
-        seat
-            .classList
-            .remove(
-                "absent"
-            );
+        seat.classList.remove(
+            "absent",
+            "recurring",
+            "both"
+        );
 
 
         status.innerHTML =
             "";
 
 
+        const single =
+            singleAbsenceData[i];
+
+
+        const recurring =
+            getRecurringForStudent(
+                i
+            );
+
 
         /*
-           현재 CIP가 아니면
-           빨간 표시하지 않음
+        오늘 날짜에서는
+        현재 CIP만 표시.
+
+        다른 날짜 조회 시에는
+        전체 신청을 보여줌.
         */
 
+        let singleVisible =
+            false;
+
+
+        let recurringVisible =
+            false;
+
+
         if(
-            currentCip === null
+            selectedDate ===
+            today
         ){
 
-            continue;
+
+            if(currentCip !== null){
+
+
+                singleVisible =
+                    !!single
+                    &&
+                    single.cips
+                        .includes(
+                            currentCip
+                        );
+
+
+                recurringVisible =
+                    !!recurring
+                    &&
+                    recurring.cips
+                        .includes(
+                            currentCip
+                        );
+
+            }
+
+
+        }else{
+
+
+            singleVisible =
+                !!single;
+
+
+            recurringVisible =
+                !!recurring;
 
         }
 
 
 
-        const data =
-            absenceData[i];
-
-
         if(
-            !data
+            singleVisible
+            &&
+            recurringVisible
         ){
 
-            continue;
+            seat.classList.add(
+                "both"
+            );
+
+        }
+        else if(singleVisible){
+
+            seat.classList.add(
+                "absent"
+            );
+
+        }
+        else if(recurringVisible){
+
+            seat.classList.add(
+                "recurring"
+            );
 
         }
 
 
 
-        if(
-            data.cips
-                .includes(
-                    currentCip
-                )
-        ){
+        const lines = [];
 
 
-            seat
-                .classList
-                .add(
-                    "absent"
-                );
+        if(singleVisible){
 
 
-            status.innerHTML =
+            const cipText =
+                single.cips
+                    .map(
+                        c =>
+                            `${c}차`
+                    )
+                    .join("·");
 
-                "CIP " +
-                currentCip +
-                "차 불참"
 
-                +
+            lines.push(
 
-                "<br>"
+                `${cipText} ${escapeHtml(single.reason)}`
 
-                +
-
-                escapeHtml(
-                    data.reason
-                );
+            );
 
         }
+
+
+        if(recurringVisible){
+
+
+            const cipText =
+                recurring.cips
+                    .map(
+                        c =>
+                            `${c}차`
+                    )
+                    .join("·");
+
+
+            lines.push(
+
+                `<span class="recurring-label">(${weekdayNames[weekday]})</span>
+                 ${cipText}
+                 ${escapeHtml(recurring.reason)}`
+
+            );
+
+        }
+
+
+        status.innerHTML =
+            lines.join("<br>");
 
     }
-
 
 
     updateAbsenceList();
@@ -2415,9 +2938,9 @@ function updateScreen(){
 
 
 
-/* =========================================
-   전체 신청 목록
-========================================= */
+/* ===================================================
+   오른쪽 명단
+=================================================== */
 
 function updateAbsenceList(){
 
@@ -2428,179 +2951,293 @@ function updateAbsenceList(){
         );
 
 
-    const numbers =
-        Object.keys(
-            absenceData
+    const weekday =
+        getWeekdayFromDate(
+            selectedDate
         );
 
 
-    if(
-        numbers.length === 0
+    document
+        .getElementById(
+            "listTitle"
+        )
+        .textContent =
+
+        `${selectedDate} (${weekdayNames[weekday]}) 불참 현황`;
+
+
+    const items = [];
+
+
+    for(
+        let i=1;
+        i<=36;
+        i++
     ){
 
 
-        list.textContent =
-            "오늘 신청자가 없습니다.";
+        if(
+            disabledStudents
+                .includes(i)
+        ){
 
+            continue;
+        }
+
+
+        const single =
+            singleAbsenceData[i];
+
+
+        const recurring =
+            getRecurringForStudent(
+                i
+            );
+
+
+        if(
+            !single
+            &&
+            !recurring
+        ){
+
+            continue;
+        }
+
+
+        const parts = [];
+
+
+        if(single){
+
+
+            const cips =
+                single.cips
+                    .map(
+                        c =>
+                            `CIP ${c}차`
+                    )
+                    .join(" · ");
+
+
+            parts.push(
+
+                `${cips}<br>${escapeHtml(single.reason)}`
+
+            );
+
+        }
+
+
+        if(recurring){
+
+
+            const cips =
+                recurring.cips
+                    .map(
+                        c =>
+                            `CIP ${c}차`
+                    )
+                    .join(" · ");
+
+
+            parts.push(
+
+                `<span class="recurring-label">
+                (${weekdayNames[weekday]}) 반복
+                </span>
+                ${cips}
+                <br>
+                ${escapeHtml(recurring.reason)}`
+
+            );
+
+        }
+
+
+        items.push({
+
+            number:i,
+
+            html:
+
+                `<div class="absence-item">
+
+                    <strong>
+                        ${i}번 ${students[i]}
+                    </strong>
+
+                    <br>
+
+                    ${parts.join("<hr>")}
+
+                </div>`
+
+        });
+
+    }
+
+
+    if(
+        items.length === 0
+    ){
+
+        list.textContent =
+            "해당 날짜 불참자가 없습니다.";
 
         return;
 
     }
 
 
-
-    numbers.sort(
-
-        (a,b) =>
-
-            Number(a)
-            -
-            Number(b)
-
-    );
-
-
     list.innerHTML =
-        "";
 
-
-
-    for(
-        const number
-        of numbers
-    ){
-
-
-        const data =
-            absenceData[number];
-
-
-        const item =
-            document.createElement(
-                "div"
-            );
-
-
-        item.className =
-            "absence-item";
-
-
-        const cipText =
-            data.cips
-
-                .map(
-                    cip =>
-                        "CIP " +
-                        cip +
-                        "차"
-                )
-
-                .join(
-                    " · "
-                );
-
-
-        item.innerHTML =
-
-            "<strong>"
-            +
-            number
-            +
-            "번 "
-            +
-            students[number]
-            +
-            "</strong>"
-
-            +
-
-            "<br>"
-
-            +
-
-            cipText
-
-            +
-
-            "<br>"
-
-            +
-
-            escapeHtml(
-                data.reason
-            );
-
-
-        list.appendChild(
-            item
-        );
-
-    }
+        items
+            .sort(
+                (a,b)=>
+                    a.number -
+                    b.number
+            )
+            .map(
+                item =>
+                    item.html
+            )
+            .join("");
 
 }
 
 
 
-/* =========================================
-   입력창 초기화
-========================================= */
+/* ===================================================
+   날짜 변경
+=================================================== */
 
-function clearInputs(){
+function changeSelectedDate(){
+
+
+    selectedDate =
+        document
+            .getElementById(
+                "viewDate"
+            )
+            .value;
+
+
+    const weekday =
+        getWeekdayFromDate(
+            selectedDate
+        );
 
 
     document
         .getElementById(
-            "studentInput"
+            "dateInfo"
         )
-        .value =
-            "";
+        .textContent =
+
+        `${selectedDate} (${weekdayNames[weekday]}요일)`;
+
+
+    updateCipInfo();
+
+
+    startDateSync();
+
+}
+
+
+
+/* ===================================================
+   초기화
+=================================================== */
+
+function clearSingleInput(){
 
 
     document
         .getElementById(
-            "reason"
+            "singleReason"
         )
-        .value =
-            "";
+        .value = "";
 
 
     document
         .getElementById(
             "password"
         )
-        .value =
-            "";
+        .value = "";
 
 
-    selectedCips =
-        [];
+    singleCips = [];
 
 
     document
         .querySelectorAll(
-            ".cip-btn"
+            '[data-type="single"]'
         )
         .forEach(
-
-            button => {
-
-                button
-                    .classList
-                    .remove(
-                        "selected"
-                    );
-
-            }
-
+            button =>
+                button.classList.remove(
+                    "selected"
+                )
         );
 
 }
 
 
 
-/* =========================================
-   메시지
-========================================= */
+function clearRecurringInput(){
+
+
+    document
+        .getElementById(
+            "recurringReason"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "password"
+        )
+        .value = "";
+
+
+    recurringDays = [];
+
+    recurringCips = [];
+
+
+    document
+        .querySelectorAll(
+            ".weekday-btn"
+        )
+        .forEach(
+            button =>
+                button.classList.remove(
+                    "selected"
+                )
+        );
+
+
+    document
+        .querySelectorAll(
+            '[data-type="recurring"]'
+        )
+        .forEach(
+            button =>
+                button.classList.remove(
+                    "selected"
+                )
+        );
+
+}
+
+
+
+/* ===================================================
+   상태
+=================================================== */
 
 function showError(text){
 
@@ -2642,10 +3279,6 @@ function showSuccess(text){
 
 
 
-/* =========================================
-   Firebase 상태
-========================================= */
-
 function setConnectionStatus(
     text,
     type
@@ -2668,9 +3301,9 @@ function setConnectionStatus(
 
     if(type){
 
-        status.classList.add(
-            type
-        );
+        status
+            .classList
+            .add(type);
 
     }
 
@@ -2678,137 +3311,123 @@ function setConnectionStatus(
 
 
 
-/* =========================================
-   HTML 안전 처리
-========================================= */
+/* ===================================================
+   HTML 보호
+=================================================== */
 
 function escapeHtml(text){
 
 
     return String(text)
 
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
+        .replaceAll("&","&amp;")
 
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
+        .replaceAll("<","&lt;")
 
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
+        .replaceAll(">","&gt;")
 
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
+        .replaceAll('"',"&quot;")
 
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+        .replaceAll("'","&#039;");
 
 }
 
 
 
-/* =========================================
-   버튼 이벤트
-========================================= */
+/* ===================================================
+   이벤트
+=================================================== */
 
 document
-    .querySelectorAll(
-        ".cip-btn"
+    .getElementById(
+        "viewDate"
     )
-    .forEach(
-
-        button => {
-
-            button
-                .addEventListener(
-
-                    "click",
-
-                    () =>
-                        toggleCip(
-                            button
-                        )
-
-                );
-
-        }
-
+    .addEventListener(
+        "change",
+        changeSelectedDate
     );
-
 
 
 document
     .getElementById(
-        "submitButton"
+        "singleSubmit"
     )
     .addEventListener(
-
         "click",
-        applyAbsence
-
+        applySingleAbsence
     );
-
 
 
 document
     .getElementById(
-        "cancelButton"
+        "singleCancel"
     )
     .addEventListener(
-
         "click",
-        cancelAbsence
+        cancelSingleAbsence
+    );
 
+
+document
+    .getElementById(
+        "recurringSubmit"
+    )
+    .addEventListener(
+        "click",
+        applyRecurringAbsence
+    );
+
+
+document
+    .getElementById(
+        "recurringCancel"
+    )
+    .addEventListener(
+        "click",
+        cancelRecurringAbsence
     );
 
 
 
-/* =========================================
-   시작
-========================================= */
+/* ===================================================
+   실행
+=================================================== */
 
 createSeats();
 
 createStudentList();
 
 
-currentDateKey =
-    getKoreaDateKey();
+selectedDate =
+    getTodayKey();
+
+
+document
+    .getElementById(
+        "viewDate"
+    )
+    .value =
+        selectedDate;
 
 
 currentCip =
     calculateCurrentCip();
 
 
-updateScreen();
+changeSelectedDate();
+
+startRecurringSync();
 
 updateClock();
 
 
-startRealtimeSync();
-
-
 setInterval(
-
     updateClock,
-
     1000
-
 );
 
 
 </script>
 
-
 </body>
-
 </html>
