@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>2학년 6반 야자 관리</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -24,30 +18,18 @@ html {
 body {
     margin: 0;
     padding: clamp(6px, 1.4vw, 22px);
-
-    font-family:
-        Arial,
-        "Noto Sans KR",
-        sans-serif;
-
+    font-family: Arial, "Noto Sans KR", sans-serif;
     background: #f3f5f7;
     color: #222;
 }
-
-
-/* ==================================================
-   대표 화면 버튼
-================================================== */
 
 #displayModeButton {
     position: fixed;
     top: 10px;
     left: 10px;
-
     z-index: 9999;
 
     width: auto;
-
     min-width: 105px;
     min-height: 44px;
 
@@ -62,14 +44,8 @@ body {
 
     font-size: 14px;
     font-weight: 900;
-
     cursor: pointer;
 }
-
-
-/* ==================================================
-   상단
-================================================== */
 
 .header {
     text-align: center;
@@ -78,25 +54,18 @@ body {
 
 h1 {
     margin: 4px 0 5px;
-
-    font-size:
-        clamp(28px, 3vw, 44px);
+    font-size: clamp(28px, 3vw, 44px);
 }
 
 #clock {
     margin-bottom: 8px;
-
-    font-size:
-        clamp(17px, 2vw, 27px);
-
+    font-size: clamp(17px, 2vw, 27px);
     font-weight: 900;
 }
 
 .current-cip {
     max-width: 780px;
-
     margin: 0 auto;
-
     padding: 11px 15px;
 
     border-radius: 10px;
@@ -104,57 +73,34 @@ h1 {
     background: #252525;
     color: white;
 
-    font-size:
-        clamp(13px, 1.4vw, 18px);
-
+    font-size: clamp(13px, 1.4vw, 18px);
     font-weight: 900;
 }
-
-
-/* ==================================================
-   전체
-================================================== */
 
 .container {
     width: 100%;
     max-width: 1500px;
-
     margin: 0 auto;
 
     display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        minmax(300px, 370px);
-
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 370px);
     gap: clamp(12px, 2vw, 28px);
 
     align-items: start;
 }
 
-
-/* ==================================================
-   좌석
-================================================== */
-
 .seat-area {
     min-width: 0;
-
-    padding:
-        clamp(8px, 1.5vw, 22px);
+    padding: clamp(8px, 1.5vw, 22px);
 
     border-radius: 15px;
 
     background: white;
-
-    box-shadow:
-        0 3px 14px rgba(0,0,0,0.08);
+    box-shadow: 0 3px 14px rgba(0,0,0,0.08);
 }
 
 .teacher {
-    margin-bottom:
-        clamp(9px, 1.3vw, 18px);
-
+    margin-bottom: clamp(9px, 1.3vw, 18px);
     padding: 11px;
 
     border-radius: 8px;
@@ -170,12 +116,9 @@ h1 {
     width: 100%;
 
     display: grid;
+    grid-template-columns: repeat(6, minmax(0,1fr));
 
-    grid-template-columns:
-        repeat(6, minmax(0,1fr));
-
-    gap:
-        clamp(3px, 0.7vw, 10px);
+    gap: clamp(3px, 0.7vw, 10px);
 }
 
 .seat {
@@ -183,170 +126,118 @@ h1 {
     width: 100%;
 
     aspect-ratio: 1 / 0.92;
-
     min-height: 70px;
 
-    padding:
-        clamp(2px, 0.5vw, 6px);
+    padding: clamp(2px, 0.5vw, 6px);
 
-    border:
-        2px solid #7da7e8;
-
+    border: 2px solid #7da7e8;
     border-radius: 9px;
 
     background: #e8f1ff;
 
     display: flex;
-
     flex-direction: column;
 
     justify-content: center;
     align-items: center;
 
     text-align: center;
-
     overflow: hidden;
 
     transition: 0.2s;
 }
 
-
-/* 번호 */
-
+/* 번호 조금 작게 */
 .number {
-    font-size:
-        clamp(18px, 2.5vw, 34px);
-
+    font-size: clamp(18px, 2.5vw, 34px);
     font-weight: 900;
-
     line-height: 1;
 }
 
-
-/* 이름 */
-
+/* 이름 크게 */
 .name {
     margin-top: 5px;
 
-    font-size:
-        clamp(10px, 1.3vw, 18px);
-
+    font-size: clamp(10px, 1.3vw, 18px);
     font-weight: bold;
 
     white-space: nowrap;
 }
 
-
-/* 불참 사유 */
-
+/* 사유 크게 */
 .status {
     width: 100%;
-
     margin-top: 5px;
 
-    font-size:
-        clamp(9px, 1vw, 14px);
-
+    font-size: clamp(9px, 1vw, 14px);
     line-height: 1.25;
 
     font-weight: 900;
-
     overflow-wrap: anywhere;
 }
 
-
-/* ==================================================
-   모든 불참 = 빨강
-================================================== */
-
-.seat.absent,
-.seat.recurring,
-.seat.both,
-.seat.creative {
+/* 모든 불참 좌석 = 빨강 */
+.seat.absent {
     background: #ffd9d9;
-
     border-color: #e53935;
-
     color: #950000;
 }
 
-
-/* 비활성 */
-
 .seat.disabled {
     background: #c9c9c9;
-
     border-color: #999;
-
     color: #777;
 }
 
-
-.absence-text,
-.recurring-text,
-.creative-text {
+.absence-text {
     color: #c62828;
-
     font-weight: 900;
 }
 
 
-/* ==================================================
-   입력 패널
-================================================== */
+/* 관리 패널 */
 
 .control-panel {
     width: 100%;
     min-width: 0;
 
-    padding:
-        clamp(16px, 2vw, 23px);
+    padding: clamp(16px, 2vw, 23px);
 
     border-radius: 15px;
 
     background: white;
-
-    box-shadow:
-        0 3px 14px rgba(0,0,0,0.08);
+    box-shadow: 0 3px 14px rgba(0,0,0,0.08);
 
     position: sticky;
-
     top: 10px;
 }
 
 .control-panel h2 {
     margin: 0 0 14px;
-
     font-size: 23px;
 }
 
 .section-title {
     margin: 24px 0 12px;
-
     padding-top: 17px;
 
-    border-top:
-        2px solid #eee;
+    border-top: 2px solid #eee;
 
     font-size: 18px;
-
     font-weight: 900;
 }
 
 label {
     display: block;
-
     margin-top: 4px;
 
     font-size: 14px;
-
     font-weight: bold;
 }
 
 input,
 button {
     width: 100%;
-
     min-height: 44px;
 
     padding: 11px;
@@ -355,27 +246,17 @@ button {
     margin-bottom: 15px;
 
     border-radius: 8px;
-
-    border:
-        1px solid #ccc;
+    border: 1px solid #ccc;
 
     font-family: inherit;
-
     font-size: 16px;
 }
 
-
-/* ==================================================
-   날짜
-================================================== */
-
 .date-box {
     padding: 11px;
-
     margin-bottom: 17px;
 
     border-radius: 10px;
-
     background: #f5f7fa;
 }
 
@@ -385,29 +266,21 @@ button {
 
 .date-info {
     text-align: center;
-
     font-size: 13px;
-
     font-weight: bold;
-
     color: #555;
 }
 
 
-/* ==================================================
-   CIP
-================================================== */
+/* CIP */
 
 .cip-buttons {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0,1fr));
+    grid-template-columns: repeat(3, minmax(0,1fr));
 
     gap: 7px;
 
     margin-top: 8px;
-
     margin-bottom: 18px;
 }
 
@@ -415,95 +288,72 @@ button {
     min-width: 0;
 
     margin: 0;
-
     padding: 9px 2px;
 
-    border:
-        2px solid #ccc;
+    border: 2px solid #ccc;
 
     background: #f1f3f5;
-
     color: #333;
 
     font-weight: bold;
-
     cursor: pointer;
 }
 
 .cip-btn.selected {
     border-color: #1976d2;
-
     background: #1976d2;
-
     color: white;
 }
 
 .cip-time {
     display: block;
-
     margin-top: 3px;
 
     font-size: 9px;
-
     font-weight: normal;
 }
 
 
-/* ==================================================
-   요일
-================================================== */
+/* 요일 */
 
 .weekday-buttons {
     display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0,1fr));
+    grid-template-columns: repeat(4, minmax(0,1fr));
 
     gap: 7px;
 
     margin-top: 8px;
-
     margin-bottom: 18px;
 }
 
 .weekday-btn {
     margin: 0;
 
-    border:
-        2px solid #ccc;
+    border: 2px solid #ccc;
 
     background: #f1f3f5;
-
     color: #333;
 
     font-weight: bold;
-
     cursor: pointer;
 }
 
 .weekday-btn.selected {
     border-color: #e53935;
-
     background: #e53935;
-
     color: white;
 }
 
 
-/* ==================================================
-   사유 버튼
-================================================== */
+/* 사유 */
 
 .reason-buttons {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0,1fr));
+    grid-template-columns: repeat(3, minmax(0,1fr));
 
     gap: 7px;
 
     margin-top: 8px;
-
     margin-bottom: 15px;
 }
 
@@ -511,18 +361,14 @@ button {
     min-width: 0;
 
     margin: 0;
-
     padding: 9px 3px;
 
-    border:
-        2px solid #ccc;
+    border: 2px solid #ccc;
 
     background: #f3f3f3;
-
     color: #333;
 
     font-size: 13px;
-
     font-weight: bold;
 
     cursor: pointer;
@@ -530,20 +376,9 @@ button {
 
 .reason-btn.selected {
     border-color: #e53935;
-
     background: #e53935;
-
     color: white;
 }
-
-.reason-btn.selected[data-reason="창의반"] {
-    border-color: #e53935;
-
-    background: #e53935;
-
-    color: white;
-}
-
 
 #singleOtherWrap,
 #recurringOtherWrap {
@@ -551,66 +386,49 @@ button {
 }
 
 
-/* ==================================================
-   저장 / 취소
-================================================== */
+/* 저장 버튼 */
 
 .submit-btn {
     border: 0;
-
     background: #1976d2;
-
     color: white;
 
     font-weight: bold;
-
     cursor: pointer;
 }
 
 .cancel-btn {
     border: 0;
-
     background: #555;
-
     color: white;
 
     font-weight: bold;
-
     cursor: pointer;
 }
 
 .recurring-submit {
     border: 0;
-
     background: #e53935;
-
     color: white;
 
     font-weight: bold;
-
     cursor: pointer;
 }
 
 .recurring-cancel {
     border: 0;
-
     background: #795548;
-
     color: white;
 
     font-weight: bold;
-
     cursor: pointer;
 }
 
 
-/* ==================================================
-   Firebase
-================================================== */
+/* Firebase */
 
 .connection-status {
     margin-bottom: 15px;
-
     padding: 8px;
 
     border-radius: 7px;
@@ -618,77 +436,59 @@ button {
     background: #eee;
 
     text-align: center;
-
     font-size: 12px;
-
     font-weight: bold;
 }
 
 .connection-status.online {
     background: #ddf5e3;
-
     color: #176b2d;
 }
 
 .connection-status.error {
     background: #ffe0e0;
-
     color: #9b0000;
 }
 
 .message {
     min-height: 24px;
-
     margin-bottom: 8px;
 
     text-align: center;
-
     font-size: 14px;
-
     font-weight: bold;
 }
 
 
-/* ==================================================
-   현황
-================================================== */
+/* 오른쪽 현황 */
 
 .absence-list {
     margin-top: 18px;
-
     padding-top: 13px;
 
-    border-top:
-        1px solid #ddd;
+    border-top: 1px solid #ddd;
 }
 
 .absence-item {
     margin-bottom: 7px;
-
     padding: 9px;
 
     border-radius: 7px;
 
     background: #ffeaea;
 
-    border-left:
-        5px solid #e53935;
+    border-left: 5px solid #e53935;
 
     font-size: 12px;
-
     line-height: 1.5;
 }
 
 
-/* ==================================================
-   대표 화면
-================================================== */
+/* 대표 화면 */
 
 body.display-mode {
     padding: 6px;
-
     background: #111;
-
     overflow: hidden;
 }
 
@@ -698,11 +498,8 @@ body.display-mode .control-panel {
 
 body.display-mode .container {
     display: block;
-
     width: 100%;
-
     max-width: none;
-
     margin: 0;
 }
 
@@ -712,50 +509,39 @@ body.display-mode .header {
 
 body.display-mode h1 {
     margin: 0;
-
     color: white;
 
-    font-size:
-        clamp(27px, 3.5vw, 48px);
+    font-size: clamp(27px, 3.5vw, 48px);
 }
 
 body.display-mode #clock {
     margin: 1px 0 4px;
-
     color: white;
 
-    font-size:
-        clamp(20px, 2.7vw, 37px);
+    font-size: clamp(20px, 2.7vw, 37px);
 }
 
 body.display-mode .current-cip {
     max-width: 1000px;
-
     padding: 6px 12px;
 
-    font-size:
-        clamp(17px, 2vw, 27px);
+    font-size: clamp(17px, 2vw, 27px);
 }
 
 body.display-mode .seat-area {
     width: 100%;
 
-    height:
-        calc(100vh - 126px);
-
-    height:
-        calc(100dvh - 126px);
+    height: calc(100vh - 126px);
+    height: calc(100dvh - 126px);
 
     padding: 4px;
 
     border-radius: 0;
 
     background: #111;
-
     box-shadow: none;
 
     display: flex;
-
     flex-direction: column;
 }
 
@@ -765,24 +551,18 @@ body.display-mode .teacher {
 
 body.display-mode .seat-grid {
     flex: 1;
-
     min-height: 0;
 
     display: grid;
 
-    grid-template-columns:
-        repeat(6, minmax(0,1fr));
+    grid-template-columns: repeat(6, minmax(0,1fr));
+    grid-template-rows: repeat(6, minmax(0,1fr));
 
-    grid-template-rows:
-        repeat(6, minmax(0,1fr));
-
-    gap:
-        clamp(3px, 0.55vw, 8px);
+    gap: clamp(3px, 0.55vw, 8px);
 }
 
 body.display-mode .seat {
     min-height: 0;
-
     height: 100%;
 
     aspect-ratio: auto;
@@ -790,27 +570,21 @@ body.display-mode .seat {
     padding: 2px;
 
     border-width: 3px;
-
-    border-radius:
-        clamp(5px, 0.7vw, 10px);
+    border-radius: clamp(5px, 0.7vw, 10px);
 }
 
 body.display-mode .number {
-    font-size:
-        clamp(21px, 2.8vw, 40px);
+    font-size: clamp(21px, 2.8vw, 40px);
 }
 
 body.display-mode .name {
-    font-size:
-        clamp(12px, 1.7vw, 24px);
+    font-size: clamp(12px, 1.7vw, 24px);
 }
 
 body.display-mode .status {
     margin-top: 4px;
 
-    font-size:
-        clamp(10px, 1.2vw, 17px);
-
+    font-size: clamp(10px, 1.2vw, 17px);
     line-height: 1.25;
 }
 
@@ -818,10 +592,6 @@ body.display-mode #displayModeButton {
     background: #d9534f;
 }
 
-
-/* ==================================================
-   태블릿
-================================================== */
 
 @media(max-width:900px) {
 
@@ -836,10 +606,6 @@ body.display-mode #displayModeButton {
 }
 
 
-/* ==================================================
-   휴대폰
-================================================== */
-
 @media(max-width:600px) {
 
     body {
@@ -851,7 +617,6 @@ body.display-mode #displayModeButton {
         left: 5px;
 
         min-width: 88px;
-
         min-height: 40px;
 
         padding: 6px 9px;
@@ -873,23 +638,19 @@ body.display-mode #displayModeButton {
         padding: 1px;
 
         border-width: 1px;
-
         border-radius: 5px;
     }
 
     .number {
-        font-size:
-            clamp(15px, 5vw, 22px);
+        font-size: clamp(15px, 5vw, 22px);
     }
 
     .name {
-        font-size:
-            clamp(9px, 2.8vw, 12px);
+        font-size: clamp(9px, 2.8vw, 12px);
     }
 
     .status {
-        font-size:
-            clamp(8px, 2.4vw, 11px);
+        font-size: clamp(8px, 2.4vw, 11px);
     }
 
     .control-panel {
@@ -897,16 +658,12 @@ body.display-mode #displayModeButton {
     }
 
     .reason-buttons {
-        grid-template-columns:
-            repeat(2, minmax(0,1fr));
+        grid-template-columns: repeat(2, minmax(0,1fr));
     }
 
     body.display-mode .seat-area {
-        height:
-            calc(100vh - 110px);
-
-        height:
-            calc(100dvh - 110px);
+        height: calc(100vh - 110px);
+        height: calc(100dvh - 110px);
     }
 
 }
@@ -917,32 +674,21 @@ body.display-mode #displayModeButton {
 
 <body>
 
-
-<button
-    id="displayModeButton"
-    type="button">
-
+<button id="displayModeButton" type="button">
     대표 화면
-
 </button>
 
 
 <header class="header">
 
-    <h1>
-        2학년 6반
-    </h1>
+    <h1>2학년 6반</h1>
 
     <div id="clock">
         시간 확인 중...
     </div>
 
-    <div
-        id="currentCip"
-        class="current-cip">
-
+    <div id="currentCip" class="current-cip">
         현재 상태 확인 중...
-
     </div>
 
 </header>
@@ -957,28 +703,18 @@ body.display-mode #displayModeButton {
         칠판 / 교탁
     </div>
 
-    <div
-        id="seatGrid"
-        class="seat-grid">
-    </div>
+    <div id="seatGrid" class="seat-grid"></div>
 
 </section>
 
 
 <aside class="control-panel">
 
-
-<h2>
-    🌙 야자 불참 관리
-</h2>
+<h2>🌙 야자 불참 관리</h2>
 
 
-<div
-    id="connectionStatus"
-    class="connection-status">
-
+<div id="connectionStatus" class="connection-status">
     Firebase 연결 중...
-
 </div>
 
 
@@ -988,15 +724,9 @@ body.display-mode #displayModeButton {
         조회 / 신청 날짜
     </label>
 
-    <input
-        id="viewDate"
-        type="date"
-    >
+    <input id="viewDate" type="date">
 
-    <div
-        id="dateInfo"
-        class="date-info">
-    </div>
+    <div id="dateInfo" class="date-info"></div>
 
 </div>
 
@@ -1021,53 +751,29 @@ body.display-mode #displayModeButton {
 </div>
 
 
-<label>
-    불참할 CIP
-</label>
-
+<label>불참할 CIP</label>
 
 <div class="cip-buttons">
 
-    <button
-        type="button"
-        class="cip-btn"
-        data-type="single"
-        data-cip="1">
-
+    <button type="button" class="cip-btn" data-type="single" data-cip="1">
         1차
         <span class="cip-time">16:50~17:40</span>
-
     </button>
 
-    <button
-        type="button"
-        class="cip-btn"
-        data-type="single"
-        data-cip="2">
-
+    <button type="button" class="cip-btn" data-type="single" data-cip="2">
         2차
         <span class="cip-time">18:40~20:00</span>
-
     </button>
 
-    <button
-        type="button"
-        class="cip-btn"
-        data-type="single"
-        data-cip="3">
-
+    <button type="button" class="cip-btn" data-type="single" data-cip="3">
         3차
         <span class="cip-time">20:10~21:00</span>
-
     </button>
 
 </div>
 
 
-<label>
-    불참 사유
-</label>
-
+<label>불참 사유</label>
 
 <div class="reason-buttons">
 
@@ -1127,23 +833,13 @@ body.display-mode #displayModeButton {
 >
 
 
-<button
-    id="singleSubmit"
-    type="button"
-    class="submit-btn">
-
+<button id="singleSubmit" type="button" class="submit-btn">
     선택 날짜 불참 신청
-
 </button>
 
 
-<button
-    id="singleCancel"
-    type="button"
-    class="cancel-btn">
-
+<button id="singleCancel" type="button" class="cancel-btn">
     선택 날짜 신청 취소
-
 </button>
 
 
@@ -1152,10 +848,7 @@ body.display-mode #displayModeButton {
 </div>
 
 
-<label>
-    반복 요일
-</label>
-
+<label>반복 요일</label>
 
 <div class="weekday-buttons">
 
@@ -1167,53 +860,29 @@ body.display-mode #displayModeButton {
 </div>
 
 
-<label>
-    반복해서 빠질 CIP
-</label>
-
+<label>반복해서 빠질 CIP</label>
 
 <div class="cip-buttons">
 
-    <button
-        type="button"
-        class="cip-btn"
-        data-type="recurring"
-        data-cip="1">
-
+    <button type="button" class="cip-btn" data-type="recurring" data-cip="1">
         1차
         <span class="cip-time">16:50~17:40</span>
-
     </button>
 
-    <button
-        type="button"
-        class="cip-btn"
-        data-type="recurring"
-        data-cip="2">
-
+    <button type="button" class="cip-btn" data-type="recurring" data-cip="2">
         2차
         <span class="cip-time">18:40~20:00</span>
-
     </button>
 
-    <button
-        type="button"
-        class="cip-btn"
-        data-type="recurring"
-        data-cip="3">
-
+    <button type="button" class="cip-btn" data-type="recurring" data-cip="3">
         3차
         <span class="cip-time">20:10~21:00</span>
-
     </button>
 
 </div>
 
 
-<label>
-    반복 불참 사유
-</label>
-
+<label>반복 불참 사유</label>
 
 <div class="reason-buttons">
 
@@ -1273,30 +942,17 @@ body.display-mode #displayModeButton {
 >
 
 
-<button
-    id="recurringSubmit"
-    type="button"
-    class="recurring-submit">
-
-    매주 반복 불참 추가
-
+<button id="recurringSubmit" type="button" class="recurring-submit">
+    매주 반복 불참 등록 / 변경
 </button>
 
 
-<button
-    id="recurringCancel"
-    type="button"
-    class="recurring-cancel">
-
+<button id="recurringCancel" type="button" class="recurring-cancel">
     이 학생 정기 불참 전체 삭제
-
 </button>
 
 
-<div
-    id="message"
-    class="message">
-</div>
+<div id="message" class="message"></div>
 
 
 <div class="absence-list">
@@ -1318,10 +974,6 @@ body.display-mode #displayModeButton {
 
 <script type="module">
 
-
-/* ==================================================
-   Firebase
-================================================== */
 
 import {
     initializeApp
@@ -1346,26 +998,19 @@ from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 const firebaseConfig = {
 
-    apiKey:
-        "AIzaSyCd8fUYXmJ34L1yG3x3aNsEGZgaxFLLx7s",
+    apiKey: "AIzaSyCd8fUYXmJ34L1yG3x3aNsEGZgaxFLLx7s",
 
-    authDomain:
-        "yaja2-6.firebaseapp.com",
+    authDomain: "yaja2-6.firebaseapp.com",
 
-    projectId:
-        "yaja2-6",
+    projectId: "yaja2-6",
 
-    storageBucket:
-        "yaja2-6.firebasestorage.app",
+    storageBucket: "yaja2-6.firebasestorage.app",
 
-    messagingSenderId:
-        "732002055042",
+    messagingSenderId: "732002055042",
 
-    appId:
-        "1:732002055042:web:d95f280cea84dd7036d59b",
+    appId: "1:732002055042:web:d95f280cea84dd7036d59b",
 
-    measurementId:
-        "G-TKP2QV869R"
+    measurementId: "G-TKP2QV869R"
 };
 
 
@@ -1377,9 +1022,7 @@ const db =
     getFirestore(app);
 
 
-/* ==================================================
-   학생
-================================================== */
+/* 학생 */
 
 const students = {
 
@@ -1434,9 +1077,7 @@ const disabledStudents = [
 ];
 
 
-/* ==================================================
-   비밀번호
-================================================== */
+/* 비밀번호 */
 
 const passwords = {
 
@@ -1483,9 +1124,7 @@ const passwords = {
 };
 
 
-/* ==================================================
-   CIP
-================================================== */
+/* CIP */
 
 const cipTimes = {
 
@@ -1519,10 +1158,6 @@ const weekdayNames = {
 
 };
 
-
-/* ==================================================
-   변수
-================================================== */
 
 let singleCips = [];
 let recurringCips = [];
@@ -1710,65 +1345,29 @@ function getSituationText() {
         Number(t.minute);
 
 
-    if(
-        total <
-        cipTimes[1].start
-    ) {
-
+    if(total < cipTimes[1].start) {
         return "CIP 전 · 1차 16:50 시작";
-
     }
 
-
-    if(
-        total <
-        cipTimes[1].end
-    ) {
-
+    if(total < cipTimes[1].end) {
         return "CIP 1차 진행 중 · 16:50 ~ 17:40";
-
     }
 
-
-    if(
-        total <
-        cipTimes[2].start
-    ) {
-
+    if(total < cipTimes[2].start) {
         return "쉬는 시간 · CIP 2차 18:40 시작";
-
     }
 
-
-    if(
-        total <
-        cipTimes[2].end
-    ) {
-
+    if(total < cipTimes[2].end) {
         return "CIP 2차 진행 중 · 18:40 ~ 20:00";
-
     }
 
-
-    if(
-        total <
-        cipTimes[3].start
-    ) {
-
+    if(total < cipTimes[3].start) {
         return "쉬는 시간 · CIP 3차 20:10 시작";
-
     }
 
-
-    if(
-        total <
-        cipTimes[3].end
-    ) {
-
+    if(total < cipTimes[3].end) {
         return "CIP 3차 진행 중 · 20:10 ~ 21:00";
-
     }
-
 
     return "오늘의 CIP 종료";
 
@@ -1872,7 +1471,7 @@ function updateCipInfo() {
 
 
 /* ==================================================
-   좌석 생성
+   좌석
 ================================================== */
 
 function createSeats() {
@@ -1945,9 +1544,7 @@ function createSeats() {
 }
 
 
-/* ==================================================
-   자동완성
-================================================== */
+/* 자동완성 */
 
 function createStudentList() {
 
@@ -1957,8 +1554,7 @@ function createStudentList() {
         );
 
 
-    list.innerHTML =
-        "";
+    list.innerHTML = "";
 
 
     for(
@@ -2016,9 +1612,7 @@ function createStudentList() {
 }
 
 
-/* ==================================================
-   학생 찾기
-================================================== */
+/* 학생 찾기 */
 
 function findStudent() {
 
@@ -2083,9 +1677,7 @@ function findStudent() {
 }
 
 
-/* ==================================================
-   선택 배열
-================================================== */
+/* 배열 선택 */
 
 function toggleArrayValue(
     array,
@@ -2115,9 +1707,39 @@ function toggleArrayValue(
 }
 
 
-/* ==================================================
-   CIP 버튼
-================================================== */
+/* 배열 비교 */
+
+function sameNumberArray(
+    first,
+    second
+) {
+
+    const a =
+        [...first]
+            .map(Number)
+            .sort(
+                (x,y) => x-y
+            );
+
+
+    const b =
+        [...second]
+            .map(Number)
+            .sort(
+                (x,y) => x-y
+            );
+
+
+    return (
+        JSON.stringify(a)
+        ===
+        JSON.stringify(b)
+    );
+
+}
+
+
+/* CIP 선택 */
 
 document
     .querySelectorAll(
@@ -2178,9 +1800,7 @@ document
     );
 
 
-/* ==================================================
-   요일 버튼
-================================================== */
+/* 요일 선택 */
 
 document
     .querySelectorAll(
@@ -2226,6 +1846,8 @@ document
 
 /* ==================================================
    사유 버튼
+
+   다른 사유를 누르면 기존 선택은 자동 해제
 ================================================== */
 
 document
@@ -2357,10 +1979,6 @@ document
     );
 
 
-/* ==================================================
-   기타 사유
-================================================== */
-
 function updateOtherReason(
     scope,
     reason
@@ -2439,10 +2057,6 @@ function hideOtherReason(
 }
 
 
-/* ==================================================
-   실제 사유
-================================================== */
-
 function getSingleReason() {
 
     if(
@@ -2520,108 +2134,9 @@ function getRecurringReason() {
 
 
 /* ==================================================
-   ★ 중복 표시 제거용
-
-   같은 사유가 날짜별 + 정기로 동시에 있으면
-   하나로 합치고 CIP도 중복 제거
-================================================== */
-
-function buildMergedAbsenceItems(
-    single,
-    recurring
-) {
-
-    const merged =
-        {};
-
-
-    function addItem(
-        reason,
-        cips
-    ) {
-
-        const cleanReason =
-            reason || "불참";
-
-
-        if(
-            !merged[cleanReason]
-        ) {
-
-            merged[cleanReason] =
-                new Set();
-
-        }
-
-
-        (cips || [])
-            .forEach(
-                cip => {
-
-                    merged[
-                        cleanReason
-                    ].add(
-                        Number(cip)
-                    );
-
-                }
-            );
-
-    }
-
-
-    if(single) {
-
-        addItem(
-            single.reason,
-            single.cips
-        );
-
-    }
-
-
-    recurring.forEach(
-        rule => {
-
-            addItem(
-                rule.reason,
-                rule.cips
-            );
-
-        }
-    );
-
-
-    return Object
-        .entries(
-            merged
-        )
-        .map(
-            ([reason, cipSet]) => {
-
-                return {
-
-                    reason:
-                        reason,
-
-                    cips:
-                        Array
-                            .from(cipSet)
-                            .sort(
-                                (a,b) =>
-                                    a-b
-                            )
-
-                };
-
-            }
-        );
-
-}
-
-
-/* ==================================================
    날짜별 신청
+   같은 날짜의 학생 신청은 setDoc이라
+   최신 신청으로 자동 교체됨
 ================================================== */
 
 async function applySingleAbsence() {
@@ -2777,9 +2292,7 @@ async function applySingleAbsence() {
 }
 
 
-/* ==================================================
-   날짜별 취소
-================================================== */
+/* 날짜별 취소 */
 
 async function cancelSingleAbsence() {
 
@@ -2863,6 +2376,14 @@ async function cancelSingleAbsence() {
 
 /* ==================================================
    정기 등록
+
+   ★ 같은 요일 + 같은 CIP 일정이 이미 있으면
+   기존 것을 삭제하고 최신 신청으로 교체
+
+   예:
+   화요일 2차 학원
+   → 다시 화요일 2차 창의반 등록
+   → 학원 삭제, 창의반만 남음
 ================================================== */
 
 async function applyRecurringAbsence() {
@@ -2970,76 +2491,65 @@ async function applyRecurringAbsence() {
         ] || [];
 
 
-    const duplicate =
-        existingRules.some(
-            rule => {
+    /*
+    같은 요일 구성 + 같은 CIP 구성의
+    기존 정기 신청 찾기
+    */
 
-                const sameDays =
+    const oldSameSchedule =
+        existingRules.filter(
+            rule =>
 
-                    JSON.stringify(
-                        [...rule.weekdays]
-                            .sort(
-                                (a,b) =>
-                                    a-b
-                            )
-                    )
+                sameNumberArray(
+                    rule.weekdays,
+                    recurringDays
+                )
 
-                    ===
+                &&
 
-                    JSON.stringify(
-                        [...recurringDays]
-                            .sort(
-                                (a,b) =>
-                                    a-b
-                            )
-                    );
-
-
-                const sameCips =
-
-                    JSON.stringify(
-                        [...rule.cips]
-                            .sort(
-                                (a,b) =>
-                                    a-b
-                            )
-                    )
-
-                    ===
-
-                    JSON.stringify(
-                        [...recurringCips]
-                            .sort(
-                                (a,b) =>
-                                    a-b
-                            )
-                    );
-
-
-                return (
-                    sameDays
-                    &&
-                    sameCips
-                    &&
-                    rule.reason === reason
-                );
-
-            }
+                sameNumberArray(
+                    rule.cips,
+                    recurringCips
+                )
         );
-
-
-    if(duplicate) {
-
-        showError(
-            "동일한 정기 일정이 이미 등록되어 있습니다."
-        );
-
-        return;
-
-    }
 
 
     try {
+
+        /*
+        기존 같은 일정이 있으면
+        전부 삭제
+        */
+
+        if(
+            oldSameSchedule.length >
+            0
+        ) {
+
+            await Promise.all(
+
+                oldSameSchedule.map(
+                    rule =>
+
+                        deleteDoc(
+
+                            doc(
+                                db,
+                                "recurring",
+                                rule.id
+                            )
+
+                        )
+                )
+
+            );
+
+        }
+
+
+        /*
+        최신 일정 하나만 새로 저장
+        */
 
         await addDoc(
 
@@ -3083,9 +2593,24 @@ async function applyRecurringAbsence() {
                 .join("·");
 
 
-        showSuccess(
-            `${student}번 ${students[student]} (${daysText}) ${reason} 정기 등록 완료`
-        );
+        if(
+            oldSameSchedule.length >
+            0
+        ) {
+
+            showSuccess(
+                `${student}번 ${students[student]} (${daysText}) ${reason}으로 변경 완료`
+            );
+
+        }
+        else
+        {
+
+            showSuccess(
+                `${student}번 ${students[student]} (${daysText}) ${reason} 정기 등록 완료`
+            );
+
+        }
 
 
         clearRecurringInput();
@@ -3107,9 +2632,7 @@ async function applyRecurringAbsence() {
 }
 
 
-/* ==================================================
-   정기 전체 삭제
-================================================== */
+/* 정기 전체 삭제 */
 
 async function cancelRecurringAbsence() {
 
@@ -3216,7 +2739,7 @@ async function cancelRecurringAbsence() {
 
 
 /* ==================================================
-   날짜별 Firebase
+   Firebase 날짜별
 ================================================== */
 
 function startDateSync() {
@@ -3252,8 +2775,7 @@ function startDateSync() {
 
             snapshot => {
 
-                singleAbsenceData =
-                    {};
+                singleAbsenceData = {};
 
 
                 snapshot.forEach(
@@ -3314,7 +2836,7 @@ function startDateSync() {
 
 
 /* ==================================================
-   정기 Firebase
+   Firebase 정기
 ================================================== */
 
 function startRecurringSync() {
@@ -3336,8 +2858,7 @@ function startRecurringSync() {
 
             snapshot => {
 
-                recurringData =
-                    {};
+                recurringData = {};
 
 
                 snapshot.forEach(
@@ -3411,9 +2932,7 @@ function startRecurringSync() {
 }
 
 
-/* ==================================================
-   선택 날짜 정기 일정
-================================================== */
+/* 해당 날짜 정기 */
 
 function getRecurringForStudent(
     student
@@ -3444,13 +2963,197 @@ function getRecurringForStudent(
 
 
 /* ==================================================
+   ★ 실제 화면에 표시할 최종 불참 데이터
+
+   CIP별로 하나만 존재하게 함.
+
+   정기 중 같은 CIP가 여러 개면
+   뒤에 읽힌 최신값으로 덮음.
+
+   날짜별 신청은 정기보다 우선.
+================================================== */
+
+function getEffectiveAbsences(
+    single,
+    recurring
+) {
+
+    const byCip =
+        new Map();
+
+
+    /*
+    정기부터 등록
+    */
+
+    recurring.forEach(
+
+        rule => {
+
+            rule.cips.forEach(
+
+                cip => {
+
+                    byCip.set(
+                        Number(cip),
+                        {
+                            cip:
+                                Number(cip),
+
+                            reason:
+                                rule.reason || "불참",
+
+                            source:
+                                "recurring"
+                        }
+                    );
+
+                }
+
+            );
+
+        }
+
+    );
+
+
+    /*
+    날짜별 신청이 있으면
+    같은 CIP의 정기 신청을 덮어씀
+    */
+
+    if(single) {
+
+        single.cips.forEach(
+
+            cip => {
+
+                byCip.set(
+                    Number(cip),
+                    {
+                        cip:
+                            Number(cip),
+
+                        reason:
+                            single.reason || "불참",
+
+                        source:
+                            "single"
+                    }
+                );
+
+            }
+
+        );
+
+    }
+
+
+    /*
+    같은 사유끼리 차수를 묶음
+
+    2차 학원
+    3차 학원
+
+    => 2차·3차 학원
+    */
+
+    const grouped =
+        new Map();
+
+
+    Array
+        .from(
+            byCip.values()
+        )
+        .sort(
+            (a,b) =>
+                a.cip - b.cip
+        )
+        .forEach(
+
+            item => {
+
+                const reason =
+                    item.reason;
+
+
+                if(
+                    !grouped.has(
+                        reason
+                    )
+                ) {
+
+                    grouped.set(
+                        reason,
+                        []
+                    );
+
+                }
+
+
+                grouped
+                    .get(
+                        reason
+                    )
+                    .push(
+                        item.cip
+                    );
+
+            }
+
+        );
+
+
+    const displayItems =
+        Array.from(
+            grouped.entries()
+        )
+        .map(
+
+            ([reason, cips]) => {
+
+                return {
+                    reason:
+                        reason,
+
+                    cips:
+                        cips
+                };
+
+            }
+
+        );
+
+
+    return {
+
+        byCip:
+            byCip,
+
+        displayItems:
+            displayItems
+
+    };
+
+}
+
+
+/* ==================================================
    ★ 좌석 업데이트
 
-   오늘 신청되어 있으면 시간 관계없이 빨강
-   중복 사유는 하나로 합침
+   오늘:
+   현재 CIP에 해당할 때만 빨강
+
+   다른 날짜:
+   예정된 불참이면 빨강
 ================================================== */
 
 function updateScreen() {
+
+    const today =
+        getTodayKey();
+
 
     for(
         let i = 1;
@@ -3482,12 +3185,11 @@ function updateScreen() {
         }
 
 
-        seat.classList.remove(
-            "absent",
-            "recurring",
-            "both",
-            "creative"
-        );
+        seat
+            .classList
+            .remove(
+                "absent"
+            );
 
 
         const single =
@@ -3502,36 +3204,46 @@ function updateScreen() {
             );
 
 
-        const mergedItems =
-            buildMergedAbsenceItems(
+        const effective =
+            getEffectiveAbsences(
                 single,
                 recurringToday
             );
 
 
+        /*
+        이름 밑 사유
+        */
+
         const lines =
-            mergedItems.map(
-                item => {
+            effective
+                .displayItems
+                .map(
 
-                    const cipText =
-                        item.cips
-                            .map(
-                                c =>
-                                    c + "차"
-                            )
-                            .join("·");
+                    item => {
+
+                        const cipText =
+                            item.cips
+                                .map(
+                                    cip =>
+                                        cip + "차"
+                                )
+                                .join("·");
 
 
-                    return (
-                        `<span class="absence-text">`
-                        +
-                        `${cipText} ${escapeHtml(item.reason)}`
-                        +
-                        `</span>`
-                    );
+                        return (
 
-                }
-            );
+                            `<span class="absence-text">`
+                            +
+                            `${cipText} ${escapeHtml(item.reason)}`
+                            +
+                            `</span>`
+
+                        );
+
+                    }
+
+                );
 
 
         status.innerHTML =
@@ -3540,27 +3252,62 @@ function updateScreen() {
             );
 
 
-        /*
-        ★ 중요 변경
+        let shouldBeRed =
+            false;
 
-        현재 CIP 시간이 아니어도
-        해당 날짜에 불참 신청이 있으면
-        무조건 빨간색
+
+        /*
+        오늘은 현재 CIP와 일치할 때만 빨강
         */
 
-        const hasAbsence =
-            !!single
-            ||
-            recurringToday.length > 0;
+        if(
+            selectedDate ===
+            today
+        ) {
+
+            if(
+                currentCip !==
+                null
+            ) {
+
+                shouldBeRed =
+                    effective
+                        .byCip
+                        .has(
+                            currentCip
+                        );
+
+            }
+
+        }
+
+
+        /*
+        미래/과거 날짜 조회는
+        예정된 불참 자체를 보여주기 위해 빨강
+        */
+
+        else
+        {
+
+            shouldBeRed =
+                effective
+                    .byCip
+                    .size >
+                0;
+
+        }
 
 
         if(
-            hasAbsence
+            shouldBeRed
         ) {
 
-            seat.classList.add(
-                "absent"
-            );
+            seat
+                .classList
+                .add(
+                    "absent"
+                );
 
         }
 
@@ -3573,9 +3320,7 @@ function updateScreen() {
 
 
 /* ==================================================
-   ★ 오른쪽 명단
-
-   날짜별 + 정기 중복도 하나로 합침
+   오른쪽 명단
 ================================================== */
 
 function updateAbsenceList() {
@@ -3601,8 +3346,7 @@ function updateAbsenceList() {
         `${selectedDate} (${weekdayNames[weekday]}) 불참 현황`;
 
 
-    const items =
-        [];
+    const items = [];
 
 
     for(
@@ -3632,22 +3376,23 @@ function updateAbsenceList() {
             );
 
 
+        const effective =
+            getEffectiveAbsences(
+                single,
+                recurring
+            );
+
+
         if(
-            !single
-            &&
-            recurring.length === 0
+            effective
+                .byCip
+                .size ===
+            0
         ) {
 
             continue;
 
         }
-
-
-        const mergedItems =
-            buildMergedAbsenceItems(
-                single,
-                recurring
-            );
 
 
         let html = `
@@ -3661,32 +3406,34 @@ function updateAbsenceList() {
         `;
 
 
-        mergedItems.forEach(
+        effective
+            .displayItems
+            .forEach(
 
-            item => {
+                item => {
 
-                const cips =
-                    item.cips
-                        .map(
-                            c =>
-                                `${c}차`
-                        )
-                        .join("·");
+                    const cips =
+                        item.cips
+                            .map(
+                                cip =>
+                                    `${cip}차`
+                            )
+                            .join("·");
 
 
-                html += `
+                    html += `
 
-                    <br>
+                        <br>
 
-                    <span class="absence-text">
-                        ${cips} ${escapeHtml(item.reason)}
-                    </span>
+                        <span class="absence-text">
+                            ${cips} ${escapeHtml(item.reason)}
+                        </span>
 
-                `;
+                    `;
 
-            }
+                }
 
-        );
+            );
 
 
         html +=
@@ -3904,17 +3651,14 @@ async function toggleDisplayMode() {
 
 
 /* ==================================================
-   날짜별 초기화
+   입력 초기화
 ================================================== */
 
 function clearSingleInput() {
 
-    singleCips =
-        [];
+    singleCips = [];
 
-
-    selectedSingleReason =
-        "";
+    selectedSingleReason = "";
 
 
     document
@@ -3966,22 +3710,13 @@ function clearSingleInput() {
 }
 
 
-/* ==================================================
-   정기 초기화
-================================================== */
-
 function clearRecurringInput() {
 
-    recurringDays =
-        [];
+    recurringDays = [];
 
+    recurringCips = [];
 
-    recurringCips =
-        [];
-
-
-    selectedRecurringReason =
-        "";
+    selectedRecurringReason = "";
 
 
     document
@@ -4094,9 +3829,7 @@ function showSuccess(
 }
 
 
-/* ==================================================
-   Firebase 상태
-================================================== */
+/* Firebase 상태 */
 
 function setConnectionStatus(
     text,
@@ -4130,9 +3863,7 @@ function setConnectionStatus(
 }
 
 
-/* ==================================================
-   HTML 보호
-================================================== */
+/* HTML 보호 */
 
 function escapeHtml(
     text
@@ -4168,9 +3899,7 @@ function escapeHtml(
 }
 
 
-/* ==================================================
-   이벤트
-================================================== */
+/* 이벤트 */
 
 document
     .getElementById(
@@ -4232,9 +3961,7 @@ document
     );
 
 
-/* ==================================================
-   시작
-================================================== */
+/* 시작 */
 
 createSeats();
 
