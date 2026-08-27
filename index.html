@@ -41,7 +41,6 @@ body {
 
 #displayModeButton {
     position: fixed;
-
     top: 10px;
     left: 10px;
 
@@ -212,7 +211,7 @@ h1 {
 }
 
 
-/* 번호 조금 작게 */
+/* 번호 */
 
 .number {
     font-size:
@@ -224,7 +223,7 @@ h1 {
 }
 
 
-/* 이름 크게 */
+/* 이름 */
 
 .name {
     margin-top: 5px;
@@ -238,7 +237,7 @@ h1 {
 }
 
 
-/* 사유 크게 */
+/* 불참 사유 */
 
 .status {
     width: 100%;
@@ -283,11 +282,9 @@ h1 {
 }
 
 
-/* 모든 불참 사유 글씨 = 빨강 */
-
+.absence-text,
 .recurring-text,
-.creative-text,
-.absence-text {
+.creative-text {
     color: #c62828;
 
     font-weight: 900;
@@ -485,9 +482,9 @@ button {
 }
 
 .weekday-btn.selected {
-    border-color: #e67e22;
+    border-color: #e53935;
 
-    background: #e67e22;
+    background: #e53935;
 
     color: white;
 }
@@ -555,7 +552,7 @@ button {
 
 
 /* ==================================================
-   저장 / 취소 버튼
+   저장 / 취소
 ================================================== */
 
 .submit-btn {
@@ -585,7 +582,7 @@ button {
 .recurring-submit {
     border: 0;
 
-    background: #e67e22;
+    background: #e53935;
 
     color: white;
 
@@ -653,7 +650,7 @@ button {
 
 
 /* ==================================================
-   오른쪽 명단
+   현황
 ================================================== */
 
 .absence-list {
@@ -680,14 +677,6 @@ button {
     font-size: 12px;
 
     line-height: 1.5;
-}
-
-.recurring-item,
-.creative-item {
-    border-left:
-        5px solid #e53935;
-
-    background: #ffeaea;
 }
 
 
@@ -806,24 +795,15 @@ body.display-mode .seat {
         clamp(5px, 0.7vw, 10px);
 }
 
-
-/* 대표화면 번호 */
-
 body.display-mode .number {
     font-size:
         clamp(21px, 2.8vw, 40px);
 }
 
-
-/* 대표화면 이름 */
-
 body.display-mode .name {
     font-size:
         clamp(12px, 1.7vw, 24px);
 }
-
-
-/* 대표화면 사유 */
 
 body.display-mode .status {
     margin-top: 4px;
@@ -1033,8 +1013,7 @@ body.display-mode #displayModeButton {
     placeholder="예: 25 또는 이지혁"
 >
 
-<datalist id="studentList">
-</datalist>
+<datalist id="studentList"></datalist>
 
 
 <div class="section-title">
@@ -1046,6 +1025,7 @@ body.display-mode #displayModeButton {
     불참할 CIP
 </label>
 
+
 <div class="cip-buttons">
 
     <button
@@ -1055,10 +1035,7 @@ body.display-mode #displayModeButton {
         data-cip="1">
 
         1차
-
-        <span class="cip-time">
-            16:50~17:40
-        </span>
+        <span class="cip-time">16:50~17:40</span>
 
     </button>
 
@@ -1069,10 +1046,7 @@ body.display-mode #displayModeButton {
         data-cip="2">
 
         2차
-
-        <span class="cip-time">
-            18:40~20:00
-        </span>
+        <span class="cip-time">18:40~20:00</span>
 
     </button>
 
@@ -1083,10 +1057,7 @@ body.display-mode #displayModeButton {
         data-cip="3">
 
         3차
-
-        <span class="cip-time">
-            20:10~21:00
-        </span>
+        <span class="cip-time">20:10~21:00</span>
 
     </button>
 
@@ -1096,6 +1067,7 @@ body.display-mode #displayModeButton {
 <label>
     불참 사유
 </label>
+
 
 <div class="reason-buttons">
 
@@ -1184,23 +1156,13 @@ body.display-mode #displayModeButton {
     반복 요일
 </label>
 
+
 <div class="weekday-buttons">
 
-    <button type="button" class="weekday-btn" data-day="1">
-        월
-    </button>
-
-    <button type="button" class="weekday-btn" data-day="2">
-        화
-    </button>
-
-    <button type="button" class="weekday-btn" data-day="3">
-        수
-    </button>
-
-    <button type="button" class="weekday-btn" data-day="4">
-        목
-    </button>
+    <button type="button" class="weekday-btn" data-day="1">월</button>
+    <button type="button" class="weekday-btn" data-day="2">화</button>
+    <button type="button" class="weekday-btn" data-day="3">수</button>
+    <button type="button" class="weekday-btn" data-day="4">목</button>
 
 </div>
 
@@ -1208,6 +1170,7 @@ body.display-mode #displayModeButton {
 <label>
     반복해서 빠질 CIP
 </label>
+
 
 <div class="cip-buttons">
 
@@ -1218,10 +1181,7 @@ body.display-mode #displayModeButton {
         data-cip="1">
 
         1차
-
-        <span class="cip-time">
-            16:50~17:40
-        </span>
+        <span class="cip-time">16:50~17:40</span>
 
     </button>
 
@@ -1232,10 +1192,7 @@ body.display-mode #displayModeButton {
         data-cip="2">
 
         2차
-
-        <span class="cip-time">
-            18:40~20:00
-        </span>
+        <span class="cip-time">18:40~20:00</span>
 
     </button>
 
@@ -1246,10 +1203,7 @@ body.display-mode #displayModeButton {
         data-cip="3">
 
         3차
-
-        <span class="cip-time">
-            20:10~21:00
-        </span>
+        <span class="cip-time">20:10~21:00</span>
 
     </button>
 
@@ -1259,6 +1213,7 @@ body.display-mode #displayModeButton {
 <label>
     반복 불참 사유
 </label>
+
 
 <div class="reason-buttons">
 
@@ -1358,7 +1313,6 @@ body.display-mode #displayModeButton {
 
 
 </aside>
-
 </div>
 
 
@@ -1596,35 +1550,20 @@ function getKoreaTimeParts() {
 
     const formatter =
         new Intl.DateTimeFormat(
-
             "ko-KR",
-
             {
-                timeZone:
-                    "Asia/Seoul",
+                timeZone: "Asia/Seoul",
 
-                year:
-                    "numeric",
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
 
-                month:
-                    "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
 
-                day:
-                    "2-digit",
-
-                hour:
-                    "2-digit",
-
-                minute:
-                    "2-digit",
-
-                second:
-                    "2-digit",
-
-                hourCycle:
-                    "h23"
+                hourCycle: "h23"
             }
-
         );
 
 
@@ -1634,8 +1573,7 @@ function getKoreaTimeParts() {
         );
 
 
-    const result =
-        {};
+    const result = {};
 
 
     parts.forEach(
@@ -1696,13 +1634,11 @@ function getWeekdayFromDate(
 
     const date =
         new Date(
-
             Date.UTC(
                 parts[0],
                 parts[1] - 1,
                 parts[2]
             )
-
         );
 
 
@@ -1722,11 +1658,8 @@ function calculateCurrentCip() {
 
 
     const total =
-
         Number(t.hour) * 60
-
         +
-
         Number(t.minute);
 
 
@@ -1772,11 +1705,8 @@ function getSituationText() {
 
 
     const total =
-
         Number(t.hour) * 60
-
         +
-
         Number(t.minute);
 
 
@@ -1927,7 +1857,6 @@ function updateCipInfo() {
 
 
         box.textContent =
-
             `${selectedDate} (${weekdayNames[weekday]}) 불참 현황 조회 중`;
 
 
@@ -2017,7 +1946,7 @@ function createSeats() {
 
 
 /* ==================================================
-   학생 자동완성
+   자동완성
 ================================================== */
 
 function createStudentList() {
@@ -2155,7 +2084,7 @@ function findStudent() {
 
 
 /* ==================================================
-   버튼 선택
+   선택 배열
 ================================================== */
 
 function toggleArrayValue(
@@ -2429,7 +2358,7 @@ document
 
 
 /* ==================================================
-   기타
+   기타 사유
 ================================================== */
 
 function updateOtherReason(
@@ -2511,7 +2440,7 @@ function hideOtherReason(
 
 
 /* ==================================================
-   사유
+   실제 사유
 ================================================== */
 
 function getSingleReason() {
@@ -2586,6 +2515,107 @@ function getRecurringReason() {
     return custom === ""
         ? null
         : custom;
+
+}
+
+
+/* ==================================================
+   ★ 중복 표시 제거용
+
+   같은 사유가 날짜별 + 정기로 동시에 있으면
+   하나로 합치고 CIP도 중복 제거
+================================================== */
+
+function buildMergedAbsenceItems(
+    single,
+    recurring
+) {
+
+    const merged =
+        {};
+
+
+    function addItem(
+        reason,
+        cips
+    ) {
+
+        const cleanReason =
+            reason || "불참";
+
+
+        if(
+            !merged[cleanReason]
+        ) {
+
+            merged[cleanReason] =
+                new Set();
+
+        }
+
+
+        (cips || [])
+            .forEach(
+                cip => {
+
+                    merged[
+                        cleanReason
+                    ].add(
+                        Number(cip)
+                    );
+
+                }
+            );
+
+    }
+
+
+    if(single) {
+
+        addItem(
+            single.reason,
+            single.cips
+        );
+
+    }
+
+
+    recurring.forEach(
+        rule => {
+
+            addItem(
+                rule.reason,
+                rule.cips
+            );
+
+        }
+    );
+
+
+    return Object
+        .entries(
+            merged
+        )
+        .map(
+            ([reason, cipSet]) => {
+
+                return {
+
+                    reason:
+                        reason,
+
+                    cips:
+                        Array
+                            .from(cipSet)
+                            .sort(
+                                (a,b) =>
+                                    a-b
+                            )
+
+                };
+
+            }
+        );
 
 }
 
@@ -2680,7 +2710,6 @@ async function applySingleAbsence() {
 
 
     const documentId =
-
         selectedDate
         +
         "_"
@@ -2725,9 +2754,7 @@ async function applySingleAbsence() {
 
 
         showSuccess(
-
             `${student}번 ${students[student]} 신청 완료`
-
         );
 
 
@@ -2800,7 +2827,6 @@ async function cancelSingleAbsence() {
             doc(
                 db,
                 "absence",
-
                 selectedDate
                 +
                 "_"
@@ -2939,55 +2965,67 @@ async function applyRecurringAbsence() {
 
 
     const existingRules =
-        recurringData[student] || [];
+        recurringData[
+            student
+        ] || [];
 
 
     const duplicate =
-        existingRules.some(rule => {
+        existingRules.some(
+            rule => {
 
-            const sameDays =
+                const sameDays =
 
-                JSON.stringify(
-                    [...rule.weekdays].sort(
-                        (a,b) => a-b
+                    JSON.stringify(
+                        [...rule.weekdays]
+                            .sort(
+                                (a,b) =>
+                                    a-b
+                            )
                     )
-                )
 
-                ===
+                    ===
 
-                JSON.stringify(
-                    [...recurringDays].sort(
-                        (a,b) => a-b
+                    JSON.stringify(
+                        [...recurringDays]
+                            .sort(
+                                (a,b) =>
+                                    a-b
+                            )
+                    );
+
+
+                const sameCips =
+
+                    JSON.stringify(
+                        [...rule.cips]
+                            .sort(
+                                (a,b) =>
+                                    a-b
+                            )
                     )
+
+                    ===
+
+                    JSON.stringify(
+                        [...recurringCips]
+                            .sort(
+                                (a,b) =>
+                                    a-b
+                            )
+                    );
+
+
+                return (
+                    sameDays
+                    &&
+                    sameCips
+                    &&
+                    rule.reason === reason
                 );
 
-
-            const sameCips =
-
-                JSON.stringify(
-                    [...rule.cips].sort(
-                        (a,b) => a-b
-                    )
-                )
-
-                ===
-
-                JSON.stringify(
-                    [...recurringCips].sort(
-                        (a,b) => a-b
-                    )
-                );
-
-
-            return (
-                sameDays
-                &&
-                sameCips
-                &&
-                rule.reason === reason
-            );
-
-        });
+            }
+        );
 
 
     if(duplicate) {
@@ -3046,9 +3084,7 @@ async function applyRecurringAbsence() {
 
 
         showSuccess(
-
             `${student}번 ${students[student]} (${daysText}) ${reason} 정기 등록 완료`
-
         );
 
 
@@ -3115,7 +3151,9 @@ async function cancelRecurringAbsence() {
 
 
     const rules =
-        recurringData[student] || [];
+        recurringData[
+            student
+        ] || [];
 
 
     if(
@@ -3137,7 +3175,6 @@ async function cancelRecurringAbsence() {
         await Promise.all(
 
             rules.map(
-
                 rule =>
 
                     deleteDoc(
@@ -3149,7 +3186,6 @@ async function cancelRecurringAbsence() {
                         )
 
                     )
-
             )
 
         );
@@ -3319,16 +3355,22 @@ function startRecurringSync() {
 
 
                         if(
-                            !recurringData[number]
+                            !recurringData[
+                                number
+                            ]
                         ) {
 
-                            recurringData[number] =
+                            recurringData[
+                                number
+                            ] =
                                 [];
 
                         }
 
 
-                        recurringData[number].push({
+                        recurringData[
+                            number
+                        ].push({
 
                             id:
                                 documentSnapshot.id,
@@ -3402,14 +3444,13 @@ function getRecurringForStudent(
 
 
 /* ==================================================
-   좌석 업데이트
+   ★ 좌석 업데이트
+
+   오늘 신청되어 있으면 시간 관계없이 빨강
+   중복 사유는 하나로 합침
 ================================================== */
 
 function updateScreen() {
-
-    const today =
-        getTodayKey();
-
 
     for(
         let i = 1;
@@ -3450,74 +3491,47 @@ function updateScreen() {
 
 
         const single =
-            singleAbsenceData[i];
+            singleAbsenceData[
+                i
+            ];
 
 
         const recurringToday =
-            getRecurringForStudent(i);
+            getRecurringForStudent(
+                i
+            );
+
+
+        const mergedItems =
+            buildMergedAbsenceItems(
+                single,
+                recurringToday
+            );
 
 
         const lines =
-            [];
+            mergedItems.map(
+                item => {
+
+                    const cipText =
+                        item.cips
+                            .map(
+                                c =>
+                                    c + "차"
+                            )
+                            .join("·");
 
 
-/* ==================================================
-   정기 불참 표시
-   예: 1차 학원
-       2차·3차 공교
-================================================== */
+                    return (
+                        `<span class="absence-text">`
+                        +
+                        `${cipText} ${escapeHtml(item.reason)}`
+                        +
+                        `</span>`
+                    );
 
-        recurringToday.forEach(
-
-            rule => {
-
-                const cipText =
-                    rule.cips
-                        .map(
-                            c =>
-                                c + "차"
-                        )
-                        .join("·");
-
-
-                lines.push(
-
-                    `<span class="absence-text">
-                        ${cipText} ${escapeHtml(rule.reason)}
-                    </span>`
-
-                );
-
-            }
-
-        );
-
-
-/* ==================================================
-   날짜별 불참 표시
-================================================== */
-
-        if(single) {
-
-            const cipText =
-                single
-                    .cips
-                    .map(
-                        c =>
-                            c + "차"
-                    )
-                    .join("·");
-
-
-            lines.push(
-
-                `<span class="absence-text">
-                    ${cipText} ${escapeHtml(single.reason)}
-                </span>`
-
+                }
             );
-
-        }
 
 
         status.innerHTML =
@@ -3526,79 +3540,22 @@ function updateScreen() {
             );
 
 
-        let singleActive =
-            false;
+        /*
+        ★ 중요 변경
 
+        현재 CIP 시간이 아니어도
+        해당 날짜에 불참 신청이 있으면
+        무조건 빨간색
+        */
 
-        let recurringActive =
-            false;
+        const hasAbsence =
+            !!single
+            ||
+            recurringToday.length > 0;
 
-
-/* ==================================================
-   오늘
-================================================== */
 
         if(
-            selectedDate ===
-            today
-        ) {
-
-            if(
-                currentCip !==
-                null
-            ) {
-
-                singleActive =
-
-                    !!single
-
-                    &&
-
-                    single.cips.includes(
-                        currentCip
-                    );
-
-
-                recurringActive =
-
-                    recurringToday.some(
-
-                        rule =>
-                            rule.cips.includes(
-                                currentCip
-                            )
-
-                    );
-
-            }
-
-        }
-
-
-/* ==================================================
-   다른 날짜
-================================================== */
-
-        else
-        {
-
-            singleActive =
-                !!single;
-
-
-            recurringActive =
-                recurringToday.length > 0;
-
-        }
-
-
-/* ==================================================
-   모든 불참은 빨강
-================================================== */
-
-        if(
-            singleActive ||
-            recurringActive
+            hasAbsence
         ) {
 
             seat.classList.add(
@@ -3616,7 +3573,9 @@ function updateScreen() {
 
 
 /* ==================================================
-   오른쪽 명단
+   ★ 오른쪽 명단
+
+   날짜별 + 정기 중복도 하나로 합침
 ================================================== */
 
 function updateAbsenceList() {
@@ -3655,24 +3614,40 @@ function updateAbsenceList() {
         if(
             disabledStudents.includes(i)
         ) {
+
             continue;
+
         }
 
 
         const single =
-            singleAbsenceData[i];
+            singleAbsenceData[
+                i
+            ];
 
 
         const recurring =
-            getRecurringForStudent(i);
+            getRecurringForStudent(
+                i
+            );
 
 
         if(
-            !single &&
+            !single
+            &&
             recurring.length === 0
         ) {
+
             continue;
+
         }
+
+
+        const mergedItems =
+            buildMergedAbsenceItems(
+                single,
+                recurring
+            );
 
 
         let html = `
@@ -3686,38 +3661,12 @@ function updateAbsenceList() {
         `;
 
 
-        if(single) {
+        mergedItems.forEach(
 
-            const cips =
-                single
-                    .cips
-                    .map(
-                        c =>
-                            `${c}차`
-                    )
-                    .join("·");
-
-
-            html += `
-
-                <br>
-
-                <span class="absence-text">
-                    ${cips} ${escapeHtml(single.reason)}
-                </span>
-
-            `;
-
-        }
-
-
-        recurring.forEach(
-
-            rule => {
+            item => {
 
                 const cips =
-                    rule
-                        .cips
+                    item.cips
                         .map(
                             c =>
                                 `${c}차`
@@ -3730,7 +3679,7 @@ function updateAbsenceList() {
                     <br>
 
                     <span class="absence-text">
-                        정기 · ${cips} ${escapeHtml(rule.reason)}
+                        ${cips} ${escapeHtml(item.reason)}
                     </span>
 
                 `;
@@ -3880,9 +3829,11 @@ async function toggleDisplayMode() {
         startDateSync();
 
 
-        document.body.classList.add(
-            "display-mode"
-        );
+        document.body
+            .classList
+            .add(
+                "display-mode"
+            );
 
 
         button.textContent =
@@ -3912,9 +3863,11 @@ async function toggleDisplayMode() {
     else
     {
 
-        document.body.classList.remove(
-            "display-mode"
-        );
+        document.body
+            .classList
+            .remove(
+                "display-mode"
+            );
 
 
         button.textContent =
@@ -3924,11 +3877,13 @@ async function toggleDisplayMode() {
         try {
 
             if(
-                document.fullscreenElement &&
+                document.fullscreenElement
+                &&
                 document.exitFullscreen
             ) {
 
-                await document.exitFullscreen();
+                await document
+                    .exitFullscreen();
 
             }
 
@@ -3949,7 +3904,7 @@ async function toggleDisplayMode() {
 
 
 /* ==================================================
-   날짜별 입력 초기화
+   날짜별 초기화
 ================================================== */
 
 function clearSingleInput() {
@@ -3982,9 +3937,11 @@ function clearSingleInput() {
         .forEach(
             button => {
 
-                button.classList.remove(
-                    "selected"
-                );
+                button
+                    .classList
+                    .remove(
+                        "selected"
+                    );
 
             }
         );
@@ -3997,9 +3954,11 @@ function clearSingleInput() {
         .forEach(
             button => {
 
-                button.classList.remove(
-                    "selected"
-                );
+                button
+                    .classList
+                    .remove(
+                        "selected"
+                    );
 
             }
         );
@@ -4008,7 +3967,7 @@ function clearSingleInput() {
 
 
 /* ==================================================
-   정기 입력 초기화
+   정기 초기화
 ================================================== */
 
 function clearRecurringInput() {
@@ -4045,9 +4004,11 @@ function clearRecurringInput() {
         .forEach(
             button => {
 
-                button.classList.remove(
-                    "selected"
-                );
+                button
+                    .classList
+                    .remove(
+                        "selected"
+                    );
 
             }
         );
@@ -4060,9 +4021,11 @@ function clearRecurringInput() {
         .forEach(
             button => {
 
-                button.classList.remove(
-                    "selected"
-                );
+                button
+                    .classList
+                    .remove(
+                        "selected"
+                    );
 
             }
         );
@@ -4075,9 +4038,11 @@ function clearRecurringInput() {
         .forEach(
             button => {
 
-                button.classList.remove(
-                    "selected"
-                );
+                button
+                    .classList
+                    .remove(
+                        "selected"
+                    );
 
             }
         );
@@ -4089,7 +4054,9 @@ function clearRecurringInput() {
    메시지
 ================================================== */
 
-function showError(text) {
+function showError(
+    text
+) {
 
     const message =
         document.getElementById(
@@ -4107,7 +4074,9 @@ function showError(text) {
 }
 
 
-function showSuccess(text) {
+function showSuccess(
+    text
+) {
 
     const message =
         document.getElementById(
@@ -4150,9 +4119,11 @@ function setConnectionStatus(
 
     if(type) {
 
-        status.classList.add(
-            type
-        );
+        status
+            .classList
+            .add(
+                type
+            );
 
     }
 
@@ -4163,7 +4134,9 @@ function setConnectionStatus(
    HTML 보호
 ================================================== */
 
-function escapeHtml(text) {
+function escapeHtml(
+    text
+) {
 
     return String(text)
 
