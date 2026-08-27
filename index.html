@@ -159,32 +159,43 @@ h1 {
     transition: 0.2s;
 }
 
+
+/* 번호 - 기존보다 작게 */
+
 .number {
-    font-size: clamp(21px, 3vw, 40px);
+    font-size: clamp(18px, 2.5vw, 34px);
     font-weight: 900;
     line-height: 1;
 }
 
+
+/* 이름 - 기존보다 크게 */
+
 .name {
     margin-top: 5px;
-    font-size: clamp(8px, 1.15vw, 16px);
+
+    font-size: clamp(10px, 1.3vw, 18px);
     font-weight: bold;
+
     white-space: nowrap;
 }
 
+
+/* 사유 - 기존보다 크게 */
+
 .status {
     width: 100%;
-    margin-top: 4px;
+    margin-top: 5px;
 
-    font-size: clamp(7px, 0.8vw, 12px);
-    line-height: 1.2;
+    font-size: clamp(9px, 1vw, 14px);
+    line-height: 1.25;
 
     font-weight: 900;
     overflow-wrap: anywhere;
 }
 
 
-/* 날짜별 일반 불참 = 빨강 */
+/* 날짜별 일반 불참 */
 
 .seat.absent {
     background: #ffd9d9;
@@ -193,7 +204,7 @@ h1 {
 }
 
 
-/* 정기 불참 = 주황 */
+/* 정기 불참 */
 
 .seat.recurring {
     background: #ffd39d;
@@ -211,7 +222,7 @@ h1 {
 }
 
 
-/* 창의반 = 파랑 */
+/* 창의반 */
 
 .seat.creative {
     background: #b9dcff;
@@ -229,7 +240,7 @@ h1 {
 }
 
 
-/* 정기 글씨 */
+/* 정기 사유 */
 
 .recurring-text {
     color: #e26e00;
@@ -237,7 +248,7 @@ h1 {
 }
 
 
-/* 창의반 글씨 */
+/* 창의반 */
 
 .creative-text {
     color: #1565c0;
@@ -245,7 +256,7 @@ h1 {
 }
 
 
-/* 오른쪽 패널 */
+/* 오른쪽 관리 패널 */
 
 .control-panel {
     width: 100%;
@@ -519,7 +530,7 @@ button {
 }
 
 
-/* 오른쪽 현황 */
+/* 불참 현황 */
 
 .absence-list {
     margin-top: 18px;
@@ -551,7 +562,9 @@ button {
 }
 
 
-/* 대표 화면 */
+/* ==================================================
+   대표 화면
+================================================== */
 
 body.display-mode {
     padding: 6px;
@@ -638,16 +651,25 @@ body.display-mode .seat {
     border-width: 3px;
 }
 
+
+/* 대표화면 번호도 조금 작게 */
+
 body.display-mode .number {
-    font-size: clamp(24px, 3.3vw, 48px);
+    font-size: clamp(21px, 2.8vw, 40px);
 }
+
+
+/* 대표화면 이름 크게 */
 
 body.display-mode .name {
-    font-size: clamp(10px, 1.5vw, 21px);
+    font-size: clamp(12px, 1.7vw, 24px);
 }
 
+
+/* 대표화면 사유 크게 */
+
 body.display-mode .status {
-    font-size: clamp(8px, 1vw, 14px);
+    font-size: clamp(10px, 1.2vw, 17px);
 }
 
 body.display-mode #displayModeButton {
@@ -667,6 +689,7 @@ body.display-mode #displayModeButton {
         position: static;
     }
 }
+
 
 @media(max-width: 600px) {
 
@@ -701,8 +724,10 @@ body.display-mode #displayModeButton {
         grid-template-columns: repeat(2, minmax(0,1fr));
     }
 }
+
 </style>
 </head>
+
 
 <body>
 
@@ -787,9 +812,8 @@ body.display-mode #displayModeButton {
 </div>
 
 
-<label>
-    불참할 CIP
-</label>
+<label>불참할 CIP</label>
+
 
 <div class="cip-buttons">
 
@@ -800,10 +824,7 @@ body.display-mode #displayModeButton {
         data-cip="1">
 
         1차
-
-        <span class="cip-time">
-            16:50~17:40
-        </span>
+        <span class="cip-time">16:50~17:40</span>
 
     </button>
 
@@ -814,10 +835,7 @@ body.display-mode #displayModeButton {
         data-cip="2">
 
         2차
-
-        <span class="cip-time">
-            18:40~20:00
-        </span>
+        <span class="cip-time">18:40~20:00</span>
 
     </button>
 
@@ -828,19 +846,15 @@ body.display-mode #displayModeButton {
         data-cip="3">
 
         3차
-
-        <span class="cip-time">
-            20:10~21:00
-        </span>
+        <span class="cip-time">20:10~21:00</span>
 
     </button>
 
 </div>
 
 
-<label>
-    불참 사유
-</label>
+<label>불참 사유</label>
+
 
 <div class="reason-buttons">
 
@@ -900,23 +914,13 @@ body.display-mode #displayModeButton {
 >
 
 
-<button
-    id="singleSubmit"
-    type="button"
-    class="submit-btn">
-
+<button id="singleSubmit" type="button" class="submit-btn">
     선택 날짜 불참 신청
-
 </button>
 
 
-<button
-    id="singleCancel"
-    type="button"
-    class="cancel-btn">
-
+<button id="singleCancel" type="button" class="cancel-btn">
     선택 날짜 신청 취소
-
 </button>
 
 
@@ -927,9 +931,8 @@ body.display-mode #displayModeButton {
 </div>
 
 
-<label>
-    반복 요일
-</label>
+<label>반복 요일</label>
+
 
 <div class="weekday-buttons">
 
@@ -952,48 +955,49 @@ body.display-mode #displayModeButton {
 </div>
 
 
-<label>
-    반복해서 빠질 CIP
-</label>
+<label>반복해서 빠질 CIP</label>
+
 
 <div class="cip-buttons">
 
-    <button type="button" class="cip-btn" data-type="recurring" data-cip="1">
+    <button
+        type="button"
+        class="cip-btn"
+        data-type="recurring"
+        data-cip="1">
 
         1차
-
-        <span class="cip-time">
-            16:50~17:40
-        </span>
+        <span class="cip-time">16:50~17:40</span>
 
     </button>
 
-    <button type="button" class="cip-btn" data-type="recurring" data-cip="2">
+    <button
+        type="button"
+        class="cip-btn"
+        data-type="recurring"
+        data-cip="2">
 
         2차
-
-        <span class="cip-time">
-            18:40~20:00
-        </span>
+        <span class="cip-time">18:40~20:00</span>
 
     </button>
 
-    <button type="button" class="cip-btn" data-type="recurring" data-cip="3">
+    <button
+        type="button"
+        class="cip-btn"
+        data-type="recurring"
+        data-cip="3">
 
         3차
-
-        <span class="cip-time">
-            20:10~21:00
-        </span>
+        <span class="cip-time">20:10~21:00</span>
 
     </button>
 
 </div>
 
 
-<label>
-    반복 불참 사유
-</label>
+<label>반복 불참 사유</label>
+
 
 <div class="reason-buttons">
 
@@ -1053,23 +1057,13 @@ body.display-mode #displayModeButton {
 >
 
 
-<button
-    id="recurringSubmit"
-    type="button"
-    class="recurring-submit">
-
+<button id="recurringSubmit" type="button" class="recurring-submit">
     매주 반복 불참 추가
-
 </button>
 
 
-<button
-    id="recurringCancel"
-    type="button"
-    class="recurring-cancel">
-
+<button id="recurringCancel" type="button" class="recurring-cancel">
     이 학생 정기 불참 전체 삭제
-
 </button>
 
 
@@ -1090,14 +1084,15 @@ body.display-mode #displayModeButton {
 
 
 </aside>
-
 </div>
 
 
 <script type="module">
 
 
-/* Firebase */
+/* ==================================================
+   Firebase
+================================================== */
 
 import {
     initializeApp
@@ -1123,31 +1118,23 @@ from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 const firebaseConfig = {
 
     apiKey: "AIzaSyCd8fUYXmJ34L1yG3x3aNsEGZgaxFLLx7s",
-
     authDomain: "yaja2-6.firebaseapp.com",
-
     projectId: "yaja2-6",
-
     storageBucket: "yaja2-6.firebasestorage.app",
-
     messagingSenderId: "732002055042",
-
     appId: "1:732002055042:web:d95f280cea84dd7036d59b",
-
     measurementId: "G-TKP2QV869R"
 
 };
 
 
-const app =
-    initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 
-const db =
-    getFirestore(app);
-
-
-/* 학생 */
+/* ==================================================
+   학생
+================================================== */
 
 const students = {
 
@@ -1250,7 +1237,9 @@ const passwords = {
 };
 
 
-/* CIP */
+/* ==================================================
+   CIP
+================================================== */
 
 const cipTimes = {
 
@@ -1285,7 +1274,9 @@ const weekdayNames = {
 };
 
 
-/* 변수 */
+/* ==================================================
+   상태값
+================================================== */
 
 let singleCips = [];
 let recurringCips = [];
@@ -1305,34 +1296,28 @@ let unsubscribeSingle = null;
 let unsubscribeRecurring = null;
 
 
-/* 한국시간 */
+/* ==================================================
+   한국 시간
+================================================== */
 
 function getKoreaTimeParts() {
 
-    const formatter =
-        new Intl.DateTimeFormat(
-
-            "ko-KR",
-
-            {
-                timeZone: "Asia/Seoul",
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-                hourCycle: "h23"
-            }
-
-        );
+    const formatter = new Intl.DateTimeFormat(
+        "ko-KR",
+        {
+            timeZone: "Asia/Seoul",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hourCycle: "h23"
+        }
+    );
 
 
-    const parts =
-        formatter.formatToParts(
-            new Date()
-        );
-
+    const parts = formatter.formatToParts(new Date());
 
     const result = {};
 
@@ -1340,78 +1325,56 @@ function getKoreaTimeParts() {
     parts.forEach(part => {
 
         if(part.type !== "literal") {
-
-            result[part.type] =
-                part.value;
-
+            result[part.type] = part.value;
         }
 
     });
 
 
     return result;
-
 }
 
 
 function getTodayKey() {
 
-    const t =
-        getKoreaTimeParts();
+    const t = getKoreaTimeParts();
 
-
-    return (
-        t.year +
-        "-" +
-        t.month +
-        "-" +
-        t.day
-    );
-
+    return `${t.year}-${t.month}-${t.day}`;
 }
 
 
-function getWeekdayFromDate(
-    dateString
-) {
+function getWeekdayFromDate(dateString) {
 
     if(!dateString) {
-
         return 0;
-
     }
 
 
-    const parts =
-        dateString
-            .split("-")
-            .map(Number);
+    const parts = dateString
+        .split("-")
+        .map(Number);
 
 
-    const date =
-        new Date(
-
-            Date.UTC(
-                parts[0],
-                parts[1] - 1,
-                parts[2]
-            )
-
-        );
+    const date = new Date(
+        Date.UTC(
+            parts[0],
+            parts[1] - 1,
+            parts[2]
+        )
+    );
 
 
     return date.getUTCDay();
-
 }
 
 
-/* 현재 CIP */
+/* ==================================================
+   현재 CIP
+================================================== */
 
 function calculateCurrentCip() {
 
-    const t =
-        getKoreaTimeParts();
-
+    const t = getKoreaTimeParts();
 
     const total =
         Number(t.hour) * 60 +
@@ -1422,9 +1385,7 @@ function calculateCurrentCip() {
         total >= cipTimes[1].start &&
         total < cipTimes[1].end
     ) {
-
         return 1;
-
     }
 
 
@@ -1432,9 +1393,7 @@ function calculateCurrentCip() {
         total >= cipTimes[2].start &&
         total < cipTimes[2].end
     ) {
-
         return 2;
-
     }
 
 
@@ -1442,22 +1401,17 @@ function calculateCurrentCip() {
         total >= cipTimes[3].start &&
         total < cipTimes[3].end
     ) {
-
         return 3;
-
     }
 
 
     return null;
-
 }
 
 
 function getSituationText() {
 
-    const t =
-        getKoreaTimeParts();
-
+    const t = getKoreaTimeParts();
 
     const total =
         Number(t.hour) * 60 +
@@ -1465,189 +1419,121 @@ function getSituationText() {
 
 
     if(total < cipTimes[1].start) {
-
         return "CIP 전 · 1차 16:50 시작";
-
     }
 
 
     if(total < cipTimes[1].end) {
-
         return "CIP 1차 진행 중 · 16:50 ~ 17:40";
-
     }
 
 
     if(total < cipTimes[2].start) {
-
         return "쉬는 시간 · CIP 2차 18:40 시작";
-
     }
 
 
     if(total < cipTimes[2].end) {
-
         return "CIP 2차 진행 중 · 18:40 ~ 20:00";
-
     }
 
 
     if(total < cipTimes[3].start) {
-
         return "쉬는 시간 · CIP 3차 20:10 시작";
-
     }
 
 
     if(total < cipTimes[3].end) {
-
         return "CIP 3차 진행 중 · 20:10 ~ 21:00";
-
     }
 
 
     return "오늘의 CIP 종료";
-
 }
 
 
-/* 시계 */
+/* ==================================================
+   시계
+================================================== */
 
 function updateClock() {
 
-    const t =
-        getKoreaTimeParts();
+    const t = getKoreaTimeParts();
+
+    const today = getTodayKey();
+
+    const weekday = getWeekdayFromDate(today);
 
 
-    const today =
-        getTodayKey();
-
-
-    const weekday =
-        getWeekdayFromDate(
-            today
-        );
-
-
-    document
-        .getElementById("clock")
-        .textContent =
-
+    document.getElementById("clock").textContent =
         `${t.year}.${t.month}.${t.day} (${weekdayNames[weekday]}) ${t.hour}:${t.minute}:${t.second}`;
 
 
-    const newCip =
-        calculateCurrentCip();
+    const newCip = calculateCurrentCip();
 
 
-    if(
-        newCip !==
-        currentCip
-    ) {
+    if(newCip !== currentCip) {
 
-        currentCip =
-            newCip;
-
+        currentCip = newCip;
 
         updateScreen();
-
     }
 
 
     updateCipInfo();
-
 }
 
 
 function updateCipInfo() {
 
-    const box =
-        document.getElementById(
-            "currentCip"
-        );
+    const box = document.getElementById("currentCip");
 
 
     if(displayMode) {
 
-        box.textContent =
-            getSituationText();
-
+        box.textContent = getSituationText();
         return;
-
     }
 
 
-    if(
-        selectedDate !==
-        getTodayKey()
-    ) {
+    if(selectedDate !== getTodayKey()) {
 
-        const weekday =
-            getWeekdayFromDate(
-                selectedDate
-            );
-
+        const weekday = getWeekdayFromDate(selectedDate);
 
         box.textContent =
-
             `${selectedDate} (${weekdayNames[weekday]}) 불참 현황 조회 중`;
 
-
         return;
-
     }
 
 
-    box.textContent =
-        getSituationText();
-
+    box.textContent = getSituationText();
 }
 
 
-/* 좌석 생성 */
+/* ==================================================
+   좌석 생성
+================================================== */
 
 function createSeats() {
 
-    const grid =
-        document.getElementById(
-            "seatGrid"
-        );
+    const grid = document.getElementById("seatGrid");
+
+    grid.innerHTML = "";
 
 
-    grid.innerHTML =
-        "";
+    for(let i = 1; i <= 36; i++) {
+
+        const seat = document.createElement("div");
+
+        seat.id = "seat-" + i;
+
+        seat.className = "seat";
 
 
-    for(
-        let i = 1;
-        i <= 36;
-        i++
-    ) {
+        if(disabledStudents.includes(i)) {
 
-        const seat =
-            document.createElement(
-                "div"
-            );
-
-
-        seat.id =
-            "seat-" + i;
-
-
-        seat.className =
-            "seat";
-
-
-        if(
-            disabledStudents.includes(i)
-        ) {
-
-            seat
-                .classList
-                .add(
-                    "disabled"
-                );
-
+            seat.classList.add("disabled");
         }
 
 
@@ -1661,241 +1547,149 @@ function createSeats() {
                 ${students[i]}
             </div>
 
-            <div
-                id="status-${i}"
-                class="status">
-            </div>
+            <div id="status-${i}" class="status"></div>
 
         `;
 
 
-        grid.appendChild(
-            seat
-        );
-
+        grid.appendChild(seat);
     }
-
 }
 
 
-/* 자동완성 */
+/* ==================================================
+   학생 자동완성
+================================================== */
 
 function createStudentList() {
 
-    const list =
-        document.getElementById(
-            "studentList"
-        );
+    const list = document.getElementById("studentList");
+
+    list.innerHTML = "";
 
 
-    list.innerHTML =
-        "";
+    for(let i = 1; i <= 36; i++) {
 
-
-    for(
-        let i = 1;
-        i <= 36;
-        i++
-    ) {
-
-        if(
-            disabledStudents.includes(i)
-        ) {
-
+        if(disabledStudents.includes(i)) {
             continue;
-
         }
 
 
-        const numberOption =
-            document.createElement(
-                "option"
-            );
+        const numberOption = document.createElement("option");
+
+        numberOption.value = String(i);
+        numberOption.label = students[i];
+
+        list.appendChild(numberOption);
 
 
-        numberOption.value =
-            String(i);
+        const nameOption = document.createElement("option");
 
+        nameOption.value = students[i];
+        nameOption.label = i + "번";
 
-        numberOption.label =
-            students[i];
-
-
-        list.appendChild(
-            numberOption
-        );
-
-
-        const nameOption =
-            document.createElement(
-                "option"
-            );
-
-
-        nameOption.value =
-            students[i];
-
-
-        nameOption.label =
-            i + "번";
-
-
-        list.appendChild(
-            nameOption
-        );
-
+        list.appendChild(nameOption);
     }
-
 }
 
 
-/* 학생 찾기 */
+/* ==================================================
+   학생 찾기
+================================================== */
 
 function findStudent() {
 
-    let input =
-        document
-            .getElementById(
-                "studentInput"
-            )
-            .value
-            .trim();
+    let input = document
+        .getElementById("studentInput")
+        .value
+        .trim();
 
 
-    input =
-        input
-            .replace(
-                "번",
-                ""
-            )
-            .trim();
+    input = input
+        .replace("번", "")
+        .trim();
 
 
-    if(
-        /^\d+$/.test(input)
-    ) {
+    if(/^\d+$/.test(input)) {
 
-        const number =
-            Number(input);
+        const number = Number(input);
 
 
-        if(
-            number >= 1 &&
-            number <= 36
-        ) {
+        if(number >= 1 && number <= 36) {
 
             return number;
-
         }
-
     }
 
 
-    for(
-        let i = 1;
-        i <= 36;
-        i++
-    ) {
+    for(let i = 1; i <= 36; i++) {
 
-        if(
-            students[i] ===
-            input
-        ) {
+        if(students[i] === input) {
 
             return i;
-
         }
-
     }
 
 
     return null;
-
 }
 
 
-/* 배열 선택 */
+/* ==================================================
+   버튼 선택
+================================================== */
 
-function toggleArrayValue(
-    array,
-    value
-) {
+function toggleArrayValue(array, value) {
 
-    if(
-        array.includes(value)
-    ) {
+    if(array.includes(value)) {
 
         return array.filter(
-            item =>
-                item !== value
+            item => item !== value
         );
-
     }
 
 
     return [
         ...array,
         value
-    ].sort(
-        (a,b) =>
-            a-b
-    );
-
+    ].sort((a,b) => a-b);
 }
 
 
-/* 창의반 */
+/* ==================================================
+   창의반 여부
+================================================== */
 
-function isCreativeReason(
-    data
-) {
+function isCreativeReason(data) {
 
     if(!data) {
-
         return false;
-
     }
 
 
     return (
-
-        data.reasonType ===
-        "창의반"
-
-        ||
-
-        data.reason ===
-        "창의반"
-
+        data.reasonType === "창의반" ||
+        data.reason === "창의반"
     );
-
 }
 
 
-/* CIP 버튼 */
+/* ==================================================
+   CIP 버튼
+================================================== */
 
 document
-    .querySelectorAll(
-        ".cip-btn"
-    )
+    .querySelectorAll(".cip-btn")
     .forEach(button => {
 
         button.addEventListener(
-
             "click",
-
             () => {
 
-                const cip =
-                    Number(
-                        button.dataset.cip
-                    );
+                const cip = Number(button.dataset.cip);
 
 
-                if(
-                    button.dataset.type ===
-                    "single"
-                ) {
+                if(button.dataset.type === "single") {
 
                     singleCips =
                         toggleArrayValue(
@@ -1903,50 +1697,37 @@ document
                             cip
                         );
 
-                }
-                else
-                {
+                } else {
 
                     recurringCips =
                         toggleArrayValue(
                             recurringCips,
                             cip
                         );
-
                 }
 
 
-                button
-                    .classList
-                    .toggle(
-                        "selected"
-                    );
-
+                button.classList.toggle("selected");
             }
-
         );
 
     });
 
 
-/* 요일 버튼 */
+/* ==================================================
+   요일 버튼
+================================================== */
 
 document
-    .querySelectorAll(
-        ".weekday-btn"
-    )
+    .querySelectorAll(".weekday-btn")
     .forEach(button => {
 
         button.addEventListener(
-
             "click",
-
             () => {
 
                 const day =
-                    Number(
-                        button.dataset.day
-                    );
+                    Number(button.dataset.day);
 
 
                 recurringDays =
@@ -1956,431 +1737,256 @@ document
                     );
 
 
-                button
-                    .classList
-                    .toggle(
-                        "selected"
-                    );
-
+                button.classList.toggle("selected");
             }
-
         );
 
     });
 
 
-/* 사유 버튼 */
+/* ==================================================
+   사유 버튼
+================================================== */
 
 document
-    .querySelectorAll(
-        ".reason-btn"
-    )
+    .querySelectorAll(".reason-btn")
     .forEach(button => {
 
         button.addEventListener(
-
             "click",
-
             () => {
 
-                const scope =
-                    button.dataset.scope;
+                const scope = button.dataset.scope;
 
-
-                const reason =
-                    button.dataset.reason;
-
+                const reason = button.dataset.reason;
 
                 const wasSelected =
-                    button
-                        .classList
-                        .contains(
-                            "selected"
-                        );
+                    button.classList.contains("selected");
 
 
                 document
                     .querySelectorAll(
                         `.reason-btn[data-scope="${scope}"]`
                     )
-                    .forEach(
-                        otherButton => {
+                    .forEach(otherButton => {
 
-                            otherButton
-                                .classList
-                                .remove(
-                                    "selected"
-                                );
-
-                        }
-                    );
+                        otherButton.classList.remove("selected");
+                    });
 
 
-                /*
-                   같은 버튼 다시 누르면 취소
-                */
+                /* 같은 버튼을 다시 누르면 선택 해제 */
 
                 if(wasSelected) {
 
-                    if(
-                        scope ===
-                        "single"
-                    ) {
+                    if(scope === "single") {
 
-                        selectedSingleReason =
-                            "";
+                        selectedSingleReason = "";
 
+                        hideOtherReason("single");
 
-                        hideOtherReason(
-                            "single"
-                        );
+                    } else {
 
+                        selectedRecurringReason = "";
+
+                        hideOtherReason("recurring");
                     }
-                    else
-                    {
-
-                        selectedRecurringReason =
-                            "";
-
-
-                        hideOtherReason(
-                            "recurring"
-                        );
-
-                    }
-
 
                     return;
-
                 }
 
 
-                button
-                    .classList
-                    .add(
-                        "selected"
-                    );
+                button.classList.add("selected");
 
 
-                if(
-                    scope ===
-                    "single"
-                ) {
+                if(scope === "single") {
 
-                    selectedSingleReason =
-                        reason;
-
+                    selectedSingleReason = reason;
 
                     updateOtherReason(
                         "single",
                         reason
                     );
 
-                }
-                else
-                {
+                } else {
 
-                    selectedRecurringReason =
-                        reason;
-
+                    selectedRecurringReason = reason;
 
                     updateOtherReason(
                         "recurring",
                         reason
                     );
-
                 }
-
             }
-
         );
 
     });
 
 
-/* 기타 */
+/* ==================================================
+   기타 사유
+================================================== */
 
-function updateOtherReason(
-    scope,
-    reason
-) {
+function updateOtherReason(scope, reason) {
 
-    const wrap =
-        document.getElementById(
-
-            scope === "single"
-                ? "singleOtherWrap"
-                : "recurringOtherWrap"
-
-        );
+    const wrap = document.getElementById(
+        scope === "single"
+            ? "singleOtherWrap"
+            : "recurringOtherWrap"
+    );
 
 
-    const input =
-        document.getElementById(
-
-            scope === "single"
-                ? "singleOther"
-                : "recurringOther"
-
-        );
+    const input = document.getElementById(
+        scope === "single"
+            ? "singleOther"
+            : "recurringOther"
+    );
 
 
-    if(
-        reason ===
-        "기타"
-    ) {
+    if(reason === "기타") {
 
-        wrap.style.display =
-            "block";
-
+        wrap.style.display = "block";
 
         input.focus();
 
+    } else {
+
+        wrap.style.display = "none";
+
+        input.value = "";
     }
-    else
-    {
-
-        wrap.style.display =
-            "none";
-
-
-        input.value =
-            "";
-
-    }
-
 }
 
 
-function hideOtherReason(
-    scope
-) {
+function hideOtherReason(scope) {
 
-    const wrap =
-        document.getElementById(
-
-            scope === "single"
-                ? "singleOtherWrap"
-                : "recurringOtherWrap"
-
-        );
+    const wrap = document.getElementById(
+        scope === "single"
+            ? "singleOtherWrap"
+            : "recurringOtherWrap"
+    );
 
 
-    const input =
-        document.getElementById(
-
-            scope === "single"
-                ? "singleOther"
-                : "recurringOther"
-
-        );
+    const input = document.getElementById(
+        scope === "single"
+            ? "singleOther"
+            : "recurringOther"
+    );
 
 
-    wrap.style.display =
-        "none";
+    wrap.style.display = "none";
 
-
-    input.value =
-        "";
-
+    input.value = "";
 }
 
 
-/* 날짜별 사유 */
+/* ==================================================
+   사유 가져오기
+================================================== */
 
 function getSingleReason() {
 
-    if(
-        selectedSingleReason ===
-        ""
-    ) {
+    if(selectedSingleReason === "") {
 
         return null;
-
     }
 
 
-    if(
-        selectedSingleReason !==
-        "기타"
-    ) {
+    if(selectedSingleReason !== "기타") {
 
         return selectedSingleReason;
-
     }
 
 
-    const custom =
-        document
-            .getElementById(
-                "singleOther"
-            )
-            .value
-            .trim();
+    const custom = document
+        .getElementById("singleOther")
+        .value
+        .trim();
 
 
-    if(
-        custom ===
-        ""
-    ) {
-
-        return null;
-
-    }
-
-
-    return custom;
-
+    return custom === ""
+        ? null
+        : custom;
 }
 
-
-/* 정기 사유 */
 
 function getRecurringReason() {
 
-    if(
-        selectedRecurringReason ===
-        ""
-    ) {
+    if(selectedRecurringReason === "") {
 
         return null;
-
     }
 
 
-    if(
-        selectedRecurringReason !==
-        "기타"
-    ) {
+    if(selectedRecurringReason !== "기타") {
 
         return selectedRecurringReason;
-
     }
 
 
-    const custom =
-        document
-            .getElementById(
-                "recurringOther"
-            )
-            .value
-            .trim();
+    const custom = document
+        .getElementById("recurringOther")
+        .value
+        .trim();
 
 
-    if(
-        custom ===
-        ""
-    ) {
-
-        return null;
-
-    }
-
-
-    return custom;
-
+    return custom === ""
+        ? null
+        : custom;
 }
 
 
-/* 날짜별 신청 */
+/* ==================================================
+   날짜별 불참 신청
+================================================== */
 
 async function applySingleAbsence() {
 
-    const student =
-        findStudent();
+    const student = findStudent();
+
+    const reason = getSingleReason();
+
+    const password = document
+        .getElementById("singlePassword")
+        .value;
 
 
-    const reason =
-        getSingleReason();
+    if(student === null) {
 
-
-    const password =
-        document
-            .getElementById(
-                "singlePassword"
-            )
-            .value;
-
-
-    if(
-        student ===
-        null
-    ) {
-
-        showError(
-            "학생을 입력해주세요."
-        );
-
+        showError("학생을 입력해주세요.");
         return;
-
     }
 
 
-    if(
-        disabledStudents
-            .includes(
-                student
-            )
-    ) {
+    if(disabledStudents.includes(student)) {
 
-        showError(
-            "비활성 번호입니다."
-        );
-
+        showError("비활성 번호입니다.");
         return;
-
     }
 
 
-    if(
-        singleCips.length ===
-        0
-    ) {
+    if(singleCips.length === 0) {
 
-        showError(
-            "불참할 CIP를 선택해주세요."
-        );
-
+        showError("불참할 CIP를 선택해주세요.");
         return;
-
     }
 
 
-    if(
-        reason ===
-        null
-    ) {
+    if(reason === null) {
 
-        showError(
-            "불참 사유를 선택해주세요."
-        );
-
+        showError("불참 사유를 선택해주세요.");
         return;
-
     }
 
 
-    if(
-        password !==
-        passwords[student]
-    ) {
+    if(password !== passwords[student]) {
 
-        showError(
-            "비밀번호가 틀렸습니다."
-        );
-
+        showError("비밀번호가 틀렸습니다.");
         return;
-
     }
 
 
     const documentId =
-
-        selectedDate
-        +
-        "_"
-        +
-        student;
+        selectedDate + "_" + student;
 
 
     try {
@@ -2394,98 +2000,65 @@ async function applySingleAbsence() {
             ),
 
             {
-                date:
-                    selectedDate,
+                date: selectedDate,
 
-                number:
-                    student,
+                number: student,
 
-                name:
-                    students[student],
+                name: students[student],
 
-                cips:
-                    [...singleCips],
+                cips: [...singleCips],
 
-                reasonType:
-                    selectedSingleReason,
+                reasonType: selectedSingleReason,
 
-                reason:
-                    reason,
+                reason: reason,
 
-                updatedAt:
-                    serverTimestamp()
+                updatedAt: serverTimestamp()
             }
-
         );
 
 
         showSuccess(
-
             `${student}번 ${students[student]} 신청 완료`
-
         );
 
 
         clearSingleInput();
 
-    }
-    catch(error) {
+    } catch(error) {
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         showError(
             "신청 저장에 실패했습니다."
         );
-
     }
-
 }
 
 
-/* 날짜별 취소 */
+/* ==================================================
+   날짜별 신청 취소
+================================================== */
 
 async function cancelSingleAbsence() {
 
-    const student =
-        findStudent();
+    const student = findStudent();
+
+    const password = document
+        .getElementById("singlePassword")
+        .value;
 
 
-    const password =
-        document
-            .getElementById(
-                "singlePassword"
-            )
-            .value;
+    if(student === null) {
 
-
-    if(
-        student ===
-        null
-    ) {
-
-        showError(
-            "학생을 입력해주세요."
-        );
-
+        showError("학생을 입력해주세요.");
         return;
-
     }
 
 
-    if(
-        password !==
-        passwords[student]
-    ) {
+    if(password !== passwords[student]) {
 
-        showError(
-            "비밀번호가 틀렸습니다."
-        );
-
+        showError("비밀번호가 틀렸습니다.");
         return;
-
     }
 
 
@@ -2496,14 +2069,8 @@ async function cancelSingleAbsence() {
             doc(
                 db,
                 "absence",
-
-                selectedDate
-                +
-                "_"
-                +
-                student
+                selectedDate + "_" + student
             )
-
         );
 
 
@@ -2514,134 +2081,76 @@ async function cancelSingleAbsence() {
 
         clearSingleInput();
 
+    } catch(error) {
+
+        console.error(error);
+
+        showError("취소에 실패했습니다.");
     }
-    catch(error) {
-
-        console.error(
-            error
-        );
-
-
-        showError(
-            "취소에 실패했습니다."
-        );
-
-    }
-
 }
 
 
 /* ==================================================
    정기 불참 추가
 
-   학생 1명에게 여러 개 등록 가능
+   학생 한 명에게 여러 개의 정기 일정 등록 가능
 ================================================== */
 
 async function applyRecurringAbsence() {
 
-    const student =
-        findStudent();
+    const student = findStudent();
+
+    const password = document
+        .getElementById("recurringPassword")
+        .value;
+
+    const reason = getRecurringReason();
 
 
-    const password =
-        document
-            .getElementById(
-                "recurringPassword"
-            )
-            .value;
+    if(student === null) {
 
-
-    const reason =
-        getRecurringReason();
-
-
-    if(
-        student ===
-        null
-    ) {
-
-        showError(
-            "학생을 입력해주세요."
-        );
-
+        showError("학생을 입력해주세요.");
         return;
-
     }
 
 
-    if(
-        disabledStudents
-            .includes(
-                student
-            )
-    ) {
+    if(disabledStudents.includes(student)) {
 
-        showError(
-            "비활성 번호입니다."
-        );
-
+        showError("비활성 번호입니다.");
         return;
-
     }
 
 
-    if(
-        recurringDays.length ===
-        0
-    ) {
+    if(recurringDays.length === 0) {
 
-        showError(
-            "반복 요일을 선택해주세요."
-        );
-
+        showError("반복 요일을 선택해주세요.");
         return;
-
     }
 
 
-    if(
-        recurringCips.length ===
-        0
-    ) {
+    if(recurringCips.length === 0) {
 
-        showError(
-            "반복 CIP를 선택해주세요."
-        );
-
+        showError("반복 CIP를 선택해주세요.");
         return;
-
     }
 
 
-    if(
-        reason ===
-        null
-    ) {
+    if(reason === null) {
 
-        showError(
-            "반복 불참 사유를 선택해주세요."
-        );
-
+        showError("반복 불참 사유를 선택해주세요.");
         return;
-
     }
 
 
-    if(
-        password !==
-        passwords[student]
-    ) {
+    if(password !== passwords[student]) {
 
         showError(
             "반복 불참 비밀번호가 틀렸습니다."
         );
 
         return;
-
     }
 
-
-    /* 같은 일정 중복 방지 */
 
     const existingRules =
         recurringData[student] || [];
@@ -2650,64 +2159,41 @@ async function applyRecurringAbsence() {
     const duplicate =
         existingRules.some(rule => {
 
-
             const sameDays =
-
                 JSON.stringify(
-                    [...rule.weekdays].sort(
-                        (a,b) => a-b
-                    )
+                    [...rule.weekdays].sort((a,b) => a-b)
                 )
-
                 ===
-
                 JSON.stringify(
-                    [...recurringDays].sort(
-                        (a,b) => a-b
-                    )
+                    [...recurringDays].sort((a,b) => a-b)
                 );
 
 
             const sameCips =
-
                 JSON.stringify(
-                    [...rule.cips].sort(
-                        (a,b) => a-b
-                    )
+                    [...rule.cips].sort((a,b) => a-b)
                 )
-
                 ===
-
                 JSON.stringify(
-                    [...recurringCips].sort(
-                        (a,b) => a-b
-                    )
+                    [...recurringCips].sort((a,b) => a-b)
                 );
 
 
             return (
-
-                sameDays
-                &&
-                sameCips
-                &&
+                sameDays &&
+                sameCips &&
                 rule.reason === reason
-
             );
-
         });
 
 
-    if(
-        duplicate
-    ) {
+    if(duplicate) {
 
         showError(
             "동일한 정기 일정이 이미 등록되어 있습니다."
         );
 
         return;
-
     }
 
 
@@ -2721,107 +2207,74 @@ async function applyRecurringAbsence() {
             ),
 
             {
-                number:
-                    student,
+                number: student,
 
-                name:
-                    students[student],
+                name: students[student],
 
-                weekdays:
-                    [...recurringDays],
+                weekdays: [...recurringDays],
 
-                cips:
-                    [...recurringCips],
+                cips: [...recurringCips],
 
-                reasonType:
-                    selectedRecurringReason,
+                reasonType: selectedRecurringReason,
 
-                reason:
-                    reason,
+                reason: reason,
 
-                updatedAt:
-                    serverTimestamp()
+                updatedAt: serverTimestamp()
             }
-
         );
 
 
         const daysText =
             recurringDays
-                .map(
-                    day =>
-                        weekdayNames[day]
-                )
+                .map(day => weekdayNames[day])
                 .join("·");
 
 
         showSuccess(
-
             `${student}번 ${students[student]} · ${daysText} ${reason} 추가 완료`
-
         );
 
 
         clearRecurringInput();
 
-    }
-    catch(error) {
+    } catch(error) {
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         showError(
             "반복 불참 등록에 실패했습니다."
         );
-
     }
-
 }
 
 
-/* 학생 정기 불참 전체 삭제 */
+/* ==================================================
+   학생 정기 불참 전체 삭제
+================================================== */
 
 async function cancelRecurringAbsence() {
 
-    const student =
-        findStudent();
+    const student = findStudent();
+
+    const password = document
+        .getElementById("recurringPassword")
+        .value;
 
 
-    const password =
-        document
-            .getElementById(
-                "recurringPassword"
-            )
-            .value;
+    if(student === null) {
 
-
-    if(
-        student ===
-        null
-    ) {
-
-        showError(
-            "학생을 입력해주세요."
-        );
-
+        showError("학생을 입력해주세요.");
         return;
-
     }
 
 
-    if(
-        password !==
-        passwords[student]
-    ) {
+    if(password !== passwords[student]) {
 
         showError(
             "반복 불참 비밀번호가 틀렸습니다."
         );
 
         return;
-
     }
 
 
@@ -2829,17 +2282,13 @@ async function cancelRecurringAbsence() {
         recurringData[student] || [];
 
 
-    if(
-        rules.length ===
-        0
-    ) {
+    if(rules.length === 0) {
 
         showError(
             "등록된 정기 불참이 없습니다."
         );
 
         return;
-
     }
 
 
@@ -2856,68 +2305,53 @@ async function cancelRecurringAbsence() {
                         "recurring",
                         rule.id
                     )
-
                 )
-
             )
-
         );
 
 
         showSuccess(
-
             `${student}번 정기 불참을 모두 삭제했습니다.`
-
         );
 
 
         clearRecurringInput();
 
-    }
-    catch(error) {
+    } catch(error) {
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         showError(
             "정기 불참 삭제에 실패했습니다."
         );
-
     }
-
 }
 
 
-/* 날짜별 Firebase */
+/* ==================================================
+   날짜별 데이터 실시간 불러오기
+================================================== */
 
 function startDateSync() {
 
-    if(
-        unsubscribeSingle
-    ) {
-
+    if(unsubscribeSingle) {
         unsubscribeSingle();
-
     }
 
 
-    const q =
-        query(
+    const q = query(
 
-            collection(
-                db,
-                "absence"
-            ),
+        collection(
+            db,
+            "absence"
+        ),
 
-            where(
-                "date",
-                "==",
-                selectedDate
-            )
-
-        );
+        where(
+            "date",
+            "==",
+            selectedDate
+        )
+    );
 
 
     unsubscribeSingle =
@@ -2927,8 +2361,7 @@ function startDateSync() {
 
             snapshot => {
 
-                singleAbsenceData =
-                    {};
+                singleAbsenceData = {};
 
 
                 snapshot.forEach(
@@ -2950,9 +2383,7 @@ function startDateSync() {
 
                             reasonType:
                                 data.reasonType || ""
-
                         };
-
                     }
                 );
 
@@ -2964,42 +2395,30 @@ function startDateSync() {
                     "실시간 공유 연결됨",
                     "online"
                 );
-
             },
 
             error => {
 
-                console.error(
-                    error
-                );
+                console.error(error);
 
 
                 setConnectionStatus(
                     "Firebase 연결 오류",
                     "error"
                 );
-
             }
-
         );
-
 }
 
 
 /* ==================================================
-   정기 Firebase
-
-   학생 1명당 배열로 관리
+   정기 불참 실시간 불러오기
 ================================================== */
 
 function startRecurringSync() {
 
-    if(
-        unsubscribeRecurring
-    ) {
-
+    if(unsubscribeRecurring) {
         unsubscribeRecurring();
-
     }
 
 
@@ -3013,8 +2432,7 @@ function startRecurringSync() {
 
             snapshot => {
 
-                recurringData =
-                    {};
+                recurringData = {};
 
 
                 snapshot.forEach(
@@ -3025,76 +2443,59 @@ function startRecurringSync() {
 
 
                         const number =
-                            Number(
-                                data.number
-                            );
+                            Number(data.number);
 
 
-                        if(
-                            !recurringData[number]
-                        ) {
+                        if(!recurringData[number]) {
 
-                            recurringData[number] =
-                                [];
-
+                            recurringData[number] = [];
                         }
 
 
-                        recurringData[number]
-                            .push({
+                        recurringData[number].push({
 
-                                id:
-                                    documentSnapshot.id,
+                            id:
+                                documentSnapshot.id,
 
-                                weekdays:
-                                    data.weekdays || [],
+                            weekdays:
+                                data.weekdays || [],
 
-                                cips:
-                                    data.cips || [],
+                            cips:
+                                data.cips || [],
 
-                                reason:
-                                    data.reason || "",
+                            reason:
+                                data.reason || "",
 
-                                reasonType:
-                                    data.reasonType || ""
-
-                            });
-
+                            reasonType:
+                                data.reasonType || ""
+                        });
                     }
                 );
 
 
                 updateScreen();
-
             },
 
             error => {
 
-                console.error(
-                    error
-                );
-
+                console.error(error);
             }
-
         );
-
 }
 
 
-/* 선택 날짜에 적용되는 정기 일정 */
+/* ==================================================
+   선택 날짜에 해당하는 정기 일정만 가져오기
+================================================== */
 
-function getRecurringForStudent(
-    student
-) {
+function getRecurringForStudent(student) {
 
     const rules =
         recurringData[student] || [];
 
 
     const weekday =
-        getWeekdayFromDate(
-            selectedDate
-        );
+        getWeekdayFromDate(selectedDate);
 
 
     return rules.filter(
@@ -3103,25 +2504,19 @@ function getRecurringForStudent(
                 weekday
             )
     );
-
 }
 
 
 /* ==================================================
-   좌석 화면
+   좌석 화면 업데이트
 ================================================== */
 
 function updateScreen() {
 
-    const today =
-        getTodayKey();
+    const today = getTodayKey();
 
 
-    for(
-        let i = 1;
-        i <= 36;
-        i++
-    ) {
+    for(let i = 1; i <= 36; i++) {
 
         const seat =
             document.getElementById(
@@ -3135,26 +2530,20 @@ function updateScreen() {
             );
 
 
-        if(
-            disabledStudents.includes(i)
-        ) {
+        if(disabledStudents.includes(i)) {
 
-            status.textContent =
-                "비활성";
+            status.textContent = "비활성";
 
             continue;
-
         }
 
 
-        seat
-            .classList
-            .remove(
-                "absent",
-                "recurring",
-                "both",
-                "creative"
-            );
+        seat.classList.remove(
+            "absent",
+            "recurring",
+            "both",
+            "creative"
+        );
 
 
         const single =
@@ -3162,163 +2551,101 @@ function updateScreen() {
 
 
         /*
-        선택 날짜의 요일에 해당하는
-        정기 일정만 표시
+           그 날짜에 해당하는 정기 일정만 표시
+           월요일이면 월요일 일정만,
+           화요일이면 화요일 일정만 표시
         */
 
         const recurringToday =
-            getRecurringForStudent(
-                i
-            );
+            getRecurringForStudent(i);
 
 
-        const lines =
-            [];
+        const lines = [];
 
 
         /*
-        정기:
-        요일 표시 없이
-        해당 날짜 사유만 표시
+           정기 불참은 요일 없이
+           이름 아래에 "학원", "공교" 등만 표시
         */
 
-        recurringToday.forEach(
-            rule => {
+        recurringToday.forEach(rule => {
 
-                if(
-                    isCreativeReason(
-                        rule
-                    )
-                ) {
+            if(isCreativeReason(rule)) {
 
-                    lines.push(
+                lines.push(
+                    `<span class="creative-text">창의반</span>`
+                );
 
-                        `<span class="creative-text">
-                            창의반
-                        </span>`
+            } else {
 
-                    );
-
-                }
-                else
-                {
-
-                    lines.push(
-
-                        `<span class="recurring-text">
-                            ${escapeHtml(
-                                rule.reason
-                            )}
-                        </span>`
-
-                    );
-
-                }
-
+                lines.push(
+                    `<span class="recurring-text">${escapeHtml(rule.reason)}</span>`
+                );
             }
-        );
+        });
 
 
-        /* 날짜별 */
+        /*
+           날짜별 불참
+        */
 
-        if(
-            single
-        ) {
+        if(single) {
 
             const cipText =
                 single.cips
-                    .map(
-                        c =>
-                            c + "차"
-                    )
+                    .map(c => c + "차")
                     .join("·");
 
 
-            if(
-                isCreativeReason(
-                    single
-                )
-            ) {
+            if(isCreativeReason(single)) {
 
                 lines.push(
-
-                    `<span class="creative-text">
-                        ${cipText} 창의반
-                    </span>`
-
+                    `<span class="creative-text">${cipText} 창의반</span>`
                 );
 
-            }
-            else
-            {
+            } else {
 
                 lines.push(
-
-                    `${cipText} ${escapeHtml(
-                        single.reason
-                    )}`
-
+                    `${cipText} ${escapeHtml(single.reason)}`
                 );
-
             }
-
         }
 
 
         status.innerHTML =
-            lines.join(
-                "<br>"
-            );
+            lines.join("<br>");
 
 
-        let singleActive =
-            false;
+        let singleActive = false;
 
+        let recurringActive = false;
 
-        let recurringActive =
-            false;
-
-
-        let creativeActive =
-            false;
+        let creativeActive = false;
 
 
         /*
-        오늘:
-        현재 CIP에 해당할 때 색칠
+           오늘 날짜일 경우
+           현재 진행 중인 CIP에 해당하는 학생만 색상 표시
         */
 
-        if(
-            selectedDate ===
-            today
-        ) {
+        if(selectedDate === today) {
 
-            if(
-                currentCip !==
-                null
-            ) {
+            if(currentCip !== null) {
 
                 singleActive =
-
-                    !!single
-
-                    &&
-
-                    single.cips
-                        .includes(
-                            currentCip
-                        );
+                    !!single &&
+                    single.cips.includes(
+                        currentCip
+                    );
 
 
                 const activeRecurring =
-                    recurringToday
-                        .filter(
-                            rule =>
-                                rule.cips
-                                    .includes(
-                                        currentCip
-                                    )
-                        );
+                    recurringToday.filter(
+                        rule =>
+                            rule.cips.includes(
+                                currentCip
+                            )
+                    );
 
 
                 recurringActive =
@@ -3328,31 +2655,25 @@ function updateScreen() {
                 creativeActive =
 
                     (
-                        singleActive
-                        &&
-                        isCreativeReason(
-                            single
-                        )
+                        singleActive &&
+                        isCreativeReason(single)
                     )
 
                     ||
 
-                    activeRecurring
-                        .some(
-                            rule =>
-                                isCreativeReason(
-                                    rule
-                                )
-                        );
-
+                    activeRecurring.some(
+                        rule =>
+                            isCreativeReason(rule)
+                    );
             }
-
         }
 
-        /* 미래/과거 날짜 조회 */
+        /*
+           다른 날짜 조회 시
+           예정된 불참을 바로 색상으로 표시
+        */
 
-        else
-        {
+        else {
 
             singleActive =
                 !!single;
@@ -3365,85 +2686,48 @@ function updateScreen() {
             creativeActive =
 
                 (
-                    singleActive
-                    &&
-                    isCreativeReason(
-                        single
-                    )
+                    singleActive &&
+                    isCreativeReason(single)
                 )
 
                 ||
 
-                recurringToday
-                    .some(
-                        rule =>
-                            isCreativeReason(
-                                rule
-                            )
-                    );
-
-        }
-
-
-        if(
-            creativeActive
-        ) {
-
-            seat
-                .classList
-                .add(
-                    "creative"
+                recurringToday.some(
+                    rule =>
+                        isCreativeReason(rule)
                 );
-
         }
 
-        else if(
-            singleActive
-            &&
+
+        if(creativeActive) {
+
+            seat.classList.add("creative");
+
+        } else if(
+            singleActive &&
             recurringActive
         ) {
 
-            seat
-                .classList
-                .add(
-                    "both"
-                );
+            seat.classList.add("both");
 
+        } else if(singleActive) {
+
+            seat.classList.add("absent");
+
+        } else if(recurringActive) {
+
+            seat.classList.add("recurring");
         }
-
-        else if(
-            singleActive
-        ) {
-
-            seat
-                .classList
-                .add(
-                    "absent"
-                );
-
-        }
-
-        else if(
-            recurringActive
-        ) {
-
-            seat
-                .classList
-                .add(
-                    "recurring"
-                );
-
-        }
-
     }
 
 
     updateAbsenceList();
-
 }
 
 
-/* 오른쪽 현황 */
+/* ==================================================
+   오른쪽 불참 현황
+================================================== */
 
 function updateAbsenceList() {
 
@@ -3460,30 +2744,18 @@ function updateAbsenceList() {
 
 
     document
-        .getElementById(
-            "listTitle"
-        )
+        .getElementById("listTitle")
         .textContent =
-
         `${selectedDate} (${weekdayNames[weekday]}) 불참 현황`;
 
 
-    const items =
-        [];
+    const items = [];
 
 
-    for(
-        let i = 1;
-        i <= 36;
-        i++
-    ) {
+    for(let i = 1; i <= 36; i++) {
 
-        if(
-            disabledStudents.includes(i)
-        ) {
-
+        if(disabledStudents.includes(i)) {
             continue;
-
         }
 
 
@@ -3492,35 +2764,26 @@ function updateAbsenceList() {
 
 
         const recurring =
-            getRecurringForStudent(
-                i
-            );
+            getRecurringForStudent(i);
 
 
         if(
-            !single
-            &&
+            !single &&
             recurring.length === 0
         ) {
-
             continue;
-
         }
 
 
         const creative =
 
-            isCreativeReason(
-                single
-            )
+            isCreativeReason(single)
 
             ||
 
             recurring.some(
                 rule =>
-                    isCreativeReason(
-                        rule
-                    )
+                    isCreativeReason(rule)
             );
 
 
@@ -3528,22 +2791,13 @@ function updateAbsenceList() {
             "absence-item";
 
 
-        if(
-            creative
-        ) {
+        if(creative) {
 
-            itemClass +=
-                " creative-item";
+            itemClass += " creative-item";
 
-        }
+        } else if(recurring.length > 0) {
 
-        else if(
-            recurring.length > 0
-        ) {
-
-            itemClass +=
-                " recurring-item";
-
+            itemClass += " recurring-item";
         }
 
 
@@ -3558,15 +2812,12 @@ function updateAbsenceList() {
         `;
 
 
-        if(
-            single
-        ) {
+        if(single) {
 
             const cips =
                 single.cips
                     .map(
-                        c =>
-                            `CIP ${c}차`
+                        c => `CIP ${c}차`
                     )
                     .join(" · ");
 
@@ -3574,156 +2825,112 @@ function updateAbsenceList() {
             html += `
 
                 <br>
-
                 ${cips}
 
                 <br>
-
-                ${escapeHtml(
-                    single.reason
-                )}
+                ${escapeHtml(single.reason)}
 
             `;
-
         }
 
 
-        recurring.forEach(
-            rule => {
+        recurring.forEach(rule => {
 
-                const cips =
-                    rule.cips
-                        .map(
-                            c =>
-                                `CIP ${c}차`
-                        )
-                        .join(" · ");
-
-
-                if(
-                    isCreativeReason(
-                        rule
+            const cips =
+                rule.cips
+                    .map(
+                        c => `CIP ${c}차`
                     )
-                ) {
+                    .join(" · ");
 
-                    html += `
 
-                        <br>
+            if(isCreativeReason(rule)) {
 
-                        <span class="creative-text">
-                            정기 · 창의반
-                        </span>
+                html += `
 
-                        · ${cips}
+                    <br>
 
-                    `;
+                    <span class="creative-text">
+                        정기 · 창의반
+                    </span>
 
-                }
-                else
-                {
+                    · ${cips}
 
-                    html += `
+                `;
 
-                        <br>
+            } else {
 
-                        <span class="recurring-text">
-                            정기 · ${escapeHtml(
-                                rule.reason
-                            )}
-                        </span>
+                html += `
 
-                        · ${cips}
+                    <br>
 
-                    `;
+                    <span class="recurring-text">
+                        정기 · ${escapeHtml(rule.reason)}
+                    </span>
 
-                }
+                    · ${cips}
 
+                `;
             }
-        );
+        });
 
 
-        html +=
-            "</div>";
+        html += "</div>";
 
 
         items.push({
-
-            number:
-                i,
-
-            html:
-                html
-
+            number: i,
+            html: html
         });
-
     }
 
 
-    if(
-        items.length ===
-        0
-    ) {
+    if(items.length === 0) {
 
         list.textContent =
             "해당 날짜 불참자가 없습니다.";
 
         return;
-
     }
 
 
     list.innerHTML =
-
         items
-
             .sort(
                 (a,b) =>
-                    a.number -
-                    b.number
+                    a.number - b.number
             )
-
             .map(
-                item =>
-                    item.html
+                item => item.html
             )
-
             .join("");
-
 }
 
 
-/* 날짜 변경 */
+/* ==================================================
+   날짜 변경
+================================================== */
 
 function changeSelectedDate() {
 
     let date =
         document
-            .getElementById(
-                "viewDate"
-            )
+            .getElementById("viewDate")
             .value;
 
 
-    if(
-        !date
-    ) {
+    if(!date) {
 
-        date =
-            getTodayKey();
+        date = getTodayKey();
 
 
         document
-            .getElementById(
-                "viewDate"
-            )
-            .value =
-                date;
-
+            .getElementById("viewDate")
+            .value = date;
     }
 
 
-    selectedDate =
-        date;
+    selectedDate = date;
 
 
     const weekday =
@@ -3733,28 +2940,24 @@ function changeSelectedDate() {
 
 
     document
-        .getElementById(
-            "dateInfo"
-        )
+        .getElementById("dateInfo")
         .textContent =
-
         `${selectedDate} (${weekdayNames[weekday]}요일)`;
 
 
     updateCipInfo();
 
-
     startDateSync();
-
 }
 
 
-/* 대표 화면 */
+/* ==================================================
+   대표 화면
+================================================== */
 
 async function toggleDisplayMode() {
 
-    displayMode =
-        !displayMode;
+    displayMode = !displayMode;
 
 
     const button =
@@ -3763,30 +2966,24 @@ async function toggleDisplayMode() {
         );
 
 
-    if(
-        displayMode
-    ) {
+    if(displayMode) {
 
         selectedDate =
             getTodayKey();
 
 
         document
-            .getElementById(
-                "viewDate"
-            )
+            .getElementById("viewDate")
             .value =
-                selectedDate;
+            selectedDate;
 
 
         startDateSync();
 
 
-        document.body
-            .classList
-            .add(
-                "display-mode"
-            );
+        document.body.classList.add(
+            "display-mode"
+        );
 
 
         button.textContent =
@@ -3804,23 +3001,16 @@ async function toggleDisplayMode() {
                 await document
                     .documentElement
                     .requestFullscreen();
-
             }
 
-        }
-        catch(error) {
-
+        } catch(error) {
         }
 
-    }
-    else
-    {
+    } else {
 
-        document.body
-            .classList
-            .remove(
-                "display-mode"
-            );
+        document.body.classList.remove(
+            "display-mode"
+        );
 
 
         button.textContent =
@@ -3830,54 +3020,41 @@ async function toggleDisplayMode() {
         try {
 
             if(
-                document.fullscreenElement
-                &&
+                document.fullscreenElement &&
                 document.exitFullscreen
             ) {
 
-                await document
-                    .exitFullscreen();
-
+                await document.exitFullscreen();
             }
 
+        } catch(error) {
         }
-        catch(error) {
-
-        }
-
     }
 
 
     updateCipInfo();
 
     updateScreen();
-
 }
 
 
-/* 입력 초기화 */
+/* ==================================================
+   날짜별 입력 초기화
+================================================== */
 
 function clearSingleInput() {
 
-    singleCips =
-        [];
+    singleCips = [];
 
-
-    selectedSingleReason =
-        "";
+    selectedSingleReason = "";
 
 
     document
-        .getElementById(
-            "singlePassword"
-        )
-        .value =
-            "";
+        .getElementById("singlePassword")
+        .value = "";
 
 
-    hideOtherReason(
-        "single"
-    );
+    hideOtherReason("single");
 
 
     document
@@ -3886,11 +3063,9 @@ function clearSingleInput() {
         )
         .forEach(
             button =>
-                button
-                    .classList
-                    .remove(
-                        "selected"
-                    )
+                button.classList.remove(
+                    "selected"
+                )
         );
 
 
@@ -3900,41 +3075,32 @@ function clearSingleInput() {
         )
         .forEach(
             button =>
-                button
-                    .classList
-                    .remove(
-                        "selected"
-                    )
+                button.classList.remove(
+                    "selected"
+                )
         );
-
 }
 
 
+/* ==================================================
+   정기 입력 초기화
+================================================== */
+
 function clearRecurringInput() {
 
-    recurringDays =
-        [];
+    recurringDays = [];
 
+    recurringCips = [];
 
-    recurringCips =
-        [];
-
-
-    selectedRecurringReason =
-        "";
+    selectedRecurringReason = "";
 
 
     document
-        .getElementById(
-            "recurringPassword"
-        )
-        .value =
-            "";
+        .getElementById("recurringPassword")
+        .value = "";
 
 
-    hideOtherReason(
-        "recurring"
-    );
+    hideOtherReason("recurring");
 
 
     document
@@ -3943,11 +3109,9 @@ function clearRecurringInput() {
         )
         .forEach(
             button =>
-                button
-                    .classList
-                    .remove(
-                        "selected"
-                    )
+                button.classList.remove(
+                    "selected"
+                )
         );
 
 
@@ -3957,11 +3121,9 @@ function clearRecurringInput() {
         )
         .forEach(
             button =>
-                button
-                    .classList
-                    .remove(
-                        "selected"
-                    )
+                button.classList.remove(
+                    "selected"
+                )
         );
 
 
@@ -3971,26 +3133,21 @@ function clearRecurringInput() {
         )
         .forEach(
             button =>
-                button
-                    .classList
-                    .remove(
-                        "selected"
-                    )
+                button.classList.remove(
+                    "selected"
+                )
         );
-
 }
 
 
-/* 메시지 */
+/* ==================================================
+   메시지
+================================================== */
 
-function showError(
-    text
-) {
+function showError(text) {
 
     const message =
-        document.getElementById(
-            "message"
-        );
+        document.getElementById("message");
 
 
     message.style.color =
@@ -3999,18 +3156,13 @@ function showError(
 
     message.textContent =
         text;
-
 }
 
 
-function showSuccess(
-    text
-) {
+function showSuccess(text) {
 
     const message =
-        document.getElementById(
-            "message"
-        );
+        document.getElementById("message");
 
 
     message.style.color =
@@ -4019,14 +3171,10 @@ function showSuccess(
 
     message.textContent =
         text;
-
 }
 
 
-function setConnectionStatus(
-    text,
-    type
-) {
+function setConnectionStatus(text, type) {
 
     const status =
         document.getElementById(
@@ -4034,34 +3182,24 @@ function setConnectionStatus(
         );
 
 
-    status.textContent =
-        text;
-
+    status.textContent = text;
 
     status.className =
         "connection-status";
 
 
-    if(
-        type
-    ) {
+    if(type) {
 
-        status
-            .classList
-            .add(
-                type
-            );
-
+        status.classList.add(type);
     }
-
 }
 
 
-/* HTML 보호 */
+/* ==================================================
+   HTML 문자 보호
+================================================== */
 
-function escapeHtml(
-    text
-) {
+function escapeHtml(text) {
 
     return String(text)
 
@@ -4074,11 +3212,12 @@ function escapeHtml(
         .replaceAll('"', "&quot;")
 
         .replaceAll("'", "&#039;");
-
 }
 
 
-/* 이벤트 */
+/* ==================================================
+   이벤트
+================================================== */
 
 document
     .getElementById(
@@ -4140,7 +3279,9 @@ document
     );
 
 
-/* 시작 */
+/* ==================================================
+   시작
+================================================== */
 
 createSeats();
 
@@ -4152,11 +3293,9 @@ selectedDate =
 
 
 document
-    .getElementById(
-        "viewDate"
-    )
+    .getElementById("viewDate")
     .value =
-        selectedDate;
+    selectedDate;
 
 
 currentCip =
