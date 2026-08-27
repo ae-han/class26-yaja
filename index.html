@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>2학년 6반 야자 관리</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -24,31 +18,21 @@ html {
 body {
     margin: 0;
     padding: clamp(6px, 1.4vw, 22px);
-
-    font-family:
-        Arial,
-        "Noto Sans KR",
-        sans-serif;
-
+    font-family: Arial, "Noto Sans KR", sans-serif;
     background: #f3f5f7;
     color: #222;
 }
 
 
-/* ==================================================
-   대표 화면 버튼
-================================================== */
+/* 대표 화면 버튼 */
 
 #displayModeButton {
     position: fixed;
-
     top: 10px;
     left: 10px;
-
     z-index: 9999;
 
     width: auto;
-
     min-width: 105px;
     min-height: 44px;
 
@@ -63,14 +47,11 @@ body {
 
     font-size: 14px;
     font-weight: 900;
-
     cursor: pointer;
 }
 
 
-/* ==================================================
-   상단
-================================================== */
+/* 상단 */
 
 .header {
     text-align: center;
@@ -79,25 +60,18 @@ body {
 
 h1 {
     margin: 4px 0 5px;
-
-    font-size:
-        clamp(28px, 3vw, 44px);
+    font-size: clamp(28px, 3vw, 44px);
 }
 
 #clock {
     margin-bottom: 8px;
-
-    font-size:
-        clamp(17px, 2vw, 27px);
-
+    font-size: clamp(17px, 2vw, 27px);
     font-weight: 900;
 }
 
 .current-cip {
     max-width: 780px;
-
     margin: 0 auto;
-
     padding: 11px 15px;
 
     border-radius: 10px;
@@ -105,56 +79,40 @@ h1 {
     background: #252525;
     color: white;
 
-    font-size:
-        clamp(13px, 1.4vw, 18px);
-
+    font-size: clamp(13px, 1.4vw, 18px);
     font-weight: 900;
 }
 
 
-/* ==================================================
-   전체
-================================================== */
+/* 전체 */
 
 .container {
     width: 100%;
     max-width: 1500px;
-
     margin: 0 auto;
 
     display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        minmax(300px, 370px);
-
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 370px);
     gap: clamp(12px, 2vw, 28px);
 
     align-items: start;
 }
 
 
-/* ==================================================
-   좌석
-================================================== */
+/* 좌석 */
 
 .seat-area {
     min-width: 0;
-
     padding: clamp(8px, 1.5vw, 22px);
 
     border-radius: 15px;
 
     background: white;
-
-    box-shadow:
-        0 3px 14px rgba(0,0,0,0.08);
+    box-shadow: 0 3px 14px rgba(0,0,0,0.08);
 }
 
 .teacher {
-    margin-bottom:
-        clamp(9px, 1.3vw, 18px);
-
+    margin-bottom: clamp(9px, 1.3vw, 18px);
     padding: 11px;
 
     border-radius: 8px;
@@ -170,12 +128,9 @@ h1 {
     width: 100%;
 
     display: grid;
+    grid-template-columns: repeat(6, minmax(0,1fr));
 
-    grid-template-columns:
-        repeat(6, minmax(0,1fr));
-
-    gap:
-        clamp(3px, 0.7vw, 10px);
+    gap: clamp(3px, 0.7vw, 10px);
 }
 
 .seat {
@@ -183,65 +138,48 @@ h1 {
     width: 100%;
 
     aspect-ratio: 1 / 0.92;
-
     min-height: 70px;
 
-    padding:
-        clamp(2px, 0.5vw, 6px);
+    padding: clamp(2px, 0.5vw, 6px);
 
-    border:
-        2px solid #7da7e8;
-
+    border: 2px solid #7da7e8;
     border-radius: 9px;
 
     background: #e8f1ff;
 
     display: flex;
-
     flex-direction: column;
 
     justify-content: center;
     align-items: center;
 
     text-align: center;
-
     overflow: hidden;
 
     transition: 0.2s;
 }
 
 .number {
-    font-size:
-        clamp(21px, 3vw, 40px);
-
+    font-size: clamp(21px, 3vw, 40px);
     font-weight: 900;
-
     line-height: 1;
 }
 
 .name {
     margin-top: 5px;
-
-    font-size:
-        clamp(8px, 1.15vw, 16px);
-
+    font-size: clamp(8px, 1.15vw, 16px);
     font-weight: bold;
-
     white-space: nowrap;
 }
 
 .status {
     width: 100%;
-
     margin-top: 4px;
 
-    font-size:
-        clamp(7px, 0.8vw, 12px);
-
+    font-size: clamp(7px, 0.8vw, 12px);
     line-height: 1.2;
 
     font-weight: 900;
-
     overflow-wrap: anywhere;
 }
 
@@ -250,9 +188,7 @@ h1 {
 
 .seat.absent {
     background: #ffd9d9;
-
     border-color: #e53935;
-
     color: #950000;
 }
 
@@ -261,20 +197,16 @@ h1 {
 
 .seat.recurring {
     background: #ffd39d;
-
     border-color: #e67e22;
-
     color: #814100;
 }
 
 
-/* 날짜 + 정기 */
+/* 날짜별 + 정기 */
 
 .seat.both {
     background: #ffc788;
-
     border-color: #d35400;
-
     color: #702d00;
 }
 
@@ -283,9 +215,7 @@ h1 {
 
 .seat.creative {
     background: #b9dcff;
-
     border-color: #1976d2;
-
     color: #064b91;
 }
 
@@ -294,83 +224,70 @@ h1 {
 
 .seat.disabled {
     background: #c9c9c9;
-
     border-color: #999;
-
     color: #777;
 }
 
 
-.recurring-text {
-    color: #d66700;
+/* 정기 글씨 */
 
+.recurring-text {
+    color: #e26e00;
     font-weight: 900;
 }
+
+
+/* 창의반 글씨 */
 
 .creative-text {
     color: #1565c0;
-
     font-weight: 900;
 }
 
 
-/* ==================================================
-   입력 패널
-================================================== */
+/* 오른쪽 패널 */
 
 .control-panel {
     width: 100%;
     min-width: 0;
 
-    padding:
-        clamp(16px, 2vw, 23px);
+    padding: clamp(16px, 2vw, 23px);
 
     border-radius: 15px;
 
     background: white;
-
-    box-shadow:
-        0 3px 14px rgba(0,0,0,0.08);
+    box-shadow: 0 3px 14px rgba(0,0,0,0.08);
 
     position: sticky;
-
     top: 10px;
 }
 
 .control-panel h2 {
     margin: 0 0 14px;
-
     font-size: 23px;
 }
 
 .section-title {
     margin: 24px 0 12px;
-
     padding-top: 17px;
 
-    border-top:
-        2px solid #eee;
+    border-top: 2px solid #eee;
 
     font-size: 18px;
-
     font-weight: 900;
 }
 
 label {
     display: block;
-
     margin-top: 4px;
 
     font-size: 14px;
-
     font-weight: bold;
 }
 
 input,
-textarea,
 button {
     width: 100%;
-
     min-height: 44px;
 
     padding: 11px;
@@ -379,33 +296,20 @@ button {
     margin-bottom: 15px;
 
     border-radius: 8px;
-
-    border:
-        1px solid #ccc;
+    border: 1px solid #ccc;
 
     font-family: inherit;
-
     font-size: 16px;
 }
 
-textarea {
-    min-height: 68px;
 
-    resize: vertical;
-}
-
-
-/* ==================================================
-   날짜
-================================================== */
+/* 날짜 */
 
 .date-box {
     padding: 11px;
-
     margin-bottom: 17px;
 
     border-radius: 10px;
-
     background: #f5f7fa;
 }
 
@@ -415,29 +319,21 @@ textarea {
 
 .date-info {
     text-align: center;
-
     font-size: 13px;
-
     font-weight: bold;
-
     color: #555;
 }
 
 
-/* ==================================================
-   CIP
-================================================== */
+/* CIP */
 
 .cip-buttons {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0,1fr));
+    grid-template-columns: repeat(3, minmax(0,1fr));
 
     gap: 7px;
 
     margin-top: 8px;
-
     margin-bottom: 18px;
 }
 
@@ -445,95 +341,72 @@ textarea {
     min-width: 0;
 
     margin: 0;
-
     padding: 9px 2px;
 
-    border:
-        2px solid #ccc;
+    border: 2px solid #ccc;
 
     background: #f1f3f5;
-
     color: #333;
 
     font-weight: bold;
-
     cursor: pointer;
 }
 
 .cip-btn.selected {
     border-color: #1976d2;
-
     background: #1976d2;
-
     color: white;
 }
 
 .cip-time {
     display: block;
-
     margin-top: 3px;
 
     font-size: 9px;
-
     font-weight: normal;
 }
 
 
-/* ==================================================
-   요일
-================================================== */
+/* 요일 */
 
 .weekday-buttons {
     display: grid;
-
-    grid-template-columns:
-        repeat(4, minmax(0,1fr));
+    grid-template-columns: repeat(4, minmax(0,1fr));
 
     gap: 7px;
 
     margin-top: 8px;
-
     margin-bottom: 18px;
 }
 
 .weekday-btn {
     margin: 0;
 
-    border:
-        2px solid #ccc;
+    border: 2px solid #ccc;
 
     background: #f1f3f5;
-
     color: #333;
 
     font-weight: bold;
-
     cursor: pointer;
 }
 
 .weekday-btn.selected {
     border-color: #e67e22;
-
     background: #e67e22;
-
     color: white;
 }
 
 
-/* ==================================================
-   불참 사유 버튼
-================================================== */
+/* 사유 */
 
 .reason-buttons {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0,1fr));
+    grid-template-columns: repeat(3, minmax(0,1fr));
 
     gap: 7px;
 
     margin-top: 8px;
-
     margin-bottom: 15px;
 }
 
@@ -541,45 +414,30 @@ textarea {
     min-width: 0;
 
     margin: 0;
-
     padding: 9px 3px;
 
-    border:
-        2px solid #ccc;
+    border: 2px solid #ccc;
 
     background: #f3f3f3;
-
     color: #333;
 
     font-size: 13px;
-
     font-weight: bold;
 
     cursor: pointer;
 }
 
-
-/* 선택된 일반 사유 */
-
 .reason-btn.selected {
     border-color: #e67e22;
-
     background: #e67e22;
-
     color: white;
 }
-
-
-/* 창의반은 파란색 */
 
 .reason-btn.selected[data-reason="창의반"] {
     border-color: #1976d2;
-
     background: #1976d2;
-
     color: white;
 }
-
 
 #singleOtherWrap,
 #recurringOtherWrap {
@@ -587,66 +445,49 @@ textarea {
 }
 
 
-/* ==================================================
-   저장/취소 버튼
-================================================== */
+/* 주요 버튼 */
 
 .submit-btn {
     border: 0;
-
     background: #1976d2;
-
     color: white;
 
     font-weight: bold;
-
     cursor: pointer;
 }
 
 .cancel-btn {
     border: 0;
-
     background: #555;
-
     color: white;
 
     font-weight: bold;
-
     cursor: pointer;
 }
 
 .recurring-submit {
     border: 0;
-
     background: #e67e22;
-
     color: white;
 
     font-weight: bold;
-
     cursor: pointer;
 }
 
 .recurring-cancel {
     border: 0;
-
     background: #795548;
-
     color: white;
 
     font-weight: bold;
-
     cursor: pointer;
 }
 
 
-/* ==================================================
-   Firebase
-================================================== */
+/* Firebase 상태 */
 
 .connection-status {
     margin-bottom: 15px;
-
     padding: 8px;
 
     border-radius: 7px;
@@ -654,53 +495,41 @@ textarea {
     background: #eee;
 
     text-align: center;
-
     font-size: 12px;
-
     font-weight: bold;
 }
 
 .connection-status.online {
     background: #ddf5e3;
-
     color: #176b2d;
 }
 
 .connection-status.error {
     background: #ffe0e0;
-
     color: #9b0000;
 }
 
 .message {
     min-height: 24px;
-
     margin-bottom: 8px;
 
     text-align: center;
-
     font-size: 14px;
-
     font-weight: bold;
 }
 
 
-/* ==================================================
-   명단
-================================================== */
+/* 오른쪽 현황 */
 
 .absence-list {
     margin-top: 18px;
-
     padding-top: 13px;
 
-    border-top:
-        1px solid #ddd;
+    border-top: 1px solid #ddd;
 }
 
 .absence-item {
     margin-bottom: 7px;
-
     padding: 9px;
 
     border-radius: 7px;
@@ -708,34 +537,25 @@ textarea {
     background: #f5f5f5;
 
     font-size: 12px;
-
     line-height: 1.5;
 }
 
 .recurring-item {
-    border-left:
-        5px solid #e67e22;
-
+    border-left: 5px solid #e67e22;
     background: #fff3e5;
 }
 
 .creative-item {
-    border-left:
-        5px solid #1976d2;
-
+    border-left: 5px solid #1976d2;
     background: #e7f2ff;
 }
 
 
-/* ==================================================
-   대표 화면
-================================================== */
+/* 대표 화면 */
 
 body.display-mode {
     padding: 6px;
-
     background: #111;
-
     overflow: hidden;
 }
 
@@ -745,12 +565,8 @@ body.display-mode .control-panel {
 
 body.display-mode .container {
     display: block;
-
     width: 100%;
-
     max-width: none;
-
-    margin: 0;
 }
 
 body.display-mode .header {
@@ -759,50 +575,39 @@ body.display-mode .header {
 
 body.display-mode h1 {
     margin: 0;
-
     color: white;
 
-    font-size:
-        clamp(27px, 3.5vw, 48px);
+    font-size: clamp(27px, 3.5vw, 48px);
 }
 
 body.display-mode #clock {
     margin: 1px 0 4px;
-
     color: white;
 
-    font-size:
-        clamp(20px, 2.7vw, 37px);
+    font-size: clamp(20px, 2.7vw, 37px);
 }
 
 body.display-mode .current-cip {
     max-width: 1000px;
-
     padding: 6px 12px;
 
-    font-size:
-        clamp(17px, 2vw, 27px);
+    font-size: clamp(17px, 2vw, 27px);
 }
 
 body.display-mode .seat-area {
     width: 100%;
 
-    height:
-        calc(100vh - 126px);
-
-    height:
-        calc(100dvh - 126px);
+    height: calc(100vh - 126px);
+    height: calc(100dvh - 126px);
 
     padding: 4px;
 
     border-radius: 0;
 
     background: #111;
-
     box-shadow: none;
 
     display: flex;
-
     flex-direction: column;
 }
 
@@ -812,24 +617,18 @@ body.display-mode .teacher {
 
 body.display-mode .seat-grid {
     flex: 1;
-
     min-height: 0;
 
     display: grid;
 
-    grid-template-columns:
-        repeat(6, minmax(0,1fr));
+    grid-template-columns: repeat(6, minmax(0,1fr));
+    grid-template-rows: repeat(6, minmax(0,1fr));
 
-    grid-template-rows:
-        repeat(6, minmax(0,1fr));
-
-    gap:
-        clamp(3px, 0.55vw, 8px);
+    gap: clamp(3px, 0.55vw, 8px);
 }
 
 body.display-mode .seat {
     min-height: 0;
-
     height: 100%;
 
     aspect-ratio: auto;
@@ -837,26 +636,18 @@ body.display-mode .seat {
     padding: 2px;
 
     border-width: 3px;
-
-    border-radius:
-        clamp(5px, 0.7vw, 10px);
 }
 
 body.display-mode .number {
-    font-size:
-        clamp(24px, 3.3vw, 48px);
+    font-size: clamp(24px, 3.3vw, 48px);
 }
 
 body.display-mode .name {
-    font-size:
-        clamp(10px, 1.5vw, 21px);
+    font-size: clamp(10px, 1.5vw, 21px);
 }
 
 body.display-mode .status {
-    margin-top: 3px;
-
-    font-size:
-        clamp(8px, 1vw, 14px);
+    font-size: clamp(8px, 1vw, 14px);
 }
 
 body.display-mode #displayModeButton {
@@ -864,11 +655,9 @@ body.display-mode #displayModeButton {
 }
 
 
-/* ==================================================
-   태블릿
-================================================== */
+/* 반응형 */
 
-@media(max-width:900px) {
+@media(max-width: 900px) {
 
     .container {
         grid-template-columns: 1fr;
@@ -877,15 +666,9 @@ body.display-mode #displayModeButton {
     .control-panel {
         position: static;
     }
-
 }
 
-
-/* ==================================================
-   휴대폰
-================================================== */
-
-@media(max-width:600px) {
+@media(max-width: 600px) {
 
     body {
         padding: 5px;
@@ -896,16 +679,11 @@ body.display-mode #displayModeButton {
         left: 5px;
 
         min-width: 88px;
-
         min-height: 40px;
 
         padding: 6px 9px;
 
         font-size: 11px;
-    }
-
-    .seat-area {
-        padding: 5px;
     }
 
     .seat-grid {
@@ -914,80 +692,36 @@ body.display-mode #displayModeButton {
 
     .seat {
         min-height: 55px;
-
         padding: 1px;
 
         border-width: 1px;
-
-        border-radius: 5px;
-    }
-
-    .number {
-        font-size:
-            clamp(17px, 6vw, 25px);
-    }
-
-    .name {
-        font-size:
-            clamp(7px, 2.4vw, 10px);
-    }
-
-    .status {
-        font-size:
-            clamp(6px, 2vw, 9px);
-    }
-
-    .control-panel {
-        padding: 14px;
     }
 
     .reason-buttons {
-        grid-template-columns:
-            repeat(2, minmax(0,1fr));
+        grid-template-columns: repeat(2, minmax(0,1fr));
     }
-
-    body.display-mode .seat-area {
-        height:
-            calc(100vh - 110px);
-
-        height:
-            calc(100dvh - 110px);
-    }
-
 }
-
 </style>
 </head>
-
 
 <body>
 
 
-<button
-    id="displayModeButton"
-    type="button">
-
+<button id="displayModeButton" type="button">
     대표 화면
-
 </button>
 
 
 <header class="header">
 
-    <h1>
-        2학년 6반
-    </h1>
+    <h1>2학년 6반</h1>
 
     <div id="clock">
         시간 확인 중...
     </div>
 
-    <div
-        id="currentCip"
-        class="current-cip">
-
+    <div id="currentCip" class="current-cip">
         현재 상태 확인 중...
-
     </div>
 
 </header>
@@ -1002,10 +736,7 @@ body.display-mode #displayModeButton {
         칠판 / 교탁
     </div>
 
-    <div
-        id="seatGrid"
-        class="seat-grid">
-    </div>
+    <div id="seatGrid" class="seat-grid"></div>
 
 </section>
 
@@ -1013,23 +744,13 @@ body.display-mode #displayModeButton {
 <aside class="control-panel">
 
 
-<h2>
-    🌙 야자 불참 관리
-</h2>
+<h2>🌙 야자 불참 관리</h2>
 
 
-<div
-    id="connectionStatus"
-    class="connection-status">
-
+<div id="connectionStatus" class="connection-status">
     Firebase 연결 중...
-
 </div>
 
-
-<!-- ==================================================
-     날짜
-================================================== -->
 
 <div class="date-box">
 
@@ -1037,22 +758,12 @@ body.display-mode #displayModeButton {
         조회 / 신청 날짜
     </label>
 
-    <input
-        id="viewDate"
-        type="date"
-    >
+    <input id="viewDate" type="date">
 
-    <div
-        id="dateInfo"
-        class="date-info">
-    </div>
+    <div id="dateInfo" class="date-info"></div>
 
 </div>
 
-
-<!-- ==================================================
-     학생
-================================================== -->
 
 <label for="studentInput">
     번호 또는 이름
@@ -1063,16 +774,13 @@ body.display-mode #displayModeButton {
     type="text"
     list="studentList"
     autocomplete="off"
-    placeholder="예: 23 또는 윤하유"
+    placeholder="예: 25 또는 이지혁"
 >
 
-<datalist id="studentList">
-</datalist>
+<datalist id="studentList"></datalist>
 
 
-<!-- ==================================================
-     날짜별 불참
-================================================== -->
+<!-- 날짜별 불참 -->
 
 <div class="section-title">
     📅 날짜별 불참 신청
@@ -1130,59 +838,33 @@ body.display-mode #displayModeButton {
 </div>
 
 
-<!-- 날짜별 사유 버튼 -->
-
 <label>
     불참 사유
 </label>
 
 <div class="reason-buttons">
 
-    <button
-        type="button"
-        class="reason-btn"
-        data-scope="single"
-        data-reason="학원">
+    <button type="button" class="reason-btn" data-scope="single" data-reason="학원">
         학원
     </button>
 
-    <button
-        type="button"
-        class="reason-btn"
-        data-scope="single"
-        data-reason="교내활동">
+    <button type="button" class="reason-btn" data-scope="single" data-reason="교내활동">
         교내활동
     </button>
 
-    <button
-        type="button"
-        class="reason-btn"
-        data-scope="single"
-        data-reason="공교">
+    <button type="button" class="reason-btn" data-scope="single" data-reason="공교">
         공교
     </button>
 
-    <button
-        type="button"
-        class="reason-btn"
-        data-scope="single"
-        data-reason="방과후">
+    <button type="button" class="reason-btn" data-scope="single" data-reason="방과후">
         방과후
     </button>
 
-    <button
-        type="button"
-        class="reason-btn"
-        data-scope="single"
-        data-reason="창의반">
+    <button type="button" class="reason-btn" data-scope="single" data-reason="창의반">
         창의반
     </button>
 
-    <button
-        type="button"
-        class="reason-btn"
-        data-scope="single"
-        data-reason="기타">
+    <button type="button" class="reason-btn" data-scope="single" data-reason="기타">
         기타
     </button>
 
@@ -1238,9 +920,7 @@ body.display-mode #displayModeButton {
 </button>
 
 
-<!-- ==================================================
-     반복
-================================================== -->
+<!-- 정기 불참 -->
 
 <div class="section-title">
     🔁 매주 반복 불참
@@ -1253,31 +933,19 @@ body.display-mode #displayModeButton {
 
 <div class="weekday-buttons">
 
-    <button
-        type="button"
-        class="weekday-btn"
-        data-day="1">
+    <button type="button" class="weekday-btn" data-day="1">
         월
     </button>
 
-    <button
-        type="button"
-        class="weekday-btn"
-        data-day="2">
+    <button type="button" class="weekday-btn" data-day="2">
         화
     </button>
 
-    <button
-        type="button"
-        class="weekday-btn"
-        data-day="3">
+    <button type="button" class="weekday-btn" data-day="3">
         수
     </button>
 
-    <button
-        type="button"
-        class="weekday-btn"
-        data-day="4">
+    <button type="button" class="weekday-btn" data-day="4">
         목
     </button>
 
@@ -1290,11 +958,7 @@ body.display-mode #displayModeButton {
 
 <div class="cip-buttons">
 
-    <button
-        type="button"
-        class="cip-btn"
-        data-type="recurring"
-        data-cip="1">
+    <button type="button" class="cip-btn" data-type="recurring" data-cip="1">
 
         1차
 
@@ -1304,11 +968,7 @@ body.display-mode #displayModeButton {
 
     </button>
 
-    <button
-        type="button"
-        class="cip-btn"
-        data-type="recurring"
-        data-cip="2">
+    <button type="button" class="cip-btn" data-type="recurring" data-cip="2">
 
         2차
 
@@ -1318,11 +978,7 @@ body.display-mode #displayModeButton {
 
     </button>
 
-    <button
-        type="button"
-        class="cip-btn"
-        data-type="recurring"
-        data-cip="3">
+    <button type="button" class="cip-btn" data-type="recurring" data-cip="3">
 
         3차
 
@@ -1341,51 +997,27 @@ body.display-mode #displayModeButton {
 
 <div class="reason-buttons">
 
-    <button
-        type="button"
-        class="reason-btn"
-        data-scope="recurring"
-        data-reason="학원">
+    <button type="button" class="reason-btn" data-scope="recurring" data-reason="학원">
         학원
     </button>
 
-    <button
-        type="button"
-        class="reason-btn"
-        data-scope="recurring"
-        data-reason="교내활동">
+    <button type="button" class="reason-btn" data-scope="recurring" data-reason="교내활동">
         교내활동
     </button>
 
-    <button
-        type="button"
-        class="reason-btn"
-        data-scope="recurring"
-        data-reason="공교">
+    <button type="button" class="reason-btn" data-scope="recurring" data-reason="공교">
         공교
     </button>
 
-    <button
-        type="button"
-        class="reason-btn"
-        data-scope="recurring"
-        data-reason="방과후">
+    <button type="button" class="reason-btn" data-scope="recurring" data-reason="방과후">
         방과후
     </button>
 
-    <button
-        type="button"
-        class="reason-btn"
-        data-scope="recurring"
-        data-reason="창의반">
+    <button type="button" class="reason-btn" data-scope="recurring" data-reason="창의반">
         창의반
     </button>
 
-    <button
-        type="button"
-        class="reason-btn"
-        data-scope="recurring"
-        data-reason="기타">
+    <button type="button" class="reason-btn" data-scope="recurring" data-reason="기타">
         기타
     </button>
 
@@ -1426,7 +1058,7 @@ body.display-mode #displayModeButton {
     type="button"
     class="recurring-submit">
 
-    매주 반복 불참 등록
+    매주 반복 불참 추가
 
 </button>
 
@@ -1436,15 +1068,12 @@ body.display-mode #displayModeButton {
     type="button"
     class="recurring-cancel">
 
-    반복 불참 전체 삭제
+    이 학생 정기 불참 전체 삭제
 
 </button>
 
 
-<div
-    id="message"
-    class="message">
-</div>
+<div id="message" class="message"></div>
 
 
 <div class="absence-list">
@@ -1468,15 +1097,12 @@ body.display-mode #displayModeButton {
 <script type="module">
 
 
-/* ==================================================
-   Firebase
-================================================== */
+/* Firebase */
 
 import {
     initializeApp
 }
-from
-"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
 
 import {
@@ -1484,38 +1110,32 @@ import {
     collection,
     doc,
     setDoc,
+    addDoc,
     deleteDoc,
     onSnapshot,
     query,
     where,
     serverTimestamp
 }
-from
-"https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 
 const firebaseConfig = {
 
-    apiKey:
-        "AIzaSyCd8fUYXmJ34L1yG3x3aNsEGZgaxFLLx7s",
+    apiKey: "AIzaSyCd8fUYXmJ34L1yG3x3aNsEGZgaxFLLx7s",
 
-    authDomain:
-        "yaja2-6.firebaseapp.com",
+    authDomain: "yaja2-6.firebaseapp.com",
 
-    projectId:
-        "yaja2-6",
+    projectId: "yaja2-6",
 
-    storageBucket:
-        "yaja2-6.firebasestorage.app",
+    storageBucket: "yaja2-6.firebasestorage.app",
 
-    messagingSenderId:
-        "732002055042",
+    messagingSenderId: "732002055042",
 
-    appId:
-        "1:732002055042:web:d95f280cea84dd7036d59b",
+    appId: "1:732002055042:web:d95f280cea84dd7036d59b",
 
-    measurementId:
-        "G-TKP2QV869R"
+    measurementId: "G-TKP2QV869R"
+
 };
 
 
@@ -1527,53 +1147,50 @@ const db =
     getFirestore(app);
 
 
-/* ==================================================
-   학생
-================================================== */
+/* 학생 */
 
 const students = {
 
-    1:"강주형",
-    2:"고진용",
-    3:"권율",
-    4:"X",
+    1: "강주형",
+    2: "고진용",
+    3: "권율",
+    4: "X",
+    5: "김경태",
+    6: "김용준",
+    7: "김제겸",
+    8: "김지효",
+    9: "김하윤",
+    10: "김현성",
 
-    5:"김경태",
-    6:"김용준",
-    7:"김제겸",
-    8:"김지효",
-    9:"김하윤",
-    10:"김현성",
+    11: "목지안",
+    12: "백시우",
+    13: "서재훈",
+    14: "서지후",
+    15: "성무빈",
+    16: "송재호",
+    17: "신예준",
+    18: "신준모",
+    19: "양서희",
+    20: "오태진",
 
-    11:"목지안",
-    12:"백시우",
-    13:"서재훈",
-    14:"서지후",
-    15:"성무빈",
-    16:"송재호",
-    17:"신예준",
-    18:"신준모",
-    19:"양서희",
-    20:"오태진",
+    21: "윤수찬",
+    22: "윤정연",
+    23: "윤하유",
+    24: "이지성",
+    25: "이지혁",
+    26: "이지후",
+    27: "전윤우",
+    28: "정준기",
+    29: "정하율",
+    30: "조동현",
 
-    21:"윤수찬",
-    22:"윤정연",
-    23:"윤하유",
-    24:"이지성",
-    25:"이지혁",
-    26:"이지후",
-    27:"전윤우",
-    28:"정준기",
-    29:"정하율",
-    30:"조동현",
+    31: "차이한",
+    32: "최담호",
+    33: "최유진",
+    34: "최태웅",
+    35: "X",
+    36: "X"
 
-    31:"차이한",
-    32:"최담호",
-    33:"최유진",
-    34:"최태웅",
-
-    35:"X",
-    36:"X"
 };
 
 
@@ -1583,6 +1200,10 @@ const disabledStudents = [
     36
 ];
 
+
+/* ==================================================
+   비밀번호
+================================================== */
 
 const passwords = {
 
@@ -1612,16 +1233,16 @@ const passwords = {
     22: "0000",
     23: "0000",
     24: "0000",
-    25: "0000",
-    26: "5351",
+    25: "5351",
+    26: "0000",
     27: "0000",
-    28: "0000",
-    29: "0820",
+    28: "0820",
+    29: "0000",
     30: "0000",
 
-    31: "0000",
-    32: "0000",
-    33: "0507",
+    31: "0316",
+    32: "0507",
+    33: "0000",
     34: "6427",
     35: "0000",
     36: "0000"
@@ -1629,34 +1250,23 @@ const passwords = {
 };
 
 
-/* ==================================================
-   CIP
-================================================== */
+/* CIP */
 
 const cipTimes = {
 
-    1:{
-        start:
-            16 * 60 + 50,
-
-        end:
-            17 * 60 + 40
+    1: {
+        start: 16 * 60 + 50,
+        end: 17 * 60 + 40
     },
 
-    2:{
-        start:
-            18 * 60 + 40,
-
-        end:
-            20 * 60
+    2: {
+        start: 18 * 60 + 40,
+        end: 20 * 60
     },
 
-    3:{
-        start:
-            20 * 60 + 10,
-
-        end:
-            21 * 60
+    3: {
+        start: 20 * 60 + 10,
+        end: 21 * 60
     }
 
 };
@@ -1664,62 +1274,38 @@ const cipTimes = {
 
 const weekdayNames = {
 
-    0:"일",
-    1:"월",
-    2:"화",
-    3:"수",
-    4:"목",
-    5:"금",
-    6:"토"
+    0: "일",
+    1: "월",
+    2: "화",
+    3: "수",
+    4: "목",
+    5: "금",
+    6: "토"
 
 };
 
 
-/* ==================================================
-   변수
-================================================== */
+/* 변수 */
 
 let singleCips = [];
-
 let recurringCips = [];
-
 let recurringDays = [];
 
+let selectedSingleReason = "";
+let selectedRecurringReason = "";
 
-let selectedSingleReason =
-    "";
+let singleAbsenceData = {};
+let recurringData = {};
 
-let selectedRecurringReason =
-    "";
+let currentCip = null;
+let selectedDate = "";
+let displayMode = false;
 
-
-let singleAbsenceData =
-    {};
-
-let recurringData =
-    {};
-
-
-let currentCip =
-    null;
-
-let selectedDate =
-    "";
-
-let displayMode =
-    false;
+let unsubscribeSingle = null;
+let unsubscribeRecurring = null;
 
 
-let unsubscribeSingle =
-    null;
-
-let unsubscribeRecurring =
-    null;
-
-
-/* ==================================================
-   한국시간
-================================================== */
+/* 한국시간 */
 
 function getKoreaTimeParts() {
 
@@ -1729,29 +1315,14 @@ function getKoreaTimeParts() {
             "ko-KR",
 
             {
-                timeZone:
-                    "Asia/Seoul",
-
-                year:
-                    "numeric",
-
-                month:
-                    "2-digit",
-
-                day:
-                    "2-digit",
-
-                hour:
-                    "2-digit",
-
-                minute:
-                    "2-digit",
-
-                second:
-                    "2-digit",
-
-                hourCycle:
-                    "h23"
+                timeZone: "Asia/Seoul",
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hourCycle: "h23"
             }
 
         );
@@ -1763,27 +1334,19 @@ function getKoreaTimeParts() {
         );
 
 
-    const result =
-        {};
+    const result = {};
 
 
-    parts.forEach(
-        part => {
+    parts.forEach(part => {
 
-            if(
-                part.type !==
-                "literal"
-            ) {
+        if(part.type !== "literal") {
 
-                result[
-                    part.type
-                ] =
-                    part.value;
-
-            }
+            result[part.type] =
+                part.value;
 
         }
-    );
+
+    });
 
 
     return result;
@@ -1808,16 +1371,14 @@ function getTodayKey() {
 }
 
 
-/* ==================================================
-   요일
-================================================== */
-
 function getWeekdayFromDate(
     dateString
 ) {
 
     if(!dateString) {
+
         return 0;
+
     }
 
 
@@ -1844,9 +1405,7 @@ function getWeekdayFromDate(
 }
 
 
-/* ==================================================
-   CIP
-================================================== */
+/* 현재 CIP */
 
 function calculateCurrentCip() {
 
@@ -1855,11 +1414,7 @@ function calculateCurrentCip() {
 
 
     const total =
-
-        Number(t.hour) * 60
-
-        +
-
+        Number(t.hour) * 60 +
         Number(t.minute);
 
 
@@ -1905,68 +1460,46 @@ function getSituationText() {
 
 
     const total =
-
-        Number(t.hour) * 60
-
-        +
-
+        Number(t.hour) * 60 +
         Number(t.minute);
 
 
-    if(
-        total <
-        cipTimes[1].start
-    ) {
+    if(total < cipTimes[1].start) {
 
         return "CIP 전 · 1차 16:50 시작";
 
     }
 
 
-    if(
-        total <
-        cipTimes[1].end
-    ) {
+    if(total < cipTimes[1].end) {
 
         return "CIP 1차 진행 중 · 16:50 ~ 17:40";
 
     }
 
 
-    if(
-        total <
-        cipTimes[2].start
-    ) {
+    if(total < cipTimes[2].start) {
 
         return "쉬는 시간 · CIP 2차 18:40 시작";
 
     }
 
 
-    if(
-        total <
-        cipTimes[2].end
-    ) {
+    if(total < cipTimes[2].end) {
 
         return "CIP 2차 진행 중 · 18:40 ~ 20:00";
 
     }
 
 
-    if(
-        total <
-        cipTimes[3].start
-    ) {
+    if(total < cipTimes[3].start) {
 
         return "쉬는 시간 · CIP 3차 20:10 시작";
 
     }
 
 
-    if(
-        total <
-        cipTimes[3].end
-    ) {
+    if(total < cipTimes[3].end) {
 
         return "CIP 3차 진행 중 · 20:10 ~ 21:00";
 
@@ -1978,9 +1511,7 @@ function getSituationText() {
 }
 
 
-/* ==================================================
-   시계
-================================================== */
+/* 시계 */
 
 function updateClock() {
 
@@ -1999,9 +1530,7 @@ function updateClock() {
 
 
     document
-        .getElementById(
-            "clock"
-        )
+        .getElementById("clock")
         .textContent =
 
         `${t.year}.${t.month}.${t.day} (${weekdayNames[weekday]}) ${t.hour}:${t.minute}:${t.second}`;
@@ -2075,9 +1604,7 @@ function updateCipInfo() {
 }
 
 
-/* ==================================================
-   좌석
-================================================== */
+/* 좌석 생성 */
 
 function createSeats() {
 
@@ -2115,9 +1642,11 @@ function createSeats() {
             disabledStudents.includes(i)
         ) {
 
-            seat.classList.add(
-                "disabled"
-            );
+            seat
+                .classList
+                .add(
+                    "disabled"
+                );
 
         }
 
@@ -2149,9 +1678,7 @@ function createSeats() {
 }
 
 
-/* ==================================================
-   자동완성
-================================================== */
+/* 자동완성 */
 
 function createStudentList() {
 
@@ -2174,7 +1701,9 @@ function createStudentList() {
         if(
             disabledStudents.includes(i)
         ) {
+
             continue;
+
         }
 
 
@@ -2220,9 +1749,7 @@ function createStudentList() {
 }
 
 
-/* ==================================================
-   학생 찾기
-================================================== */
+/* 학생 찾기 */
 
 function findStudent() {
 
@@ -2287,9 +1814,7 @@ function findStudent() {
 }
 
 
-/* ==================================================
-   배열 선택
-================================================== */
+/* 배열 선택 */
 
 function toggleArrayValue(
     array,
@@ -2319,16 +1844,16 @@ function toggleArrayValue(
 }
 
 
-/* ==================================================
-   창의반 판정
-================================================== */
+/* 창의반 */
 
 function isCreativeReason(
     data
 ) {
 
     if(!data) {
+
         return false;
+
     }
 
 
@@ -2347,224 +1872,155 @@ function isCreativeReason(
 }
 
 
-/* ==================================================
-   CIP 버튼
-================================================== */
+/* CIP 버튼 */
 
 document
     .querySelectorAll(
         ".cip-btn"
     )
-    .forEach(
+    .forEach(button => {
 
-        button => {
+        button.addEventListener(
 
-            button.addEventListener(
+            "click",
 
-                "click",
+            () => {
 
-                () => {
+                const cip =
+                    Number(
+                        button.dataset.cip
+                    );
 
-                    const cip =
-                        Number(
-                            button.dataset.cip
+
+                if(
+                    button.dataset.type ===
+                    "single"
+                ) {
+
+                    singleCips =
+                        toggleArrayValue(
+                            singleCips,
+                            cip
                         );
 
+                }
+                else
+                {
 
-                    if(
-                        button.dataset.type ===
-                        "single"
-                    ) {
-
-                        singleCips =
-                            toggleArrayValue(
-                                singleCips,
-                                cip
-                            );
-
-                    }
-                    else
-                    {
-
-                        recurringCips =
-                            toggleArrayValue(
-                                recurringCips,
-                                cip
-                            );
-
-                    }
-
-
-                    button
-                        .classList
-                        .toggle(
-                            "selected"
+                    recurringCips =
+                        toggleArrayValue(
+                            recurringCips,
+                            cip
                         );
 
                 }
 
-            );
 
-        }
+                button
+                    .classList
+                    .toggle(
+                        "selected"
+                    );
 
-    );
+            }
+
+        );
+
+    });
 
 
-/* ==================================================
-   요일 버튼
-================================================== */
+/* 요일 버튼 */
 
 document
     .querySelectorAll(
         ".weekday-btn"
     )
-    .forEach(
+    .forEach(button => {
 
-        button => {
+        button.addEventListener(
 
-            button.addEventListener(
+            "click",
 
-                "click",
+            () => {
 
-                () => {
-
-                    const day =
-                        Number(
-                            button.dataset.day
-                        );
+                const day =
+                    Number(
+                        button.dataset.day
+                    );
 
 
-                    recurringDays =
-                        toggleArrayValue(
-                            recurringDays,
-                            day
-                        );
+                recurringDays =
+                    toggleArrayValue(
+                        recurringDays,
+                        day
+                    );
 
 
-                    button
-                        .classList
-                        .toggle(
-                            "selected"
-                        );
+                button
+                    .classList
+                    .toggle(
+                        "selected"
+                    );
 
-                }
+            }
 
-            );
+        );
 
-        }
-
-    );
+    });
 
 
-/* ==================================================
-   ★ 사유 버튼
-
-   선택 → 다시 누르면 취소
-================================================== */
+/* 사유 버튼 */
 
 document
     .querySelectorAll(
         ".reason-btn"
     )
-    .forEach(
+    .forEach(button => {
 
-        button => {
+        button.addEventListener(
 
-            button.addEventListener(
+            "click",
 
-                "click",
+            () => {
 
-                () => {
-
-                    const scope =
-                        button.dataset.scope;
+                const scope =
+                    button.dataset.scope;
 
 
-                    const reason =
-                        button.dataset.reason;
+                const reason =
+                    button.dataset.reason;
 
 
-                    const wasSelected =
-                        button
-                            .classList
-                            .contains(
-                                "selected"
-                            );
-
-
-                    /*
-                    같은 영역 버튼만 초기화
-                    */
-
-                    document
-                        .querySelectorAll(
-                            `.reason-btn[data-scope="${scope}"]`
-                        )
-                        .forEach(
-
-                            otherButton => {
-
-                                otherButton
-                                    .classList
-                                    .remove(
-                                        "selected"
-                                    );
-
-                            }
-
-                        );
-
-
-                    /*
-                    이미 선택된 버튼을
-                    다시 누른 경우 = 취소
-                    */
-
-                    if(wasSelected) {
-
-                        if(
-                            scope ===
-                            "single"
-                        ) {
-
-                            selectedSingleReason =
-                                "";
-
-
-                            hideOtherReason(
-                                "single"
-                            );
-
-                        }
-                        else
-                        {
-
-                            selectedRecurringReason =
-                                "";
-
-
-                            hideOtherReason(
-                                "recurring"
-                            );
-
-                        }
-
-
-                        return;
-
-                    }
-
-
-                    /*
-                    새로 선택
-                    */
-
+                const wasSelected =
                     button
                         .classList
-                        .add(
+                        .contains(
                             "selected"
                         );
 
+
+                document
+                    .querySelectorAll(
+                        `.reason-btn[data-scope="${scope}"]`
+                    )
+                    .forEach(
+                        otherButton => {
+
+                            otherButton
+                                .classList
+                                .remove(
+                                    "selected"
+                                );
+
+                        }
+                    );
+
+
+                /*
+                   같은 버튼 다시 누르면 취소
+                */
+
+                if(wasSelected) {
 
                     if(
                         scope ===
@@ -2572,12 +2028,11 @@ document
                     ) {
 
                         selectedSingleReason =
-                            reason;
+                            "";
 
 
-                        updateOtherReason(
-                            "single",
-                            reason
+                        hideOtherReason(
+                            "single"
                         );
 
                     }
@@ -2585,28 +2040,65 @@ document
                     {
 
                         selectedRecurringReason =
-                            reason;
+                            "";
 
 
-                        updateOtherReason(
-                            "recurring",
-                            reason
+                        hideOtherReason(
+                            "recurring"
                         );
 
                     }
 
+
+                    return;
+
                 }
 
-            );
 
-        }
+                button
+                    .classList
+                    .add(
+                        "selected"
+                    );
 
-    );
+
+                if(
+                    scope ===
+                    "single"
+                ) {
+
+                    selectedSingleReason =
+                        reason;
 
 
-/* ==================================================
-   기타 입력창
-================================================== */
+                    updateOtherReason(
+                        "single",
+                        reason
+                    );
+
+                }
+                else
+                {
+
+                    selectedRecurringReason =
+                        reason;
+
+
+                    updateOtherReason(
+                        "recurring",
+                        reason
+                    );
+
+                }
+
+            }
+
+        );
+
+    });
+
+
+/* 기타 */
 
 function updateOtherReason(
     scope,
@@ -2615,17 +2107,21 @@ function updateOtherReason(
 
     const wrap =
         document.getElementById(
+
             scope === "single"
                 ? "singleOtherWrap"
                 : "recurringOtherWrap"
+
         );
 
 
     const input =
         document.getElementById(
+
             scope === "single"
                 ? "singleOther"
                 : "recurringOther"
+
         );
 
 
@@ -2662,17 +2158,21 @@ function hideOtherReason(
 
     const wrap =
         document.getElementById(
+
             scope === "single"
                 ? "singleOtherWrap"
                 : "recurringOtherWrap"
+
         );
 
 
     const input =
         document.getElementById(
+
             scope === "single"
                 ? "singleOther"
                 : "recurringOther"
+
         );
 
 
@@ -2686,9 +2186,7 @@ function hideOtherReason(
 }
 
 
-/* ==================================================
-   날짜별 실제 사유
-================================================== */
+/* 날짜별 사유 */
 
 function getSingleReason() {
 
@@ -2721,7 +2219,10 @@ function getSingleReason() {
             .trim();
 
 
-    if(custom === "") {
+    if(
+        custom ===
+        ""
+    ) {
 
         return null;
 
@@ -2733,9 +2234,7 @@ function getSingleReason() {
 }
 
 
-/* ==================================================
-   반복 실제 사유
-================================================== */
+/* 정기 사유 */
 
 function getRecurringReason() {
 
@@ -2768,7 +2267,10 @@ function getRecurringReason() {
             .trim();
 
 
-    if(custom === "") {
+    if(
+        custom ===
+        ""
+    ) {
 
         return null;
 
@@ -2780,9 +2282,7 @@ function getRecurringReason() {
 }
 
 
-/* ==================================================
-   날짜별 신청
-================================================== */
+/* 날짜별 신청 */
 
 async function applySingleAbsence() {
 
@@ -2802,7 +2302,10 @@ async function applySingleAbsence() {
             .value;
 
 
-    if(student === null) {
+    if(
+        student ===
+        null
+    ) {
 
         showError(
             "학생을 입력해주세요."
@@ -2814,9 +2317,10 @@ async function applySingleAbsence() {
 
 
     if(
-        disabledStudents.includes(
-            student
-        )
+        disabledStudents
+            .includes(
+                student
+            )
     ) {
 
         showError(
@@ -2843,27 +2347,13 @@ async function applySingleAbsence() {
 
 
     if(
-        reason === null
+        reason ===
+        null
     ) {
 
-        if(
-            selectedSingleReason ===
-            "기타"
-        ) {
-
-            showError(
-                "기타 사유를 입력해주세요."
-            );
-
-        }
-        else
-        {
-
-            showError(
-                "불참 사유를 선택해주세요."
-            );
-
-        }
+        showError(
+            "불참 사유를 선택해주세요."
+        );
 
         return;
 
@@ -2955,9 +2445,7 @@ async function applySingleAbsence() {
 }
 
 
-/* ==================================================
-   날짜별 취소
-================================================== */
+/* 날짜별 취소 */
 
 async function cancelSingleAbsence() {
 
@@ -2973,7 +2461,10 @@ async function cancelSingleAbsence() {
             .value;
 
 
-    if(student === null) {
+    if(
+        student ===
+        null
+    ) {
 
         showError(
             "학생을 입력해주세요."
@@ -3041,7 +2532,9 @@ async function cancelSingleAbsence() {
 
 
 /* ==================================================
-   반복 등록
+   정기 불참 추가
+
+   학생 1명에게 여러 개 등록 가능
 ================================================== */
 
 async function applyRecurringAbsence() {
@@ -3062,7 +2555,10 @@ async function applyRecurringAbsence() {
         getRecurringReason();
 
 
-    if(student === null) {
+    if(
+        student ===
+        null
+    ) {
 
         showError(
             "학생을 입력해주세요."
@@ -3074,9 +2570,10 @@ async function applyRecurringAbsence() {
 
 
     if(
-        disabledStudents.includes(
-            student
-        )
+        disabledStudents
+            .includes(
+                student
+            )
     ) {
 
         showError(
@@ -3108,7 +2605,7 @@ async function applyRecurringAbsence() {
     ) {
 
         showError(
-            "반복해서 빠질 CIP를 선택해주세요."
+            "반복 CIP를 선택해주세요."
         );
 
         return;
@@ -3117,27 +2614,13 @@ async function applyRecurringAbsence() {
 
 
     if(
-        reason === null
+        reason ===
+        null
     ) {
 
-        if(
-            selectedRecurringReason ===
-            "기타"
-        ) {
-
-            showError(
-                "기타 사유를 입력해주세요."
-            );
-
-        }
-        else
-        {
-
-            showError(
-                "반복 불참 사유를 선택해주세요."
-            );
-
-        }
+        showError(
+            "반복 불참 사유를 선택해주세요."
+        );
 
         return;
 
@@ -3158,14 +2641,83 @@ async function applyRecurringAbsence() {
     }
 
 
+    /* 같은 일정 중복 방지 */
+
+    const existingRules =
+        recurringData[student] || [];
+
+
+    const duplicate =
+        existingRules.some(rule => {
+
+
+            const sameDays =
+
+                JSON.stringify(
+                    [...rule.weekdays].sort(
+                        (a,b) => a-b
+                    )
+                )
+
+                ===
+
+                JSON.stringify(
+                    [...recurringDays].sort(
+                        (a,b) => a-b
+                    )
+                );
+
+
+            const sameCips =
+
+                JSON.stringify(
+                    [...rule.cips].sort(
+                        (a,b) => a-b
+                    )
+                )
+
+                ===
+
+                JSON.stringify(
+                    [...recurringCips].sort(
+                        (a,b) => a-b
+                    )
+                );
+
+
+            return (
+
+                sameDays
+                &&
+                sameCips
+                &&
+                rule.reason === reason
+
+            );
+
+        });
+
+
+    if(
+        duplicate
+    ) {
+
+        showError(
+            "동일한 정기 일정이 이미 등록되어 있습니다."
+        );
+
+        return;
+
+    }
+
+
     try {
 
-        await setDoc(
+        await addDoc(
 
-            doc(
+            collection(
                 db,
-                "recurring",
-                String(student)
+                "recurring"
             ),
 
             {
@@ -3205,7 +2757,7 @@ async function applyRecurringAbsence() {
 
         showSuccess(
 
-            `${student}번 ${students[student]} (${daysText}) ${reason} 정기 등록 완료`
+            `${student}번 ${students[student]} · ${daysText} ${reason} 추가 완료`
 
         );
 
@@ -3229,9 +2781,7 @@ async function applyRecurringAbsence() {
 }
 
 
-/* ==================================================
-   반복 삭제
-================================================== */
+/* 학생 정기 불참 전체 삭제 */
 
 async function cancelRecurringAbsence() {
 
@@ -3247,7 +2797,10 @@ async function cancelRecurringAbsence() {
             .value;
 
 
-    if(student === null) {
+    if(
+        student ===
+        null
+    ) {
 
         showError(
             "학생을 입력해주세요."
@@ -3272,21 +2825,49 @@ async function cancelRecurringAbsence() {
     }
 
 
+    const rules =
+        recurringData[student] || [];
+
+
+    if(
+        rules.length ===
+        0
+    ) {
+
+        showError(
+            "등록된 정기 불참이 없습니다."
+        );
+
+        return;
+
+    }
+
+
     try {
 
-        await deleteDoc(
+        await Promise.all(
 
-            doc(
-                db,
-                "recurring",
-                String(student)
+            rules.map(rule =>
+
+                deleteDoc(
+
+                    doc(
+                        db,
+                        "recurring",
+                        rule.id
+                    )
+
+                )
+
             )
 
         );
 
 
         showSuccess(
-            "반복 불참을 삭제했습니다."
+
+            `${student}번 정기 불참을 모두 삭제했습니다.`
+
         );
 
 
@@ -3301,7 +2882,7 @@ async function cancelRecurringAbsence() {
 
 
         showError(
-            "반복 불참 삭제에 실패했습니다."
+            "정기 불참 삭제에 실패했습니다."
         );
 
     }
@@ -3309,13 +2890,13 @@ async function cancelRecurringAbsence() {
 }
 
 
-/* ==================================================
-   날짜별 Firebase
-================================================== */
+/* 날짜별 Firebase */
 
 function startDateSync() {
 
-    if(unsubscribeSingle) {
+    if(
+        unsubscribeSingle
+    ) {
 
         unsubscribeSingle();
 
@@ -3351,11 +2932,10 @@ function startDateSync() {
 
 
                 snapshot.forEach(
-
-                    document => {
+                    documentSnapshot => {
 
                         const data =
-                            document.data();
+                            documentSnapshot.data();
 
 
                         singleAbsenceData[
@@ -3374,7 +2954,6 @@ function startDateSync() {
                         };
 
                     }
-
                 );
 
 
@@ -3408,12 +2987,16 @@ function startDateSync() {
 
 
 /* ==================================================
-   반복 Firebase
+   정기 Firebase
+
+   학생 1명당 배열로 관리
 ================================================== */
 
 function startRecurringSync() {
 
-    if(unsubscribeRecurring) {
+    if(
+        unsubscribeRecurring
+    ) {
 
         unsubscribeRecurring();
 
@@ -3435,33 +3018,49 @@ function startRecurringSync() {
 
 
                 snapshot.forEach(
-
-                    document => {
+                    documentSnapshot => {
 
                         const data =
-                            document.data();
+                            documentSnapshot.data();
 
 
-                        recurringData[
-                            data.number
-                        ] = {
+                        const number =
+                            Number(
+                                data.number
+                            );
 
-                            weekdays:
-                                data.weekdays || [],
 
-                            cips:
-                                data.cips || [],
+                        if(
+                            !recurringData[number]
+                        ) {
 
-                            reason:
-                                data.reason || "",
+                            recurringData[number] =
+                                [];
 
-                            reasonType:
-                                data.reasonType || ""
+                        }
 
-                        };
+
+                        recurringData[number]
+                            .push({
+
+                                id:
+                                    documentSnapshot.id,
+
+                                weekdays:
+                                    data.weekdays || [],
+
+                                cips:
+                                    data.cips || [],
+
+                                reason:
+                                    data.reason || "",
+
+                                reasonType:
+                                    data.reasonType || ""
+
+                            });
 
                     }
-
                 );
 
 
@@ -3482,25 +3081,14 @@ function startRecurringSync() {
 }
 
 
-/* ==================================================
-   해당 날짜 정기
-================================================== */
+/* 선택 날짜에 적용되는 정기 일정 */
 
 function getRecurringForStudent(
     student
 ) {
 
-    const data =
-        recurringData[
-            student
-        ];
-
-
-    if(!data) {
-
-        return null;
-
-    }
+    const rules =
+        recurringData[student] || [];
 
 
     const weekday =
@@ -3509,24 +3097,18 @@ function getRecurringForStudent(
         );
 
 
-    if(
-        !data.weekdays.includes(
-            weekday
-        )
-    ) {
-
-        return null;
-
-    }
-
-
-    return data;
+    return rules.filter(
+        rule =>
+            rule.weekdays.includes(
+                weekday
+            )
+    );
 
 }
 
 
 /* ==================================================
-   좌석 업데이트
+   좌석 화면
 ================================================== */
 
 function updateScreen() {
@@ -3565,85 +3147,86 @@ function updateScreen() {
         }
 
 
-        seat.classList.remove(
-            "absent",
-            "recurring",
-            "both",
-            "creative"
-        );
+        seat
+            .classList
+            .remove(
+                "absent",
+                "recurring",
+                "both",
+                "creative"
+            );
 
 
         const single =
             singleAbsenceData[i];
 
 
-        const allRecurring =
-            recurringData[i];
-
+        /*
+        선택 날짜의 요일에 해당하는
+        정기 일정만 표시
+        */
 
         const recurringToday =
-            getRecurringForStudent(i);
+            getRecurringForStudent(
+                i
+            );
 
 
         const lines =
             [];
 
 
-        /* 정기 정보는 항상 표시 */
+        /*
+        정기:
+        요일 표시 없이
+        해당 날짜 사유만 표시
+        */
 
-        if(allRecurring) {
+        recurringToday.forEach(
+            rule => {
 
-            const daysText =
-                allRecurring
-                    .weekdays
-                    .map(
-                        day =>
-                            weekdayNames[day]
+                if(
+                    isCreativeReason(
+                        rule
                     )
-                    .join("·");
+                ) {
 
+                    lines.push(
 
-            if(
-                isCreativeReason(
-                    allRecurring
-                )
-            ) {
+                        `<span class="creative-text">
+                            창의반
+                        </span>`
 
-                lines.push(
+                    );
 
-                    `<span class="creative-text">
-                        (${daysText}) 창의반
-                    </span>`
+                }
+                else
+                {
 
-                );
+                    lines.push(
 
-            }
-            else
-            {
+                        `<span class="recurring-text">
+                            ${escapeHtml(
+                                rule.reason
+                            )}
+                        </span>`
 
-                lines.push(
+                    );
 
-                    `<span class="recurring-text">
-                        (${daysText})
-                        ${escapeHtml(
-                            allRecurring.reason
-                        )}
-                    </span>`
-
-                );
+                }
 
             }
+        );
 
-        }
 
+        /* 날짜별 */
 
-        /* 날짜별 정보 */
-
-        if(single) {
+        if(
+            single
+        ) {
 
             const cipText =
-                single
-                    .cips
+                single.cips
                     .map(
                         c =>
                             c + "차"
@@ -3671,8 +3254,7 @@ function updateScreen() {
 
                 lines.push(
 
-                    `${cipText}
-                    ${escapeHtml(
+                    `${cipText} ${escapeHtml(
                         single.reason
                     )}`
 
@@ -3701,7 +3283,10 @@ function updateScreen() {
             false;
 
 
-        /* 오늘 */
+        /*
+        오늘:
+        현재 CIP에 해당할 때 색칠
+        */
 
         if(
             selectedDate ===
@@ -3719,50 +3304,52 @@ function updateScreen() {
 
                     &&
 
-                    single.cips.includes(
-                        currentCip
-                    );
+                    single.cips
+                        .includes(
+                            currentCip
+                        );
+
+
+                const activeRecurring =
+                    recurringToday
+                        .filter(
+                            rule =>
+                                rule.cips
+                                    .includes(
+                                        currentCip
+                                    )
+                        );
 
 
                 recurringActive =
-
-                    !!recurringToday
-
-                    &&
-
-                    recurringToday.cips.includes(
-                        currentCip
-                    );
+                    activeRecurring.length > 0;
 
 
-                if(
-                    singleActive &&
-                    isCreativeReason(single)
-                ) {
+                creativeActive =
 
-                    creativeActive =
-                        true;
-
-                }
-
-
-                if(
-                    recurringActive &&
-                    isCreativeReason(
-                        recurringToday
+                    (
+                        singleActive
+                        &&
+                        isCreativeReason(
+                            single
+                        )
                     )
-                ) {
 
-                    creativeActive =
-                        true;
+                    ||
 
-                }
+                    activeRecurring
+                        .some(
+                            rule =>
+                                isCreativeReason(
+                                    rule
+                                )
+                        );
 
             }
 
         }
 
-        /* 다른 날짜 */
+        /* 미래/과거 날짜 조회 */
 
         else
         {
@@ -3772,31 +3359,28 @@ function updateScreen() {
 
 
             recurringActive =
-                !!recurringToday;
+                recurringToday.length > 0;
 
 
-            if(
-                singleActive &&
-                isCreativeReason(single)
-            ) {
+            creativeActive =
 
-                creativeActive =
-                    true;
-
-            }
-
-
-            if(
-                recurringActive &&
-                isCreativeReason(
-                    recurringToday
+                (
+                    singleActive
+                    &&
+                    isCreativeReason(
+                        single
+                    )
                 )
-            ) {
 
-                creativeActive =
-                    true;
+                ||
 
-            }
+                recurringToday
+                    .some(
+                        rule =>
+                            isCreativeReason(
+                                rule
+                            )
+                    );
 
         }
 
@@ -3805,20 +3389,25 @@ function updateScreen() {
             creativeActive
         ) {
 
-            seat.classList.add(
-                "creative"
-            );
+            seat
+                .classList
+                .add(
+                    "creative"
+                );
 
         }
 
         else if(
-            singleActive &&
+            singleActive
+            &&
             recurringActive
         ) {
 
-            seat.classList.add(
-                "both"
-            );
+            seat
+                .classList
+                .add(
+                    "both"
+                );
 
         }
 
@@ -3826,9 +3415,11 @@ function updateScreen() {
             singleActive
         ) {
 
-            seat.classList.add(
-                "absent"
-            );
+            seat
+                .classList
+                .add(
+                    "absent"
+                );
 
         }
 
@@ -3836,9 +3427,11 @@ function updateScreen() {
             recurringActive
         ) {
 
-            seat.classList.add(
-                "recurring"
-            );
+            seat
+                .classList
+                .add(
+                    "recurring"
+                );
 
         }
 
@@ -3850,9 +3443,7 @@ function updateScreen() {
 }
 
 
-/* ==================================================
-   오른쪽 명단
-================================================== */
+/* 오른쪽 현황 */
 
 function updateAbsenceList() {
 
@@ -3890,7 +3481,9 @@ function updateAbsenceList() {
         if(
             disabledStudents.includes(i)
         ) {
+
             continue;
+
         }
 
 
@@ -3899,38 +3492,54 @@ function updateAbsenceList() {
 
 
         const recurring =
-            getRecurringForStudent(i);
+            getRecurringForStudent(
+                i
+            );
 
 
         if(
-            !single &&
-            !recurring
+            !single
+            &&
+            recurring.length === 0
         ) {
+
             continue;
+
         }
 
 
         const creative =
 
-            isCreativeReason(single)
+            isCreativeReason(
+                single
+            )
 
             ||
 
-            isCreativeReason(recurring);
+            recurring.some(
+                rule =>
+                    isCreativeReason(
+                        rule
+                    )
+            );
 
 
         let itemClass =
             "absence-item";
 
 
-        if(creative) {
+        if(
+            creative
+        ) {
 
             itemClass +=
                 " creative-item";
 
         }
-        else if(recurring)
-        {
+
+        else if(
+            recurring.length > 0
+        ) {
 
             itemClass +=
                 " recurring-item";
@@ -3949,11 +3558,12 @@ function updateAbsenceList() {
         `;
 
 
-        if(single) {
+        if(
+            single
+        ) {
 
             const cips =
-                single
-                    .cips
+                single.cips
                     .map(
                         c =>
                             `CIP ${c}차`
@@ -3961,106 +3571,75 @@ function updateAbsenceList() {
                     .join(" · ");
 
 
-            if(
-                isCreativeReason(
-                    single
-                )
-            ) {
+            html += `
 
-                html += `
+                <br>
 
-                    <br>
+                ${cips}
 
-                    <span class="creative-text">
-                        창의반
-                    </span>
+                <br>
 
-                    · ${cips}
+                ${escapeHtml(
+                    single.reason
+                )}
 
-                `;
-
-            }
-            else
-            {
-
-                html += `
-
-                    <br>
-
-                    ${cips}
-
-                    <br>
-
-                    ${escapeHtml(
-                        single.reason
-                    )}
-
-                `;
-
-            }
+            `;
 
         }
 
 
-        if(recurring) {
+        recurring.forEach(
+            rule => {
 
-            const cips =
-                recurring
-                    .cips
-                    .map(
-                        c =>
-                            `CIP ${c}차`
+                const cips =
+                    rule.cips
+                        .map(
+                            c =>
+                                `CIP ${c}차`
+                        )
+                        .join(" · ");
+
+
+                if(
+                    isCreativeReason(
+                        rule
                     )
-                    .join(" · ");
+                ) {
 
+                    html += `
 
-            if(
-                isCreativeReason(
-                    recurring
-                )
-            ) {
+                        <br>
 
-                html += `
+                        <span class="creative-text">
+                            정기 · 창의반
+                        </span>
 
-                    <br>
+                        · ${cips}
 
-                    <span class="creative-text">
+                    `;
 
-                        (${weekdayNames[weekday]}) 창의반
+                }
+                else
+                {
 
-                    </span>
+                    html += `
 
-                    · ${cips}
+                        <br>
 
-                `;
+                        <span class="recurring-text">
+                            정기 · ${escapeHtml(
+                                rule.reason
+                            )}
+                        </span>
 
-            }
-            else
-            {
+                        · ${cips}
 
-                html += `
+                    `;
 
-                    <br>
-
-                    <span class="recurring-text">
-
-                        (${weekdayNames[weekday]}) 정기
-
-                    </span>
-
-                    · ${cips}
-
-                    <br>
-
-                    ${escapeHtml(
-                        recurring.reason
-                    )}
-
-                `;
+                }
 
             }
-
-        }
+        );
 
 
         html +=
@@ -4113,9 +3692,7 @@ function updateAbsenceList() {
 }
 
 
-/* ==================================================
-   날짜 변경
-================================================== */
+/* 날짜 변경 */
 
 function changeSelectedDate() {
 
@@ -4127,7 +3704,9 @@ function changeSelectedDate() {
             .value;
 
 
-    if(!date) {
+    if(
+        !date
+    ) {
 
         date =
             getTodayKey();
@@ -4170,9 +3749,7 @@ function changeSelectedDate() {
 }
 
 
-/* ==================================================
-   대표화면
-================================================== */
+/* 대표 화면 */
 
 async function toggleDisplayMode() {
 
@@ -4186,7 +3763,9 @@ async function toggleDisplayMode() {
         );
 
 
-    if(displayMode) {
+    if(
+        displayMode
+    ) {
 
         selectedDate =
             getTodayKey();
@@ -4203,9 +3782,11 @@ async function toggleDisplayMode() {
         startDateSync();
 
 
-        document.body.classList.add(
-            "display-mode"
-        );
+        document.body
+            .classList
+            .add(
+                "display-mode"
+            );
 
 
         button.textContent =
@@ -4235,9 +3816,11 @@ async function toggleDisplayMode() {
     else
     {
 
-        document.body.classList.remove(
-            "display-mode"
-        );
+        document.body
+            .classList
+            .remove(
+                "display-mode"
+            );
 
 
         button.textContent =
@@ -4247,11 +3830,13 @@ async function toggleDisplayMode() {
         try {
 
             if(
-                document.fullscreenElement &&
+                document.fullscreenElement
+                &&
                 document.exitFullscreen
             ) {
 
-                await document.exitFullscreen();
+                await document
+                    .exitFullscreen();
 
             }
 
@@ -4265,15 +3850,12 @@ async function toggleDisplayMode() {
 
     updateCipInfo();
 
-
     updateScreen();
 
 }
 
 
-/* ==================================================
-   날짜별 초기화
-================================================== */
+/* 입력 초기화 */
 
 function clearSingleInput() {
 
@@ -4303,13 +3885,12 @@ function clearSingleInput() {
             '[data-type="single"]'
         )
         .forEach(
-            button => {
-
-                button.classList.remove(
-                    "selected"
-                );
-
-            }
+            button =>
+                button
+                    .classList
+                    .remove(
+                        "selected"
+                    )
         );
 
 
@@ -4318,21 +3899,16 @@ function clearSingleInput() {
             '.reason-btn[data-scope="single"]'
         )
         .forEach(
-            button => {
-
-                button.classList.remove(
-                    "selected"
-                );
-
-            }
+            button =>
+                button
+                    .classList
+                    .remove(
+                        "selected"
+                    )
         );
 
 }
 
-
-/* ==================================================
-   반복 초기화
-================================================== */
 
 function clearRecurringInput() {
 
@@ -4366,13 +3942,12 @@ function clearRecurringInput() {
             ".weekday-btn"
         )
         .forEach(
-            button => {
-
-                button.classList.remove(
-                    "selected"
-                );
-
-            }
+            button =>
+                button
+                    .classList
+                    .remove(
+                        "selected"
+                    )
         );
 
 
@@ -4381,13 +3956,12 @@ function clearRecurringInput() {
             '[data-type="recurring"]'
         )
         .forEach(
-            button => {
-
-                button.classList.remove(
-                    "selected"
-                );
-
-            }
+            button =>
+                button
+                    .classList
+                    .remove(
+                        "selected"
+                    )
         );
 
 
@@ -4396,23 +3970,22 @@ function clearRecurringInput() {
             '.reason-btn[data-scope="recurring"]'
         )
         .forEach(
-            button => {
-
-                button.classList.remove(
-                    "selected"
-                );
-
-            }
+            button =>
+                button
+                    .classList
+                    .remove(
+                        "selected"
+                    )
         );
 
 }
 
 
-/* ==================================================
-   메시지
-================================================== */
+/* 메시지 */
 
-function showError(text) {
+function showError(
+    text
+) {
 
     const message =
         document.getElementById(
@@ -4430,7 +4003,9 @@ function showError(text) {
 }
 
 
-function showSuccess(text) {
+function showSuccess(
+    text
+) {
 
     const message =
         document.getElementById(
@@ -4447,10 +4022,6 @@ function showSuccess(text) {
 
 }
 
-
-/* ==================================================
-   Firebase 상태
-================================================== */
 
 function setConnectionStatus(
     text,
@@ -4471,56 +4042,43 @@ function setConnectionStatus(
         "connection-status";
 
 
-    if(type) {
+    if(
+        type
+    ) {
 
-        status.classList.add(
-            type
-        );
+        status
+            .classList
+            .add(
+                type
+            );
 
     }
 
 }
 
 
-/* ==================================================
-   HTML 보호
-================================================== */
+/* HTML 보호 */
 
-function escapeHtml(text) {
+function escapeHtml(
+    text
+) {
 
     return String(text)
 
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
+        .replaceAll("&", "&amp;")
 
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
+        .replaceAll("<", "&lt;")
 
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
+        .replaceAll(">", "&gt;")
 
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
+        .replaceAll('"', "&quot;")
 
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+        .replaceAll("'", "&#039;");
 
 }
 
 
-/* ==================================================
-   이벤트
-================================================== */
+/* 이벤트 */
 
 document
     .getElementById(
@@ -4582,9 +4140,7 @@ document
     );
 
 
-/* ==================================================
-   시작
-================================================== */
+/* 시작 */
 
 createSeats();
 
@@ -4618,7 +4174,6 @@ setInterval(
     updateClock,
     1000
 );
-
 
 </script>
 
