@@ -1,36 +1,5405 @@
-if(
-    recurring.reason === "창의반" ||
-    recurring.reasonType === "창의반"
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>2학년 6반 야자 관리</title>
+
+<style>
+
+/* =====================================================
+   기본
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+
+    padding:
+        clamp(6px, 1.4vw, 22px);
+
+    font-family:
+        Arial,
+        "Noto Sans KR",
+        sans-serif;
+
+    background: #f3f5f7;
+
+    color: #222;
+}
+
+
+/* =====================================================
+   대표 화면 버튼
+===================================================== */
+
+#displayModeButton {
+
+    position: fixed;
+
+    top: 10px;
+    left: 10px;
+
+    z-index: 9999;
+
+    width: auto;
+
+    min-width: 105px;
+    min-height: 44px;
+
+    margin: 0;
+
+    padding:
+        9px 14px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #222;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   상단
+===================================================== */
+
+.header {
+
+    text-align: center;
+
+    margin-bottom: 18px;
+}
+
+h1 {
+
+    margin:
+        4px 0 5px;
+
+    font-size:
+        clamp(28px, 3vw, 44px);
+}
+
+#clock {
+
+    font-weight: 900;
+
+    font-size:
+        clamp(17px, 2vw, 27px);
+
+    margin-bottom: 8px;
+}
+
+.current-cip {
+
+    max-width: 780px;
+
+    margin:
+        0 auto;
+
+    padding:
+        11px 15px;
+
+    background: #252525;
+
+    color: white;
+
+    border-radius: 10px;
+
+    font-size:
+        clamp(13px, 1.4vw, 18px);
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   전체 구조
+===================================================== */
+
+.container {
+
+    width: 100%;
+
+    max-width: 1500px;
+
+    margin:
+        0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(300px, 370px);
+
+    gap:
+        clamp(12px, 2vw, 28px);
+
+    align-items: start;
+}
+
+
+/* =====================================================
+   좌석 영역
+===================================================== */
+
+.seat-area {
+
+    min-width: 0;
+
+    background: white;
+
+    padding:
+        clamp(8px, 1.5vw, 22px);
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 3px 14px
+        rgba(0,0,0,0.08);
+}
+
+
+.teacher {
+
+    background: #333;
+
+    color: white;
+
+    padding: 11px;
+
+    border-radius: 8px;
+
+    margin-bottom:
+        clamp(9px, 1.3vw, 18px);
+
+    text-align: center;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   6 x 6
+===================================================== */
+
+.seat-grid {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, minmax(0, 1fr));
+
+    gap:
+        clamp(3px, 0.7vw, 10px);
+}
+
+
+.seat {
+
+    min-width: 0;
+
+    width: 100%;
+
+    aspect-ratio:
+        1 / 0.92;
+
+    min-height: 70px;
+
+    padding:
+        clamp(2px, 0.5vw, 6px);
+
+    background:
+        #e8f1ff;
+
+    border:
+        2px solid #7da7e8;
+
+    border-radius: 9px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    transition:
+        background 0.2s,
+        border-color 0.2s,
+        color 0.2s;
+}
+
+
+.number {
+
+    font-size:
+        clamp(21px, 3vw, 40px);
+
+    font-weight: 900;
+
+    line-height: 1;
+}
+
+
+.name {
+
+    margin-top: 5px;
+
+    font-size:
+        clamp(8px, 1.15vw, 16px);
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+.status {
+
+    width: 100%;
+
+    margin-top: 4px;
+
+    font-size:
+        clamp(7px, 0.8vw, 12px);
+
+    line-height: 1.2;
+
+    font-weight: 900;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =====================================================
+   일반 날짜 불참 = 빨강
+===================================================== */
+
+.seat.absent {
+
+    background:
+        #ffd9d9;
+
+    border-color:
+        #e53935;
+
+    color:
+        #950000;
+}
+
+
+/* =====================================================
+   정기 불참 = 주황
+===================================================== */
+
+.seat.recurring {
+
+    background:
+        #ffd39d;
+
+    border-color:
+        #e67e22;
+
+    color:
+        #814100;
+}
+
+
+/* =====================================================
+   날짜 + 정기 둘 다
+===================================================== */
+
+.seat.both {
+
+    background:
+        #ffc788;
+
+    border-color:
+        #d35400;
+
+    color:
+        #702d00;
+}
+
+
+/* =====================================================
+   창의반 = 파랑
+===================================================== */
+
+.seat.creative {
+
+    background:
+        #b9dcff;
+
+    border-color:
+        #1976d2;
+
+    color:
+        #064b91;
+}
+
+
+/* =====================================================
+   비활성
+===================================================== */
+
+.seat.disabled {
+
+    background:
+        #c9c9c9;
+
+    border-color:
+        #999;
+
+    color:
+        #777;
+}
+
+
+/* =====================================================
+   상태 글씨
+===================================================== */
+
+.recurring-text {
+
+    color:
+        #d66700;
+
+    font-weight: 900;
+}
+
+
+.creative-text {
+
+    color:
+        #1565c0;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   오른쪽 패널
+===================================================== */
+
+.control-panel {
+
+    width: 100%;
+
+    min-width: 0;
+
+    background:
+        white;
+
+    padding:
+        clamp(16px, 2vw, 23px);
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 3px 14px
+        rgba(0,0,0,0.08);
+
+    position: sticky;
+
+    top: 10px;
+}
+
+
+.control-panel h2 {
+
+    margin:
+        0 0 14px;
+
+    font-size: 23px;
+}
+
+
+.section-title {
+
+    margin:
+        24px 0 12px;
+
+    padding-top: 17px;
+
+    border-top:
+        2px solid #eee;
+
+    font-size: 18px;
+
+    font-weight: 900;
+}
+
+
+label {
+
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+input,
+textarea,
+button {
+
+    width: 100%;
+
+    min-height: 44px;
+
+    padding: 11px;
+
+    margin-top: 7px;
+
+    margin-bottom: 15px;
+
+    border-radius: 8px;
+
+    border:
+        1px solid #ccc;
+
+    font-family: inherit;
+
+    font-size: 16px;
+}
+
+
+textarea {
+
+    min-height: 68px;
+
+    resize: vertical;
+}
+
+
+/* =====================================================
+   날짜
+===================================================== */
+
+.date-box {
+
+    padding: 11px;
+
+    margin-bottom: 17px;
+
+    border-radius: 10px;
+
+    background:
+        #f5f7fa;
+}
+
+
+.date-box input {
+
+    margin-bottom: 4px;
+}
+
+
+.date-info {
+
+    text-align: center;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #555;
+}
+
+
+/* =====================================================
+   CIP 버튼
+===================================================== */
+
+.cip-buttons {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0,1fr));
+
+    gap: 7px;
+
+    margin-top: 8px;
+
+    margin-bottom: 18px;
+}
+
+
+.cip-btn {
+
+    min-width: 0;
+
+    margin: 0;
+
+    padding:
+        9px 2px;
+
+    background:
+        #f1f3f5;
+
+    color:
+        #333;
+
+    border:
+        2px solid #ccc;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+.cip-btn.selected {
+
+    background:
+        #1976d2;
+
+    border-color:
+        #1976d2;
+
+    color:
+        white;
+}
+
+
+.cip-time {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 9px;
+
+    font-weight: normal;
+}
+
+
+/* =====================================================
+   요일
+===================================================== */
+
+.weekday-buttons {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0,1fr));
+
+    gap: 7px;
+
+    margin-top: 8px;
+
+    margin-bottom: 18px;
+}
+
+
+.weekday-btn {
+
+    margin: 0;
+
+    background:
+        #f1f3f5;
+
+    color:
+        #333;
+
+    border:
+        2px solid #ccc;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.weekday-btn.selected {
+
+    background:
+        #e67e22;
+
+    border-color:
+        #e67e22;
+
+    color:
+        white;
+}
+
+
+/* =====================================================
+   정기 사유
+===================================================== */
+
+.reason-buttons {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0,1fr));
+
+    gap: 7px;
+
+    margin-top: 8px;
+
+    margin-bottom: 15px;
+}
+
+
+.reason-btn {
+
+    min-width: 0;
+
+    margin: 0;
+
+    padding:
+        9px 3px;
+
+    background:
+        #f3f3f3;
+
+    color:
+        #333;
+
+    border:
+        2px solid #ccc;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.reason-btn.selected {
+
+    background:
+        #e67e22;
+
+    border-color:
+        #e67e22;
+
+    color:
+        white;
+}
+
+
+/* 창의반 버튼 선택 */
+
+.reason-btn.selected[data-reason="창의반"] {
+
+    background:
+        #1976d2;
+
+    border-color:
+        #1976d2;
+
+    color:
+        white;
+}
+
+
+#recurringOtherWrap {
+
+    display: none;
+}
+
+
+/* =====================================================
+   저장 버튼
+===================================================== */
+
+.submit-btn {
+
+    background:
+        #1976d2;
+
+    color:
+        white;
+
+    border: 0;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.cancel-btn {
+
+    background:
+        #555;
+
+    color:
+        white;
+
+    border: 0;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.recurring-submit {
+
+    background:
+        #e67e22;
+
+    color:
+        white;
+
+    border: 0;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.recurring-cancel {
+
+    background:
+        #795548;
+
+    color:
+        white;
+
+    border: 0;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   Firebase 상태
+===================================================== */
+
+.connection-status {
+
+    margin-bottom: 15px;
+
+    padding: 8px;
+
+    border-radius: 7px;
+
+    background:
+        #eee;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+.connection-status.online {
+
+    background:
+        #ddf5e3;
+
+    color:
+        #176b2d;
+}
+
+
+.connection-status.error {
+
+    background:
+        #ffe0e0;
+
+    color:
+        #9b0000;
+}
+
+
+.message {
+
+    min-height: 24px;
+
+    margin-bottom: 8px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   불참자 명단
+===================================================== */
+
+.absence-list {
+
+    margin-top: 18px;
+
+    border-top:
+        1px solid #ddd;
+
+    padding-top: 13px;
+}
+
+
+.absence-item {
+
+    margin-bottom: 7px;
+
+    padding: 9px;
+
+    border-radius: 7px;
+
+    background:
+        #f5f5f5;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+.recurring-item {
+
+    border-left:
+        5px solid #e67e22;
+
+    background:
+        #fff3e5;
+}
+
+
+.creative-item {
+
+    border-left:
+        5px solid #1976d2;
+
+    background:
+        #e7f2ff;
+}
+
+
+/* =====================================================
+   ★ 대표 패드 화면
+===================================================== */
+
+body.display-mode {
+
+    padding: 6px;
+
+    background:
+        #111;
+
+    overflow: hidden;
+}
+
+
+body.display-mode .control-panel {
+
+    display: none;
+}
+
+
+body.display-mode .container {
+
+    display: block;
+
+    width: 100%;
+
+    max-width: none;
+
+    margin: 0;
+}
+
+
+body.display-mode .header {
+
+    margin-bottom: 6px;
+}
+
+
+body.display-mode h1 {
+
+    margin: 0;
+
+    color:
+        white;
+
+    font-size:
+        clamp(27px, 3.5vw, 48px);
+}
+
+
+body.display-mode #clock {
+
+    color:
+        white;
+
+    margin:
+        1px 0 4px;
+
+    font-size:
+        clamp(20px, 2.7vw, 37px);
+}
+
+
+body.display-mode .current-cip {
+
+    max-width: 1000px;
+
+    margin:
+        0 auto;
+
+    padding:
+        6px 12px;
+
+    font-size:
+        clamp(17px, 2vw, 27px);
+}
+
+
+body.display-mode .seat-area {
+
+    width: 100%;
+
+    height:
+        calc(100vh - 126px);
+
+    height:
+        calc(100dvh - 126px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 4px;
+
+    border-radius: 0;
+
+    box-shadow: none;
+
+    background:
+        #111;
+}
+
+
+/* 대표 화면에서는 교탁 숨김 */
+
+body.display-mode .teacher {
+
+    display: none;
+}
+
+
+body.display-mode .seat-grid {
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, minmax(0,1fr));
+
+    grid-template-rows:
+        repeat(6, minmax(0,1fr));
+
+    gap:
+        clamp(3px, 0.55vw, 8px);
+}
+
+
+body.display-mode .seat {
+
+    min-height: 0;
+
+    height: 100%;
+
+    aspect-ratio: auto;
+
+    border-width: 3px;
+
+    border-radius:
+        clamp(5px, 0.7vw, 10px);
+
+    padding: 2px;
+}
+
+
+body.display-mode .number {
+
+    font-size:
+        clamp(24px, 3.3vw, 48px);
+}
+
+
+body.display-mode .name {
+
+    font-size:
+        clamp(10px, 1.5vw, 21px);
+}
+
+
+body.display-mode .status {
+
+    font-size:
+        clamp(8px, 1vw, 14px);
+
+    margin-top: 3px;
+}
+
+
+body.display-mode #displayModeButton {
+
+    background:
+        #d9534f;
+}
+
+
+/* =====================================================
+   태블릿
+===================================================== */
+
+@media(max-width: 900px) {
+
+    .container {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .control-panel {
+
+        position: static;
+    }
+
+}
+
+
+/* =====================================================
+   스마트폰
+===================================================== */
+
+@media(max-width: 600px) {
+
+    body {
+
+        padding: 5px;
+    }
+
+
+    #displayModeButton {
+
+        top: 5px;
+
+        left: 5px;
+
+        min-width: 88px;
+
+        min-height: 40px;
+
+        padding:
+            6px 9px;
+
+        font-size: 11px;
+    }
+
+
+    .seat-area {
+
+        padding: 5px;
+    }
+
+
+    .seat-grid {
+
+        gap: 3px;
+    }
+
+
+    .seat {
+
+        min-height: 55px;
+
+        border-width: 1px;
+
+        border-radius: 5px;
+
+        padding: 1px;
+    }
+
+
+    .number {
+
+        font-size:
+            clamp(17px, 6vw, 25px);
+    }
+
+
+    .name {
+
+        font-size:
+            clamp(7px, 2.4vw, 10px);
+    }
+
+
+    .status {
+
+        font-size:
+            clamp(6px, 2vw, 9px);
+    }
+
+
+    .control-panel {
+
+        padding: 14px;
+    }
+
+
+    .reason-buttons {
+
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+    }
+
+
+    body.display-mode .seat-area {
+
+        height:
+            calc(100vh - 110px);
+
+        height:
+            calc(100dvh - 110px);
+    }
+
+
+    body.display-mode .number {
+
+        font-size:
+            clamp(18px, 5vw, 28px);
+    }
+
+
+    body.display-mode .name {
+
+        font-size:
+            clamp(7px, 2vw, 11px);
+    }
+
+
+    body.display-mode .status {
+
+        font-size:
+            clamp(6px, 1.7vw, 9px);
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     대표 화면 버튼
+===================================================== -->
+
+<button
+    id="displayModeButton"
+    type="button">
+
+    대표 화면
+
+</button>
+
+
+
+<!-- =====================================================
+     상단
+===================================================== -->
+
+<header class="header">
+
+    <h1>
+        2학년 6반
+    </h1>
+
+
+    <div id="clock">
+
+        시간 확인 중...
+
+    </div>
+
+
+    <div
+        id="currentCip"
+        class="current-cip">
+
+        현재 상태 확인 중...
+
+    </div>
+
+</header>
+
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     좌석
+===================================================== -->
+
+<section class="seat-area">
+
+
+    <div class="teacher">
+
+        칠판 / 교탁
+
+    </div>
+
+
+    <div
+        id="seatGrid"
+        class="seat-grid">
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     입력창
+===================================================== -->
+
+<aside class="control-panel">
+
+
+<h2>
+    🌙 야자 불참 관리
+</h2>
+
+
+<div
+    id="connectionStatus"
+    class="connection-status">
+
+    Firebase 연결 중...
+
+</div>
+
+
+
+<!-- =====================================================
+     날짜
+===================================================== -->
+
+<div class="date-box">
+
+
+    <label for="viewDate">
+
+        조회 / 신청 날짜
+
+    </label>
+
+
+    <input
+        id="viewDate"
+        type="date"
+    >
+
+
+    <div
+        id="dateInfo"
+        class="date-info">
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     학생
+===================================================== -->
+
+<label for="studentInput">
+
+    번호 또는 이름
+
+</label>
+
+
+<input
+    id="studentInput"
+    type="text"
+    list="studentList"
+    autocomplete="off"
+    placeholder="예: 23 또는 윤하유"
+>
+
+
+<datalist id="studentList">
+</datalist>
+
+
+
+<!-- =====================================================
+     날짜별 불참
+===================================================== -->
+
+<div class="section-title">
+
+    📅 날짜별 불참 신청
+
+</div>
+
+
+<label>
+
+    불참할 CIP
+
+</label>
+
+
+<div class="cip-buttons">
+
+
+    <button
+        type="button"
+        class="cip-btn"
+        data-type="single"
+        data-cip="1">
+
+        1차
+
+        <span class="cip-time">
+            16:50~17:40
+        </span>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="cip-btn"
+        data-type="single"
+        data-cip="2">
+
+        2차
+
+        <span class="cip-time">
+            18:40~20:00
+        </span>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="cip-btn"
+        data-type="single"
+        data-cip="3">
+
+        3차
+
+        <span class="cip-time">
+            20:10~21:00
+        </span>
+
+    </button>
+
+
+</div>
+
+
+
+<label for="singleReason">
+
+    불참 사유
+
+</label>
+
+
+<textarea
+    id="singleReason"
+    maxlength="100"
+    placeholder="예: 병원, 가족 행사, 창의반">
+</textarea>
+
+
+
+<label for="singlePassword">
+
+    비밀번호
+
+</label>
+
+
+<input
+    id="singlePassword"
+    type="password"
+    maxlength="4"
+    inputmode="numeric"
+    placeholder="비밀번호 4자리"
+>
+
+
+
+<button
+    id="singleSubmit"
+    type="button"
+    class="submit-btn">
+
+    선택 날짜 불참 신청
+
+</button>
+
+
+<button
+    id="singleCancel"
+    type="button"
+    class="cancel-btn">
+
+    선택 날짜 신청 취소
+
+</button>
+
+
+
+<!-- =====================================================
+     정기 불참
+===================================================== -->
+
+<div class="section-title">
+
+    🔁 매주 반복 불참
+
+</div>
+
+
+
+<label>
+
+    반복 요일
+
+</label>
+
+
+<div class="weekday-buttons">
+
+
+    <button
+        type="button"
+        class="weekday-btn"
+        data-day="1">
+
+        월
+
+    </button>
+
+
+    <button
+        type="button"
+        class="weekday-btn"
+        data-day="2">
+
+        화
+
+    </button>
+
+
+    <button
+        type="button"
+        class="weekday-btn"
+        data-day="3">
+
+        수
+
+    </button>
+
+
+    <button
+        type="button"
+        class="weekday-btn"
+        data-day="4">
+
+        목
+
+    </button>
+
+
+</div>
+
+
+
+<label>
+
+    반복해서 빠질 CIP
+
+</label>
+
+
+<div class="cip-buttons">
+
+
+    <button
+        type="button"
+        class="cip-btn"
+        data-type="recurring"
+        data-cip="1">
+
+        1차
+
+        <span class="cip-time">
+            16:50~17:40
+        </span>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="cip-btn"
+        data-type="recurring"
+        data-cip="2">
+
+        2차
+
+        <span class="cip-time">
+            18:40~20:00
+        </span>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="cip-btn"
+        data-type="recurring"
+        data-cip="3">
+
+        3차
+
+        <span class="cip-time">
+            20:10~21:00
+        </span>
+
+    </button>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     정기 사유
+===================================================== -->
+
+<label>
+
+    반복 불참 사유
+
+</label>
+
+
+<div class="reason-buttons">
+
+
+    <button
+        type="button"
+        class="reason-btn"
+        data-reason="학원">
+
+        학원
+
+    </button>
+
+
+    <button
+        type="button"
+        class="reason-btn"
+        data-reason="교내활동">
+
+        교내활동
+
+    </button>
+
+
+    <button
+        type="button"
+        class="reason-btn"
+        data-reason="공교">
+
+        공교
+
+    </button>
+
+
+    <button
+        type="button"
+        class="reason-btn"
+        data-reason="방과후">
+
+        방과후
+
+    </button>
+
+
+    <button
+        type="button"
+        class="reason-btn"
+        data-reason="창의반">
+
+        창의반
+
+    </button>
+
+
+    <button
+        type="button"
+        class="reason-btn"
+        data-reason="기타">
+
+        기타
+
+    </button>
+
+
+</div>
+
+
+
+<!-- 기타 -->
+
+<div id="recurringOtherWrap">
+
+
+    <label for="recurringOther">
+
+        기타 사유
+
+    </label>
+
+
+    <input
+        id="recurringOther"
+        type="text"
+        maxlength="50"
+        placeholder="직접 입력해주세요"
+    >
+
+
+</div>
+
+
+
+<!-- 반복용 별도 비밀번호 -->
+
+<label for="recurringPassword">
+
+    반복 불참 비밀번호
+
+</label>
+
+
+<input
+    id="recurringPassword"
+    type="password"
+    maxlength="4"
+    inputmode="numeric"
+    placeholder="비밀번호 4자리"
+>
+
+
+
+<button
+    id="recurringSubmit"
+    type="button"
+    class="recurring-submit">
+
+    매주 반복 불참 등록
+
+</button>
+
+
+
+<button
+    id="recurringCancel"
+    type="button"
+    class="recurring-cancel">
+
+    반복 불참 전체 삭제
+
+</button>
+
+
+
+<div
+    id="message"
+    class="message">
+</div>
+
+
+
+<!-- =====================================================
+     명단
+===================================================== -->
+
+<div class="absence-list">
+
+
+    <h3 id="listTitle">
+
+        선택 날짜 불참 현황
+
+    </h3>
+
+
+    <div id="absenceList">
+
+        불러오는 중...
+
+    </div>
+
+
+</div>
+
+
+</aside>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     Firebase + JavaScript
+===================================================== -->
+
+<script type="module">
+
+
+/* =====================================================
+   Firebase 모듈
+===================================================== */
+
+import {
+
+    initializeApp
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+
+import {
+
+    getFirestore,
+    collection,
+    doc,
+    setDoc,
+    deleteDoc,
+    onSnapshot,
+    query,
+    where,
+    serverTimestamp
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+
+/* =====================================================
+   Firebase 설정
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyCd8fUYXmJ34L1yG3x3aNsEGZgaxFLLx7s",
+
+    authDomain:
+        "yaja2-6.firebaseapp.com",
+
+    projectId:
+        "yaja2-6",
+
+    storageBucket:
+        "yaja2-6.firebasestorage.app",
+
+    messagingSenderId:
+        "732002055042",
+
+    appId:
+        "1:732002055042:web:d95f280cea84dd7036d59b",
+
+    measurementId:
+        "G-TKP2QV869R"
+
+};
+
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const db =
+    getFirestore(
+        app
+    );
+
+
+
+/* =====================================================
+   학생
+===================================================== */
+
+const students = {
+
+    1:"강주형",
+    2:"고진용",
+    3:"권율",
+
+    4:"X",
+
+    5:"김경태",
+    6:"김용준",
+    7:"김제겸",
+    8:"김지효",
+    9:"김하윤",
+    10:"김현성",
+
+    11:"목지안",
+    12:"백시우",
+    13:"서재훈",
+    14:"서지후",
+    15:"성무빈",
+    16:"송재호",
+    17:"신예준",
+    18:"신준모",
+    19:"양서희",
+    20:"오태진",
+
+    21:"윤수찬",
+    22:"윤정연",
+    23:"윤하유",
+    24:"이지성",
+    25:"이지혁",
+    26:"이지후",
+    27:"전윤우",
+    28:"정준기",
+    29:"정하율",
+    30:"조동현",
+
+    31:"차이한",
+    32:"최담호",
+    33:"최유진",
+    34:"최태웅",
+
+    35:"X",
+    36:"X"
+
+};
+
+
+
+const disabledStudents = [
+
+    4,
+    35,
+    36
+
+];
+
+
+
+/* =====================================================
+   비밀번호
+===================================================== */
+
+const passwords = {};
+
+
+for(
+    let i = 1;
+    i <= 36;
+    i++
 ){
 
-    html +=
-
-        `<br>
-
-        <span class="creative-text">
-            (${weekdayNames[weekday]}) 창의반
-        </span>
-
-        ${cips}`;
+    passwords[i] =
+        "0000";
 
 }
-else
-{
 
-    html +=
 
-        `<br>
 
-        <span class="recurring-text">
-            (${weekdayNames[weekday]}) 정기
-        </span>
+/* =====================================================
+   CIP 시간
+===================================================== */
 
-        ${cips}
+const cipTimes = {
 
-        <br>
+    1: {
 
-        ${escapeHtml(
-            recurring.reason
-        )}`;
+        start:
+            16 * 60 + 50,
+
+        end:
+            17 * 60 + 40
+
+    },
+
+
+    2: {
+
+        start:
+            18 * 60 + 40,
+
+        end:
+            20 * 60
+
+    },
+
+
+    3: {
+
+        start:
+            20 * 60 + 10,
+
+        end:
+            21 * 60
+
+    }
+
+};
+
+
+
+const weekdayNames = {
+
+    0:"일",
+    1:"월",
+    2:"화",
+    3:"수",
+    4:"목",
+    5:"금",
+    6:"토"
+
+};
+
+
+
+/* =====================================================
+   변수
+===================================================== */
+
+let singleCips = [];
+
+let recurringCips = [];
+
+let recurringDays = [];
+
+let selectedRecurringReason = "";
+
+
+let singleAbsenceData = {};
+
+let recurringData = {};
+
+
+let currentCip = null;
+
+let selectedDate = "";
+
+let displayMode = false;
+
+
+let unsubscribeSingle = null;
+
+let unsubscribeRecurring = null;
+
+
+
+/* =====================================================
+   한국시간
+===================================================== */
+
+function getKoreaTimeParts(){
+
+
+    const formatter =
+        new Intl.DateTimeFormat(
+
+            "ko-KR",
+
+            {
+
+                timeZone:
+                    "Asia/Seoul",
+
+                year:
+                    "numeric",
+
+                month:
+                    "2-digit",
+
+                day:
+                    "2-digit",
+
+                hour:
+                    "2-digit",
+
+                minute:
+                    "2-digit",
+
+                second:
+                    "2-digit",
+
+                hourCycle:
+                    "h23"
+
+            }
+
+        );
+
+
+    const parts =
+        formatter
+            .formatToParts(
+                new Date()
+            );
+
+
+    const result = {};
+
+
+    parts.forEach(
+        part => {
+
+
+            if(
+                part.type !==
+                "literal"
+            ){
+
+                result[
+                    part.type
+                ] =
+                    part.value;
+
+            }
+
+        }
+    );
+
+
+    return result;
 
 }
+
+
+
+/* =====================================================
+   오늘 날짜
+===================================================== */
+
+function getTodayKey(){
+
+
+    const t =
+        getKoreaTimeParts();
+
+
+    return (
+
+        t.year
+        +
+        "-"
+        +
+        t.month
+        +
+        "-"
+        +
+        t.day
+
+    );
+
+}
+
+
+
+/* =====================================================
+   날짜 -> 요일
+===================================================== */
+
+function getWeekdayFromDate(
+    dateString
+){
+
+
+    if(
+        !dateString
+    ){
+
+        return 0;
+
+    }
+
+
+    const parts =
+        dateString
+            .split("-")
+            .map(Number);
+
+
+    const date =
+        new Date(
+
+            Date.UTC(
+
+                parts[0],
+
+                parts[1] - 1,
+
+                parts[2]
+
+            )
+
+        );
+
+
+    return date
+        .getUTCDay();
+
+}
+
+
+
+/* =====================================================
+   현재 CIP
+===================================================== */
+
+function calculateCurrentCip(){
+
+
+    const t =
+        getKoreaTimeParts();
+
+
+    const total =
+
+        Number(t.hour) * 60
+
+        +
+
+        Number(t.minute);
+
+
+
+    if(
+
+        total >=
+            cipTimes[1].start
+
+        &&
+
+        total <
+            cipTimes[1].end
+
+    ){
+
+        return 1;
+
+    }
+
+
+
+    if(
+
+        total >=
+            cipTimes[2].start
+
+        &&
+
+        total <
+            cipTimes[2].end
+
+    ){
+
+        return 2;
+
+    }
+
+
+
+    if(
+
+        total >=
+            cipTimes[3].start
+
+        &&
+
+        total <
+            cipTimes[3].end
+
+    ){
+
+        return 3;
+
+    }
+
+
+
+    return null;
+
+}
+
+
+
+/* =====================================================
+   현재 상황
+===================================================== */
+
+function getSituationText(){
+
+
+    const t =
+        getKoreaTimeParts();
+
+
+    const total =
+
+        Number(t.hour) * 60
+
+        +
+
+        Number(t.minute);
+
+
+
+    if(
+        total <
+        cipTimes[1].start
+    ){
+
+        return (
+            "CIP 전 · 1차 16:50 시작"
+        );
+
+    }
+
+
+
+    if(
+
+        total >=
+        cipTimes[1].start
+
+        &&
+
+        total <
+        cipTimes[1].end
+
+    ){
+
+        return (
+            "CIP 1차 진행 중 · 16:50 ~ 17:40"
+        );
+
+    }
+
+
+
+    if(
+
+        total >=
+        cipTimes[1].end
+
+        &&
+
+        total <
+        cipTimes[2].start
+
+    ){
+
+        return (
+            "쉬는 시간 · CIP 2차 18:40 시작"
+        );
+
+    }
+
+
+
+    if(
+
+        total >=
+        cipTimes[2].start
+
+        &&
+
+        total <
+        cipTimes[2].end
+
+    ){
+
+        return (
+            "CIP 2차 진행 중 · 18:40 ~ 20:00"
+        );
+
+    }
+
+
+
+    if(
+
+        total >=
+        cipTimes[2].end
+
+        &&
+
+        total <
+        cipTimes[3].start
+
+    ){
+
+        return (
+            "쉬는 시간 · CIP 3차 20:10 시작"
+        );
+
+    }
+
+
+
+    if(
+
+        total >=
+        cipTimes[3].start
+
+        &&
+
+        total <
+        cipTimes[3].end
+
+    ){
+
+        return (
+            "CIP 3차 진행 중 · 20:10 ~ 21:00"
+        );
+
+    }
+
+
+
+    return (
+        "오늘의 CIP 종료"
+    );
+
+}
+
+
+
+/* =====================================================
+   실시간 시계
+===================================================== */
+
+function updateClock(){
+
+
+    const t =
+        getKoreaTimeParts();
+
+
+    const today =
+        getTodayKey();
+
+
+    const weekday =
+        getWeekdayFromDate(
+            today
+        );
+
+
+    document
+        .getElementById(
+            "clock"
+        )
+        .textContent =
+
+        `${t.year}.${t.month}.${t.day} (${weekdayNames[weekday]}) ${t.hour}:${t.minute}:${t.second}`;
+
+
+
+    const newCip =
+        calculateCurrentCip();
+
+
+    if(
+        newCip !==
+        currentCip
+    ){
+
+        currentCip =
+            newCip;
+
+
+        updateScreen();
+
+    }
+
+
+    updateCipInfo();
+
+}
+
+
+
+/* =====================================================
+   상단 상황
+===================================================== */
+
+function updateCipInfo(){
+
+
+    const box =
+        document.getElementById(
+            "currentCip"
+        );
+
+
+
+    if(
+        displayMode
+    ){
+
+        box.textContent =
+            getSituationText();
+
+        return;
+
+    }
+
+
+
+    if(
+        selectedDate !==
+        getTodayKey()
+    ){
+
+
+        const weekday =
+            getWeekdayFromDate(
+                selectedDate
+            );
+
+
+        box.textContent =
+
+            `${selectedDate} (${weekdayNames[weekday]}) 불참 현황 조회 중`;
+
+
+        return;
+
+    }
+
+
+
+    box.textContent =
+        getSituationText();
+
+}
+
+
+
+/* =====================================================
+   좌석 만들기
+===================================================== */
+
+function createSeats(){
+
+
+    const grid =
+        document.getElementById(
+            "seatGrid"
+        );
+
+
+    grid.innerHTML =
+        "";
+
+
+    for(
+        let i = 1;
+        i <= 36;
+        i++
+    ){
+
+
+        const seat =
+            document.createElement(
+                "div"
+            );
+
+
+        seat.className =
+            "seat";
+
+
+        seat.id =
+            "seat-" + i;
+
+
+
+        if(
+            disabledStudents
+                .includes(i)
+        ){
+
+            seat
+                .classList
+                .add(
+                    "disabled"
+                );
+
+        }
+
+
+
+        seat.innerHTML = `
+
+            <div class="number">
+                ${i}
+            </div>
+
+            <div class="name">
+                ${students[i]}
+            </div>
+
+            <div
+                id="status-${i}"
+                class="status">
+            </div>
+
+        `;
+
+
+        grid
+            .appendChild(
+                seat
+            );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   학생 자동완성
+===================================================== */
+
+function createStudentList(){
+
+
+    const list =
+        document.getElementById(
+            "studentList"
+        );
+
+
+    list.innerHTML =
+        "";
+
+
+    for(
+        let i = 1;
+        i <= 36;
+        i++
+    ){
+
+
+        if(
+            disabledStudents
+                .includes(i)
+        ){
+
+            continue;
+
+        }
+
+
+
+        const numberOption =
+            document.createElement(
+                "option"
+            );
+
+
+        numberOption.value =
+            String(i);
+
+
+        numberOption.label =
+            students[i];
+
+
+        list.appendChild(
+            numberOption
+        );
+
+
+
+        const nameOption =
+            document.createElement(
+                "option"
+            );
+
+
+        nameOption.value =
+            students[i];
+
+
+        nameOption.label =
+            i + "번";
+
+
+        list.appendChild(
+            nameOption
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   학생 찾기
+===================================================== */
+
+function findStudent(){
+
+
+    let input =
+        document
+            .getElementById(
+                "studentInput"
+            )
+            .value
+            .trim();
+
+
+    input =
+        input
+            .replace(
+                "번",
+                ""
+            )
+            .trim();
+
+
+
+    if(
+        /^\d+$/
+            .test(input)
+    ){
+
+
+        const number =
+            Number(input);
+
+
+        if(
+
+            number >= 1
+
+            &&
+
+            number <= 36
+
+        ){
+
+            return number;
+
+        }
+
+    }
+
+
+
+    for(
+        let i = 1;
+        i <= 36;
+        i++
+    ){
+
+
+        if(
+            students[i] ===
+            input
+        ){
+
+            return i;
+
+        }
+
+    }
+
+
+
+    return null;
+
+}
+
+
+
+/* =====================================================
+   배열 선택
+===================================================== */
+
+function toggleArrayValue(
+    array,
+    value
+){
+
+
+    if(
+        array.includes(value)
+    ){
+
+        return array
+            .filter(
+                item =>
+                    item !== value
+            );
+
+    }
+
+
+    return [
+
+        ...array,
+
+        value
+
+    ].sort(
+        (a,b) =>
+            a-b
+    );
+
+}
+
+
+
+/* =====================================================
+   창의반 판정
+===================================================== */
+
+function isCreativeReason(
+    data
+){
+
+
+    if(
+        !data
+    ){
+
+        return false;
+
+    }
+
+
+    return (
+
+        data.reason ===
+            "창의반"
+
+        ||
+
+        data.reasonType ===
+            "창의반"
+
+    );
+
+}
+
+
+
+/* =====================================================
+   CIP 버튼
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".cip-btn"
+    )
+    .forEach(
+
+        button => {
+
+
+            button
+                .addEventListener(
+
+                    "click",
+
+                    ()=>{
+
+
+                        const cip =
+                            Number(
+                                button.dataset.cip
+                            );
+
+
+                        if(
+                            button.dataset.type ===
+                            "single"
+                        ){
+
+
+                            singleCips =
+                                toggleArrayValue(
+
+                                    singleCips,
+
+                                    cip
+
+                                );
+
+                        }
+                        else
+                        {
+
+
+                            recurringCips =
+                                toggleArrayValue(
+
+                                    recurringCips,
+
+                                    cip
+
+                                );
+
+                        }
+
+
+                        button
+                            .classList
+                            .toggle(
+                                "selected"
+                            );
+
+                    }
+
+                );
+
+        }
+
+    );
+
+
+
+/* =====================================================
+   요일 버튼
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".weekday-btn"
+    )
+    .forEach(
+
+        button => {
+
+
+            button
+                .addEventListener(
+
+                    "click",
+
+                    ()=>{
+
+
+                        const day =
+                            Number(
+                                button.dataset.day
+                            );
+
+
+                        recurringDays =
+                            toggleArrayValue(
+
+                                recurringDays,
+
+                                day
+
+                            );
+
+
+                        button
+                            .classList
+                            .toggle(
+                                "selected"
+                            );
+
+                    }
+
+                );
+
+        }
+
+    );
+
+
+
+/* =====================================================
+   정기 사유 버튼
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".reason-btn"
+    )
+    .forEach(
+
+        button => {
+
+
+            button
+                .addEventListener(
+
+                    "click",
+
+                    ()=>{
+
+
+                        document
+                            .querySelectorAll(
+                                ".reason-btn"
+                            )
+                            .forEach(
+
+                                otherButton => {
+
+                                    otherButton
+                                        .classList
+                                        .remove(
+                                            "selected"
+                                        );
+
+                                }
+
+                            );
+
+
+                        button
+                            .classList
+                            .add(
+                                "selected"
+                            );
+
+
+                        selectedRecurringReason =
+                            button.dataset.reason;
+
+
+
+                        const otherWrap =
+                            document.getElementById(
+                                "recurringOtherWrap"
+                            );
+
+
+                        const otherInput =
+                            document.getElementById(
+                                "recurringOther"
+                            );
+
+
+
+                        if(
+                            selectedRecurringReason ===
+                            "기타"
+                        ){
+
+                            otherWrap
+                                .style
+                                .display =
+                                    "block";
+
+
+                            otherInput
+                                .focus();
+
+                        }
+                        else
+                        {
+
+                            otherWrap
+                                .style
+                                .display =
+                                    "none";
+
+
+                            otherInput.value =
+                                "";
+
+                        }
+
+                    }
+
+                );
+
+        }
+
+    );
+
+
+
+/* =====================================================
+   날짜별 신청
+===================================================== */
+
+async function applySingleAbsence(){
+
+
+    const student =
+        findStudent();
+
+
+    const reason =
+        document
+            .getElementById(
+                "singleReason"
+            )
+            .value
+            .trim();
+
+
+    const password =
+        document
+            .getElementById(
+                "singlePassword"
+            )
+            .value;
+
+
+
+    if(
+        student === null
+    ){
+
+        showError(
+            "학생을 입력해주세요."
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+        disabledStudents
+            .includes(
+                student
+            )
+    ){
+
+        showError(
+            "비활성 번호입니다."
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+        singleCips.length === 0
+    ){
+
+        showError(
+            "불참할 CIP를 선택해주세요."
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+        reason === ""
+    ){
+
+        showError(
+            "불참 사유를 입력해주세요."
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+        password !==
+        passwords[student]
+    ){
+
+        showError(
+            "비밀번호가 틀렸습니다."
+        );
+
+        return;
+
+    }
+
+
+
+    const documentId =
+
+        selectedDate
+        +
+        "_"
+        +
+        student;
+
+
+
+    try{
+
+
+        await setDoc(
+
+            doc(
+                db,
+                "absence",
+                documentId
+            ),
+
+            {
+
+                date:
+                    selectedDate,
+
+                number:
+                    student,
+
+                name:
+                    students[student],
+
+                cips:
+                    [...singleCips],
+
+                reason:
+                    reason,
+
+                updatedAt:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+        showSuccess(
+
+            `${student}번 ${students[student]} 신청 완료`
+
+        );
+
+
+        clearSingleInput();
+
+
+    }
+    catch(error)
+    {
+
+
+        console.error(
+            error
+        );
+
+
+        showError(
+            "신청 저장에 실패했습니다."
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   날짜별 취소
+===================================================== */
+
+async function cancelSingleAbsence(){
+
+
+    const student =
+        findStudent();
+
+
+    const password =
+        document
+            .getElementById(
+                "singlePassword"
+            )
+            .value;
+
+
+
+    if(
+        student === null
+    ){
+
+        showError(
+            "학생을 입력해주세요."
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+        password !==
+        passwords[student]
+    ){
+
+        showError(
+            "비밀번호가 틀렸습니다."
+        );
+
+        return;
+
+    }
+
+
+
+    try{
+
+
+        await deleteDoc(
+
+            doc(
+                db,
+                "absence",
+
+                selectedDate
+                +
+                "_"
+                +
+                student
+            )
+
+        );
+
+
+        showSuccess(
+            "선택 날짜 신청을 취소했습니다."
+        );
+
+
+        clearSingleInput();
+
+
+    }
+    catch(error)
+    {
+
+
+        console.error(
+            error
+        );
+
+
+        showError(
+            "취소에 실패했습니다."
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   반복 사유
+===================================================== */
+
+function getRecurringReason(){
+
+
+    if(
+        selectedRecurringReason ===
+        ""
+    ){
+
+        return null;
+
+    }
+
+
+
+    if(
+        selectedRecurringReason !==
+        "기타"
+    ){
+
+        return selectedRecurringReason;
+
+    }
+
+
+
+    const custom =
+        document
+            .getElementById(
+                "recurringOther"
+            )
+            .value
+            .trim();
+
+
+
+    if(
+        custom === ""
+    ){
+
+        return null;
+
+    }
+
+
+
+    return custom;
+
+}
+
+
+
+/* =====================================================
+   반복 등록
+===================================================== */
+
+async function applyRecurringAbsence(){
+
+
+    const student =
+        findStudent();
+
+
+    const password =
+        document
+            .getElementById(
+                "recurringPassword"
+            )
+            .value;
+
+
+    const reason =
+        getRecurringReason();
+
+
+
+    if(
+        student === null
+    ){
+
+        showError(
+            "학생을 입력해주세요."
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+        disabledStudents
+            .includes(
+                student
+            )
+    ){
+
+        showError(
+            "비활성 번호입니다."
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+        recurringDays.length ===
+        0
+    ){
+
+        showError(
+            "반복 요일을 선택해주세요."
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+        recurringCips.length ===
+        0
+    ){
+
+        showError(
+            "반복해서 빠질 CIP를 선택해주세요."
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+        reason === null
+    ){
+
+        showError(
+            "반복 불참 사유를 선택해주세요."
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+        password !==
+        passwords[student]
+    ){
+
+        showError(
+            "반복 불참 비밀번호가 틀렸습니다."
+        );
+
+        return;
+
+    }
+
+
+
+    try{
+
+
+        await setDoc(
+
+            doc(
+                db,
+                "recurring",
+                String(student)
+            ),
+
+            {
+
+                number:
+                    student,
+
+                name:
+                    students[student],
+
+                weekdays:
+                    [...recurringDays],
+
+                cips:
+                    [...recurringCips],
+
+                reasonType:
+                    selectedRecurringReason,
+
+                reason:
+                    reason,
+
+                updatedAt:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+
+        const daysText =
+            recurringDays
+
+                .map(
+                    day =>
+                        weekdayNames[day]
+                )
+
+                .join("·");
+
+
+
+        showSuccess(
+
+            `${student}번 ${students[student]} (${daysText}) ${reason} 정기 등록 완료`
+
+        );
+
+
+        clearRecurringInput();
+
+
+    }
+    catch(error)
+    {
+
+
+        console.error(
+            error
+        );
+
+
+        showError(
+            "반복 불참 등록에 실패했습니다."
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   반복 삭제
+===================================================== */
+
+async function cancelRecurringAbsence(){
+
+
+    const student =
+        findStudent();
+
+
+    const password =
+        document
+            .getElementById(
+                "recurringPassword"
+            )
+            .value;
+
+
+
+    if(
+        student === null
+    ){
+
+        showError(
+            "학생을 입력해주세요."
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+        password !==
+        passwords[student]
+    ){
+
+        showError(
+            "반복 불참 비밀번호가 틀렸습니다."
+        );
+
+        return;
+
+    }
+
+
+
+    try{
+
+
+        await deleteDoc(
+
+            doc(
+                db,
+                "recurring",
+                String(student)
+            )
+
+        );
+
+
+        showSuccess(
+            "반복 불참을 삭제했습니다."
+        );
+
+
+        clearRecurringInput();
+
+
+    }
+    catch(error)
+    {
+
+
+        console.error(
+            error
+        );
+
+
+        showError(
+            "반복 불참 삭제에 실패했습니다."
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   날짜별 Firebase 동기화
+===================================================== */
+
+function startDateSync(){
+
+
+    if(
+        unsubscribeSingle
+    ){
+
+        unsubscribeSingle();
+
+    }
+
+
+
+    const q =
+        query(
+
+            collection(
+                db,
+                "absence"
+            ),
+
+            where(
+                "date",
+                "==",
+                selectedDate
+            )
+
+        );
+
+
+
+    unsubscribeSingle =
+        onSnapshot(
+
+            q,
+
+
+            snapshot => {
+
+
+                singleAbsenceData =
+                    {};
+
+
+                snapshot
+                    .forEach(
+
+                        document => {
+
+
+                            const data =
+                                document.data();
+
+
+                            singleAbsenceData[
+                                data.number
+                            ] = {
+
+                                cips:
+                                    data.cips || [],
+
+                                reason:
+                                    data.reason || ""
+
+                            };
+
+                        }
+
+                    );
+
+
+                updateScreen();
+
+
+                setConnectionStatus(
+
+                    "실시간 공유 연결됨",
+
+                    "online"
+
+                );
+
+            },
+
+
+            error => {
+
+
+                console.error(
+                    error
+                );
+
+
+                setConnectionStatus(
+
+                    "Firebase 연결 오류",
+
+                    "error"
+
+                );
+
+
+                showError(
+                    "Firebase 연결을 확인해주세요."
+                );
+
+            }
+
+        );
+
+}
+
+
+
+/* =====================================================
+   반복 Firebase 동기화
+===================================================== */
+
+function startRecurringSync(){
+
+
+    if(
+        unsubscribeRecurring
+    ){
+
+        unsubscribeRecurring();
+
+    }
+
+
+
+    unsubscribeRecurring =
+        onSnapshot(
+
+            collection(
+                db,
+                "recurring"
+            ),
+
+
+            snapshot => {
+
+
+                recurringData =
+                    {};
+
+
+                snapshot
+                    .forEach(
+
+                        document => {
+
+
+                            const data =
+                                document.data();
+
+
+                            recurringData[
+                                data.number
+                            ] = {
+
+                                weekdays:
+                                    data.weekdays || [],
+
+                                cips:
+                                    data.cips || [],
+
+                                reason:
+                                    data.reason || "",
+
+                                reasonType:
+                                    data.reasonType || ""
+
+                            };
+
+                        }
+
+                    );
+
+
+                updateScreen();
+
+            },
+
+
+            error => {
+
+
+                console.error(
+                    error
+                );
+
+            }
+
+        );
+
+}
+
+
+
+/* =====================================================
+   선택 날짜에 적용되는 정기 일정
+===================================================== */
+
+function getRecurringForStudent(
+    student
+){
+
+
+    const data =
+        recurringData[
+            student
+        ];
+
+
+    if(
+        !data
+    ){
+
+        return null;
+
+    }
+
+
+
+    const weekday =
+        getWeekdayFromDate(
+            selectedDate
+        );
+
+
+
+    if(
+        !data.weekdays
+            .includes(
+                weekday
+            )
+    ){
+
+        return null;
+
+    }
+
+
+
+    return data;
+
+}
+
+
+
+/* =====================================================
+   ★ 좌석 화면 업데이트
+===================================================== */
+
+function updateScreen(){
+
+
+    const today =
+        getTodayKey();
+
+
+
+    for(
+        let i = 1;
+        i <= 36;
+        i++
+    ){
+
+
+        const seat =
+            document.getElementById(
+                "seat-" + i
+            );
+
+
+        const status =
+            document.getElementById(
+                "status-" + i
+            );
+
+
+
+        if(
+            disabledStudents
+                .includes(i)
+        ){
+
+            status.textContent =
+                "비활성";
+
+            continue;
+
+        }
+
+
+
+        /* 기존 색 초기화 */
+
+        seat
+            .classList
+            .remove(
+
+                "absent",
+                "recurring",
+                "both",
+                "creative"
+
+            );
+
+
+
+        const single =
+            singleAbsenceData[i];
+
+
+        /* 전체 정기 일정 */
+
+        const allRecurring =
+            recurringData[i];
+
+
+        /* 오늘/선택 날짜에 실제 적용되는 정기 일정 */
+
+        const recurringToday =
+            getRecurringForStudent(
+                i
+            );
+
+
+
+        const lines = [];
+
+
+
+        /* =================================================
+           정기 일정은 항상 표시
+           예: (월·수) 학원
+        ================================================= */
+
+        if(
+            allRecurring
+        ){
+
+
+            const daysText =
+                allRecurring
+                    .weekdays
+
+                    .map(
+                        day =>
+                            weekdayNames[day]
+                    )
+
+                    .join("·");
+
+
+
+            const cipText =
+                allRecurring
+                    .cips
+
+                    .map(
+                        cip =>
+                            cip + "차"
+                    )
+
+                    .join("·");
+
+
+
+            if(
+                isCreativeReason(
+                    allRecurring
+                )
+            ){
+
+                lines.push(
+
+                    `<span class="creative-text">
+                        (${daysText}) 창의반
+                    </span>
+                    <br>
+                    ${cipText}`
+
+                );
+
+            }
+            else
+            {
+
+                lines.push(
+
+                    `<span class="recurring-text">
+                        (${daysText})
+                        ${escapeHtml(
+                            allRecurring.reason
+                        )}
+                    </span>
+                    <br>
+                    ${cipText}`
+
+                );
+
+            }
+
+        }
+
+
+
+        /* =================================================
+           날짜별 불참
+        ================================================= */
+
+        if(
+            single
+        ){
+
+
+            const cipText =
+                single
+                    .cips
+
+                    .map(
+                        cip =>
+                            cip + "차"
+                    )
+
+                    .join("·");
+
+
+
+            if(
+                single.reason
+                    .trim() ===
+                "창의반"
+            ){
+
+                lines.push(
+
+                    `<span class="creative-text">
+                        ${cipText} 창의반
+                    </span>`
+
+                );
+
+            }
+            else
+            {
+
+                lines.push(
+
+                    `${cipText}
+                    ${escapeHtml(
+                        single.reason
+                    )}`
+
+                );
+
+            }
+
+        }
+
+
+
+        status.innerHTML =
+            lines.join(
+                "<br>"
+            );
+
+
+
+        /* =================================================
+           실제 색깔 활성화
+        ================================================= */
+
+        let singleActive =
+            false;
+
+
+        let recurringActive =
+            false;
+
+
+        let creativeActive =
+            false;
+
+
+
+        /* 오늘이면 현재 CIP에 해당할 때만 색깔 */
+
+        if(
+            selectedDate ===
+            today
+        ){
+
+
+            if(
+                currentCip !==
+                null
+            ){
+
+
+                singleActive =
+
+                    !!single
+
+                    &&
+
+                    single
+                        .cips
+                        .includes(
+                            currentCip
+                        );
+
+
+
+                recurringActive =
+
+                    !!recurringToday
+
+                    &&
+
+                    recurringToday
+                        .cips
+                        .includes(
+                            currentCip
+                        );
+
+
+
+                if(
+
+                    singleActive
+
+                    &&
+
+                    single
+
+                    &&
+
+                    single.reason
+                        .trim() ===
+                        "창의반"
+
+                ){
+
+                    creativeActive =
+                        true;
+
+                }
+
+
+
+                if(
+
+                    recurringActive
+
+                    &&
+
+                    isCreativeReason(
+                        recurringToday
+                    )
+
+                ){
+
+                    creativeActive =
+                        true;
+
+                }
+
+            }
+
+        }
+
+
+        /* 다른 날짜 조회 시에는 그날 예정 자체를 색칠 */
+
+        else
+        {
+
+
+            singleActive =
+                !!single;
+
+
+            recurringActive =
+                !!recurringToday;
+
+
+
+            if(
+
+                single
+
+                &&
+
+                single.reason
+                    .trim() ===
+                    "창의반"
+
+            ){
+
+                creativeActive =
+                    true;
+
+            }
+
+
+
+            if(
+
+                recurringToday
+
+                &&
+
+                isCreativeReason(
+                    recurringToday
+                )
+
+            ){
+
+                creativeActive =
+                    true;
+
+            }
+
+        }
+
+
+
+        /* =================================================
+           색깔 우선순위
+
+           창의반 = 파랑
+           날짜+정기 = 혼합
+           날짜 = 빨강
+           정기 = 주황
+        ================================================= */
+
+        if(
+            creativeActive
+        ){
+
+
+            seat
+                .classList
+                .add(
+                    "creative"
+                );
+
+        }
+
+        else if(
+
+            singleActive
+
+            &&
+
+            recurringActive
+
+        ){
+
+
+            seat
+                .classList
+                .add(
+                    "both"
+                );
+
+        }
+
+        else if(
+            singleActive
+        ){
+
+
+            seat
+                .classList
+                .add(
+                    "absent"
+                );
+
+        }
+
+        else if(
+            recurringActive
+        ){
+
+
+            seat
+                .classList
+                .add(
+                    "recurring"
+                );
+
+        }
+
+    }
+
+
+
+    updateAbsenceList();
+
+}
+
+
+
+/* =====================================================
+   ★ 오른쪽 불참 명단
+===================================================== */
+
+function updateAbsenceList(){
+
+
+    const list =
+        document.getElementById(
+            "absenceList"
+        );
+
+
+    const weekday =
+        getWeekdayFromDate(
+            selectedDate
+        );
+
+
+
+    document
+        .getElementById(
+            "listTitle"
+        )
+        .textContent =
+
+        `${selectedDate} (${weekdayNames[weekday]}) 불참 현황`;
+
+
+
+    const items = [];
+
+
+
+    for(
+        let i = 1;
+        i <= 36;
+        i++
+    ){
+
+
+        if(
+            disabledStudents
+                .includes(i)
+        ){
+
+            continue;
+
+        }
+
+
+
+        const single =
+            singleAbsenceData[i];
+
+
+        const recurring =
+            getRecurringForStudent(
+                i
+            );
+
+
+
+        if(
+
+            !single
+
+            &&
+
+            !recurring
+
+        ){
+
+            continue;
+
+        }
+
+
+
+        const creative =
+
+            (
+                single
+
+                &&
+
+                single.reason
+                    .trim() ===
+                    "창의반"
+            )
+
+            ||
+
+            isCreativeReason(
+                recurring
+            );
+
+
+
+        let itemClass =
+            "absence-item";
+
+
+        if(
+            creative
+        ){
+
+            itemClass +=
+                " creative-item";
+
+        }
+        else if(
+            recurring
+        ){
+
+            itemClass +=
+                " recurring-item";
+
+        }
+
+
+
+        let html =
+
+            `<div class="${itemClass}">
+
+                <strong>
+                    ${i}번 ${students[i]}
+                </strong>`;
+
+
+
+        /* 날짜별 */
+
+        if(
+            single
+        ){
+
+
+            const cips =
+                single
+                    .cips
+
+                    .map(
+                        c =>
+                            `CIP ${c}차`
+                    )
+
+                    .join(
+                        " · "
+                    );
+
+
+
+            if(
+                single.reason
+                    .trim() ===
+                "창의반"
+            ){
+
+                html += `
+
+                    <br>
+
+                    <span class="creative-text">
+                        창의반
+                    </span>
+
+                    · ${cips}
+
+                `;
+
+            }
+            else
+            {
+
+                html += `
+
+                    <br>
+
+                    ${cips}
+
+                    <br>
+
+                    ${escapeHtml(
+                        single.reason
+                    )}
+
+                `;
+
+            }
+
+        }
+
+
+
+        /* 정기 */
+
+        if(
+            recurring
+        ){
+
+
+            const cips =
+                recurring
+                    .cips
+
+                    .map(
+                        c =>
+                            `CIP ${c}차`
+                    )
+
+                    .join(
+                        " · "
+                    );
+
+
+
+            if(
+                isCreativeReason(
+                    recurring
+                )
+            ){
+
+                html += `
+
+                    <br>
+
+                    <span class="creative-text">
+
+                        (${weekdayNames[weekday]}) 창의반
+
+                    </span>
+
+                    <br>
+
+                    ${cips}
+
+                `;
+
+            }
+            else
+            {
+
+                html += `
+
+                    <br>
+
+                    <span class="recurring-text">
+
+                        (${weekdayNames[weekday]}) 정기
+
+                    </span>
+
+                    · ${cips}
+
+                    <br>
+
+                    ${escapeHtml(
+                        recurring.reason
+                    )}
+
+                `;
+
+            }
+
+        }
+
+
+
+        html +=
+            "</div>";
+
+
+
+        items.push({
+
+            number:
+                i,
+
+            html:
+                html
+
+        });
+
+    }
+
+
+
+    if(
+        items.length ===
+        0
+    ){
+
+        list.textContent =
+            "해당 날짜 불참자가 없습니다.";
+
+        return;
+
+    }
+
+
+
+    list.innerHTML =
+
+        items
+
+            .sort(
+                (a,b) =>
+                    a.number -
+                    b.number
+            )
+
+            .map(
+                item =>
+                    item.html
+            )
+
+            .join("");
+
+}
+
+
+
+/* =====================================================
+   날짜 변경
+===================================================== */
+
+function changeSelectedDate(){
+
+
+    let date =
+        document
+            .getElementById(
+                "viewDate"
+            )
+            .value;
+
+
+    if(
+        !date
+    ){
+
+        date =
+            getTodayKey();
+
+
+        document
+            .getElementById(
+                "viewDate"
+            )
+            .value =
+                date;
+
+    }
+
+
+
+    selectedDate =
+        date;
+
+
+
+    const weekday =
+        getWeekdayFromDate(
+            selectedDate
+        );
+
+
+
+    document
+        .getElementById(
+            "dateInfo"
+        )
+        .textContent =
+
+        `${selectedDate} (${weekdayNames[weekday]}요일)`;
+
+
+
+    updateCipInfo();
+
+
+    startDateSync();
+
+}
+
+
+
+/* =====================================================
+   ★ 대표 화면
+===================================================== */
+
+async function toggleDisplayMode(){
+
+
+    displayMode =
+        !displayMode;
+
+
+
+    const button =
+        document.getElementById(
+            "displayModeButton"
+        );
+
+
+
+    if(
+        displayMode
+    ){
+
+
+        /* 대표화면은 항상 오늘 */
+
+        selectedDate =
+            getTodayKey();
+
+
+
+        document
+            .getElementById(
+                "viewDate"
+            )
+            .value =
+                selectedDate;
+
+
+
+        startDateSync();
+
+
+
+        document
+            .body
+            .classList
+            .add(
+                "display-mode"
+            );
+
+
+
+        button.textContent =
+            "신청 화면";
+
+
+
+        /*
+        브라우저가 지원하면
+        전체화면도 시도
+        */
+
+        try
+        {
+
+
+            if(
+                document
+                    .documentElement
+                    .requestFullscreen
+            ){
+
+                await document
+                    .documentElement
+                    .requestFullscreen();
+
+            }
+
+        }
+        catch(error)
+        {
+
+            /*
+            아이패드 등에서 지원되지 않아도
+            대표 화면 자체는 정상 작동
+            */
+
+        }
+
+    }
+    else
+    {
+
+
+        document
+            .body
+            .classList
+            .remove(
+                "display-mode"
+            );
+
+
+
+        button.textContent =
+            "대표 화면";
+
+
+
+        try
+        {
+
+
+            if(
+
+                document.fullscreenElement
+
+                &&
+
+                document.exitFullscreen
+
+            ){
+
+                await document
+                    .exitFullscreen();
+
+            }
+
+        }
+        catch(error)
+        {
+
+        }
+
+    }
+
+
+
+    updateCipInfo();
+
+
+    updateScreen();
+
+}
+
+
+
+/* =====================================================
+   날짜별 입력 초기화
+===================================================== */
+
+function clearSingleInput(){
+
+
+    document
+        .getElementById(
+            "singleReason"
+        )
+        .value =
+            "";
+
+
+    document
+        .getElementById(
+            "singlePassword"
+        )
+        .value =
+            "";
+
+
+    singleCips =
+        [];
+
+
+    document
+        .querySelectorAll(
+            '[data-type="single"]'
+        )
+        .forEach(
+
+            button => {
+
+
+                button
+                    .classList
+                    .remove(
+                        "selected"
+                    );
+
+            }
+
+        );
+
+}
+
+
+
+/* =====================================================
+   반복 입력 초기화
+===================================================== */
+
+function clearRecurringInput(){
+
+
+    recurringDays =
+        [];
+
+
+    recurringCips =
+        [];
+
+
+    selectedRecurringReason =
+        "";
+
+
+
+    document
+        .getElementById(
+            "recurringPassword"
+        )
+        .value =
+            "";
+
+
+    document
+        .getElementById(
+            "recurringOther"
+        )
+        .value =
+            "";
+
+
+    document
+        .getElementById(
+            "recurringOtherWrap"
+        )
+        .style
+        .display =
+            "none";
+
+
+
+    document
+        .querySelectorAll(
+            ".weekday-btn"
+        )
+        .forEach(
+
+            button => {
+
+
+                button
+                    .classList
+                    .remove(
+                        "selected"
+                    );
+
+            }
+
+        );
+
+
+
+    document
+        .querySelectorAll(
+            '[data-type="recurring"]'
+        )
+        .forEach(
+
+            button => {
+
+
+                button
+                    .classList
+                    .remove(
+                        "selected"
+                    );
+
+            }
+
+        );
+
+
+
+    document
+        .querySelectorAll(
+            ".reason-btn"
+        )
+        .forEach(
+
+            button => {
+
+
+                button
+                    .classList
+                    .remove(
+                        "selected"
+                    );
+
+            }
+
+        );
+
+}
+
+
+
+/* =====================================================
+   메시지
+===================================================== */
+
+function showError(
+    text
+){
+
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    message.style.color =
+        "#b00020";
+
+
+    message.textContent =
+        text;
+
+}
+
+
+
+function showSuccess(
+    text
+){
+
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    message.style.color =
+        "green";
+
+
+    message.textContent =
+        text;
+
+}
+
+
+
+/* =====================================================
+   Firebase 연결 상태
+===================================================== */
+
+function setConnectionStatus(
+    text,
+    type
+){
+
+
+    const status =
+        document.getElementById(
+            "connectionStatus"
+        );
+
+
+    status.textContent =
+        text;
+
+
+    status.className =
+        "connection-status";
+
+
+    if(
+        type
+    ){
+
+        status
+            .classList
+            .add(
+                type
+            );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   사용자 입력 안전 처리
+===================================================== */
+
+function escapeHtml(
+    text
+){
+
+
+    return String(text)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+
+/* =====================================================
+   이벤트
+===================================================== */
+
+document
+    .getElementById(
+        "displayModeButton"
+    )
+    .addEventListener(
+
+        "click",
+
+        toggleDisplayMode
+
+    );
+
+
+
+document
+    .getElementById(
+        "viewDate"
+    )
+    .addEventListener(
+
+        "change",
+
+        changeSelectedDate
+
+    );
+
+
+
+document
+    .getElementById(
+        "singleSubmit"
+    )
+    .addEventListener(
+
+        "click",
+
+        applySingleAbsence
+
+    );
+
+
+
+document
+    .getElementById(
+        "singleCancel"
+    )
+    .addEventListener(
+
+        "click",
+
+        cancelSingleAbsence
+
+    );
+
+
+
+document
+    .getElementById(
+        "recurringSubmit"
+    )
+    .addEventListener(
+
+        "click",
+
+        applyRecurringAbsence
+
+    );
+
+
+
+document
+    .getElementById(
+        "recurringCancel"
+    )
+    .addEventListener(
+
+        "click",
+
+        cancelRecurringAbsence
+
+    );
+
+
+
+/* =====================================================
+   시작
+===================================================== */
+
+createSeats();
+
+
+createStudentList();
+
+
+
+selectedDate =
+    getTodayKey();
+
+
+
+document
+    .getElementById(
+        "viewDate"
+    )
+    .value =
+        selectedDate;
+
+
+
+currentCip =
+    calculateCurrentCip();
+
+
+
+changeSelectedDate();
+
+
+startRecurringSync();
+
+
+updateClock();
+
+
+
+setInterval(
+
+    updateClock,
+
+    1000
+
+);
+
+
+</script>
+
+
+</body>
+
+</html>
