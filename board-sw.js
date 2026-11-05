@@ -1,5 +1,5 @@
 'use strict';
-var CACHE = 'class26-yaja-board-shell-v2';
+var CACHE = 'class26-yaja-board-shell-v3';
 var BOARD = new URL('./board.html', self.location.href).href;
 self.addEventListener('install', function(event) {
  event.waitUntil(caches.open(CACHE).then(function(cache) {return cache.add(BOARD);}).then(function(){return self.skipWaiting();}));

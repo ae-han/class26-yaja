@@ -14,6 +14,7 @@
 <nav aria-label="화면 도구"><button id="refresh">지금 갱신</button><button id="fullscreen">전체 화면</button><label>조회 날짜 <input id="date" type="date"></label><button id="today">오늘</button><button id="download" disabled>오프라인 파일 저장</button><a href="https://ae-han.github.io/class26-yaja/">신청 화면</a></nav>
 <div id="connection" role="status" aria-live="polite">자료를 불러오는 중입니다. 아직 좌석 상태를 확인하지 못했습니다.</div>
 <div id="saveStatus">처음에는 인터넷에 연결해 자료를 한 번 받아주세요.</div>
+<div id="autoStatus" style="text-align:center;font-weight:bold;margin:6px" role="timer">자동 갱신 준비 중</div>
 <noscript>브라우저의 JavaScript를 켜주세요. 켤 수 없으면 최신 크롬 또는 엣지에서 열어주세요.</noscript>
 <div id="grid" aria-label="좌석표"></div>
 <footer>빨강: 현재 CIP 불참 · 초록: 현재 CIP 불참 신청 없음 · 회색: 자료 확인 전<br>지난 자료를 표시할 때는 위쪽의 마지막 확인 시각을 확인해주세요. 새 신청은 연결이 복구된 후 반영됩니다.</footer>
@@ -69,7 +70,7 @@ var students = {
 var disabled = [4,19,20,35,36];
 var base = 'https://firestore.googleapis.com/v1/projects/yaja2-6/databases/(default)/documents';
 var cacheKey = 'class26-yaja-board-v1';
-var data = null, busy = false, timer = null, failures = 0, live = false, storageOK = true;
+var data = null, busy = false, timer = null, failures = 0, live = false, storageOK = true, nextSyncAt = 0;
 var selected = korea().date, followToday = true, lastToday = selected, lastCip = cipAt(korea()), shellReady = false;
 function el(id) { return document.getElementById(id); }
 function pad(n) { return n < 10 ? '0' + n : String(n); }
@@ -124,10 +125,11 @@ function readDate(date) {
   return rows.filter(function(r){if(r.error)throw new Error('query failed');return !!r.document;}).map(function(r){return record(r.document);});
  });
 }
-function schedule() { var interval=cipAt(korea())?60000:300000;clearTimeout(timer);timer=setTimeout(sync,Math.min(300000,interval*Math.pow(2,Math.min(failures,3)))); }
+function refreshInterval() { var hour=korea().hour;return hour>=16&&hour<22?30000:300000; }
+function schedule() { var delay=Math.min(300000,refreshInterval()*Math.pow(2,Math.min(failures,3)));nextSyncAt=Date.now()+delay;clearTimeout(timer);timer=setTimeout(sync,delay); }
 function sync() {
  if(busy)return;
- busy=true;var requestedDate=selected;el('refresh').disabled=true;el('refresh').textContent='확인 중…';
+ busy=true;clearTimeout(timer);nextSyncAt=0;var requestedDate=selected;el('refresh').disabled=true;el('refresh').textContent='확인 중…';
  Promise.all([readDate(requestedDate),readAll('recurring')]).then(function(parts){
   // Replace only after both collections, including all pages, have arrived.
   var times=data&&data.checkedDates||{};times[requestedDate]=Date.now();
@@ -154,7 +156,8 @@ function render() {
  el('clock').textContent=t.date+' ('+'일월화수목금토'.charAt(t.weekday)+') '+pad(t.hour)+':'+pad(t.minute)+':'+pad(t.second);
  el('cip').textContent=selected!==t.date?selected+' 불참 예정 조회':current?'CIP '+current+'차 진행 중':'현재 CIP 진행 시간이 아닙니다 · 1차 16:50 / 2차 18:40 / 3차 20:10';
  el('connection').className=fresh&&known?'fresh':'';
- el('connection').textContent=!data?'아직 자료를 받지 못했습니다 · 연결을 확인하고 ‘지금 갱신’을 눌러주세요.':!known?'이 날짜의 자료는 아직 확인하지 못했습니다 · 저장 당시의 정기 일정만 참고용으로 표시합니다.':(fresh?'연결됨 · CIP 중 1분 / 그 외 5분마다 확인':'저장된 자료 표시 중 · 최신 신청과 다를 수 있습니다')+' · 마지막 확인 '+stamp(dateTime(selected));
+ el('connection').textContent=!data?'아직 자료를 받지 못했습니다 · 연결을 확인해주세요. 자동으로 다시 시도합니다.':!known?'이 날짜의 자료는 아직 확인하지 못했습니다 · 저장 당시의 정기 일정만 참고용으로 표시합니다.':(fresh?'연결됨 · 자동 갱신 켜짐':'저장된 자료 표시 중 · 최신 신청과 다를 수 있습니다')+' · 마지막 확인 '+stamp(dateTime(selected));
+ el('autoStatus').textContent=busy?'최신 신청 자동 확인 중…':nextSyncAt?'다음 자동 갱신까지 '+Math.max(0,Math.ceil((nextSyncAt-Date.now())/1000))+'초'+(failures?' · 연결 재시도 중':''):'자동 갱신 준비 중';
  el('saveStatus').textContent=!storageOK?'이 기기에 자료를 보관할 수 없습니다. ‘오프라인 파일 저장’을 이용해주세요.':shellReady?(data?'화면과 자료 보관 준비 완료 · 다음부터 연결이 끊겨도 이 주소를 다시 열 수 있습니다.':'화면 보관 완료 · 자료는 아직 받지 못했습니다. 연결을 확인해주세요.'):'이 기기에 마지막 자료를 보관합니다. 연결이 복구되면 자동 갱신합니다.';
  el('download').disabled=!data;
  for(var n=1;n<=36;n++){
@@ -173,6 +176,8 @@ function tick() {
  var today=korea().date, cip=cipAt(korea());
  if(today!==lastToday){lastToday=today;if(followToday){selected=today;el('date').value=today;}sync();}
  if(cip!==lastCip){lastCip=cip;sync();}
+ // Recover when a board drops a one-shot timeout while asleep or in the background.
+ if(!busy&&nextSyncAt&&Date.now()>=nextSyncAt)sync();
  render();
 }
 function download() {
@@ -197,6 +202,8 @@ el('today').onclick=function(){selected=korea().date;el('date').value=selected;f
 el('refresh').onclick=sync;el('download').onclick=download;
 el('fullscreen').onclick=function(){var target=document.documentElement,fn=target.requestFullscreen||target.webkitRequestFullscreen;if(fn){try{var p=fn.call(target);if(p&&p.catch)p.catch(function(){});}catch(e){}}};
 window.addEventListener('online',sync);
+window.addEventListener('focus',sync);
+window.addEventListener('pageshow',sync);
 window.addEventListener('offline',function(){live=false;render();});
 document.addEventListener('visibilitychange',function(){if(!document.hidden)sync();});
 loadSaved();render();setInterval(tick,1000);sync();
