@@ -844,7 +844,7 @@ body.display-mode #displayModeButton {
 
 
 <button id="singleCancel" type="button" class="cancel-btn">
-    선택 날짜 신청 취소
+    선택 차수 신청 취소
 </button>
 
 
@@ -996,7 +996,8 @@ import {
     onSnapshot,
     query,
     where,
-    serverTimestamp
+    serverTimestamp,
+    runTransaction
 }
 from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
@@ -2142,9 +2143,36 @@ function getRecurringReason() {
 
 /* ==================================================
    날짜별 신청
-   같은 날짜의 학생 신청은 setDoc이라
-   최신 신청으로 자동 교체됨
+   선택한 CIP만 등록·변경하고 다른 CIP의 사유는 유지
 ================================================== */
+
+/* Independent CIP records; legacy records are expanded before editing. */
+function singleCipDetails(record) {
+    const result = {};
+    (record.cips || []).forEach(cip => {
+        if (![1, 2, 3].includes(Number(cip))) return;
+        const detail = (record.cipReasons || {})[cip];
+        result[Number(cip)] = detail
+            ? { reason: detail.reason || "불참", reasonType: detail.reasonType || "" }
+            : { reason: record.reason || "불참", reasonType: record.reasonType || "" };
+    });
+    return result;
+}
+
+function mergeSingleCips(previous, selected, reason, reasonType) {
+    const cipReasons = singleCipDetails(previous);
+    selected.forEach(cip => {
+        if ([1, 2, 3].includes(Number(cip)))
+            cipReasons[Number(cip)] = { reason, reasonType };
+    });
+    return { ...previous, cips: Object.keys(cipReasons).map(Number).sort(), cipReasons };
+}
+function removeSingleCips(previous, selected) {
+    const cipReasons = singleCipDetails(previous);
+    selected.forEach(cip => { delete cipReasons[Number(cip)]; });
+    return { ...previous, cips: Object.keys(cipReasons).map(Number).sort(), cipReasons };
+}
+/* End independent CIP helpers. */
 
 async function applySingleAbsence() {
 
@@ -2241,38 +2269,23 @@ async function applySingleAbsence() {
 
     try {
 
-        await setDoc(
-
-            doc(
-                db,
-                "absence",
-                documentId
-            ),
-
-            {
-                date:
-                    selectedDate,
-
-                number:
-                    student,
-
-                name:
-                    students[student],
-
-                cips:
-                    [...singleCips],
-
-                reasonType:
-                    selectedSingleReason,
-
-                reason:
-                    reason,
-
-                updatedAt:
-                    serverTimestamp()
-            }
-
-        );
+        // Capture the selected fields before waiting for a transaction.
+        const dateToSave = selectedDate;
+        const cipsToSave = [...singleCips];
+        const reasonTypeToSave = selectedSingleReason;
+        const ref = doc(db, "absence", documentId);
+        await runTransaction(db, async transaction => {
+            const snapshot = await transaction.get(ref);
+            const previous = snapshot.exists() ? snapshot.data() : {};
+            const next = mergeSingleCips(previous, cipsToSave, reason, reasonTypeToSave);
+            transaction.set(ref, {
+                ...next,
+                date: dateToSave,
+                number: student,
+                name: students[student],
+                updatedAt: serverTimestamp()
+            });
+        });
 
 
         showSuccess(
@@ -2342,23 +2355,23 @@ async function cancelSingleAbsence() {
 
     try {
 
-        await deleteDoc(
-
-            doc(
-                db,
-                "absence",
-                selectedDate
-                +
-                "_"
-                +
-                student
-            )
-
-        );
+        if (!singleCips.length) {
+            showError("취소할 CIP를 선택해주세요. 다른 차수는 유지됩니다.");
+            return;
+        }
+        const cipsToCancel = [...singleCips];
+        const ref = doc(db, "absence", selectedDate + "_" + student);
+        await runTransaction(db, async transaction => {
+            const snapshot = await transaction.get(ref);
+            if (!snapshot.exists()) return;
+            const next = removeSingleCips(snapshot.data(), cipsToCancel);
+            if (next.cips.length) transaction.set(ref, { ...next, updatedAt: serverTimestamp() });
+            else transaction.delete(ref);
+        });
 
 
         showSuccess(
-            "선택 날짜 신청을 취소했습니다."
+            "선택한 CIP의 날짜별 신청만 취소했습니다."
         );
 
 
@@ -2800,6 +2813,9 @@ function startDateSync() {
                             cips:
                                 data.cips || [],
 
+                            cipReasons:
+                                data.cipReasons || {},
+
                             reason:
                                 data.reason || "",
 
@@ -3042,7 +3058,7 @@ function getEffectiveAbsences(
                             Number(cip),
 
                         reason:
-                            single.reason || "불참",
+                            (singleCipDetails(single)[cip] || {}).reason || "불참",
 
                         source:
                             "single"

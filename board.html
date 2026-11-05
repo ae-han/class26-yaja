@@ -95,6 +95,7 @@ function decode(v) {
  if('timestampValue' in v)return v.timestampValue;
  if('booleanValue' in v)return v.booleanValue;
  if(v.arrayValue)return (v.arrayValue.values||[]).map(decode);
+ if(v.mapValue){var obj={};Object.keys(v.mapValue.fields||{}).forEach(function(k){Object.defineProperty(obj,k,{value:decode(v.mapValue.fields[k]),enumerable:true});});return obj;}
  return null;
 }
 function record(d) {
@@ -120,7 +121,7 @@ function readAll(name, token, rows) {
  });
 }
 function readDate(date) {
- return request(base+':runQuery',{structuredQuery:{from:[{collectionId:'absence'}],where:{fieldFilter:{field:{fieldPath:'date'},op:'EQUAL',value:{stringValue:date}}},select:{fields:['number','date','cips','reason','updatedAt'].map(function(name){return{fieldPath:name};})}}}).then(function(rows){
+ return request(base+':runQuery',{structuredQuery:{from:[{collectionId:'absence'}],where:{fieldFilter:{field:{fieldPath:'date'},op:'EQUAL',value:{stringValue:date}}},select:{fields:['number','date','cips','cipReasons','reason','updatedAt'].map(function(name){return{fieldPath:name};})}}}).then(function(rows){
   if(!Array.isArray(rows))throw new Error('invalid query');
   return rows.filter(function(r){if(r.error)throw new Error('query failed');return !!r.document;}).map(function(r){return record(r.document);});
  });
@@ -146,7 +147,7 @@ function effective(number,date) {
  data.recurring.slice().sort(function(a,b){return String(a.updatedAt||'').localeCompare(String(b.updatedAt||''))||a.id.localeCompare(b.id);}).forEach(function(r){
   if(Number(r.number)===number && (r.weekdays||[]).map(Number).indexOf(weekday)>=0)(r.cips||[]).forEach(function(c){by[Number(c)]=r.reason||'불참';});
  });
- data.absence.forEach(function(r){if(Number(r.number)===number&&r.date===date)(r.cips||[]).forEach(function(c){by[Number(c)]=r.reason||'불참';});});
+ data.absence.forEach(function(r){if(Number(r.number)===number&&r.date===date)(r.cips||[]).forEach(function(c){var detail=(r.cipReasons||{})[c];by[Number(c)]=detail?detail.reason||'불참':r.reason||'불참';});});
  return by;
 }
 function dateTime(date) { return !data?0:data.checkedDates?data.checkedDates[date]||0:date<=korea(data.savedAt).date?data.savedAt:0; }
